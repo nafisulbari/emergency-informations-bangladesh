@@ -34,6 +34,7 @@ public class LoginController {
 
         //master test comment
         System.out.println(userService.findUserById(1).toString());
+       //test new comment
 
         return new ModelAndView("index");
     }
