@@ -31,10 +31,9 @@ public class LoginController {
         medicalRecord.setRecord("very sick and sad");
         userService.addMedicalRecord(1,medicalRecord);
 
-
-        //master test comment
         System.out.println(userService.findUserById(1).toString());
-       //test new comment
+
+        //freshen up code
         return new ModelAndView("index");
     }
 }
