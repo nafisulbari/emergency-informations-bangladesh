@@ -1,9 +1,7 @@
 package com.nafisulbari.eib.controller;
 
 import com.nafisulbari.eib.model.MedicalRecord;
-import com.nafisulbari.eib.model.User;
 import com.nafisulbari.eib.service.UserService;
-import com.nafisulbari.eib.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,10 +29,11 @@ public class LoginController {
         medicalRecord.setRecord("very sick and sad");
         userService.addMedicalRecord(1,medicalRecord);
 
-
-        //master test comment
         System.out.println(userService.findUserById(1).toString());
+
        //test new comment
+
+       //freshen up code
 
         return new ModelAndView("index");
     }
