@@ -5,7 +5,9 @@ import com.nafisulbari.eib.model.User;
 
 public interface UserService {
 
-     User findUserById(int userId);
+     User findUserById(Long userId);
 
-     void addMedicalRecord(int userId, MedicalRecord medicalRecord);
+     void save(User user);
+
+
 }

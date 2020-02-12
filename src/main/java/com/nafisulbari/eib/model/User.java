@@ -1,50 +1,38 @@
 package com.nafisulbari.eib.model;
 
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.NotNull;
+
+
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@Getter
+@Setter
+@ToString
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(columnDefinition="BIGINT(32)")
+    private Long id;
+
 
     private String name;
 
-    @OneToMany
-    private List<MedicalRecord> medicalRecords;
 
-    public int getId() {
-        return id;
-    }
+    private String email;
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
-    public String getName() {
-        return name;
-    }
+    private String password;
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public List<MedicalRecord> getMedicalRecords() {
-        return medicalRecords;
-    }
+    private String role;
 
-    public void setMedicalRecords(List<MedicalRecord> medicalRecords) {
-        this.medicalRecords = medicalRecords;
-    }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", medicalRecords=" + medicalRecords +
-                '}';
-    }
 }

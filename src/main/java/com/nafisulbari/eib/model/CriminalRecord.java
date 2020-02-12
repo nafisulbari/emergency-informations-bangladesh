@@ -1,5 +1,6 @@
 package com.nafisulbari.eib.model;
 
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,18 +12,17 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class MedicalRecord {
+public class CriminalRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition="BIGINT(32)")
     private Long id;
 
-
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    private String doctor;
+    private String location;
 
     private String title;
 
@@ -34,7 +34,6 @@ public class MedicalRecord {
     private Citizen citizen;
 
     @ManyToOne
-    @JoinColumn(name = "hospital_id")
-    private Hospital hospital;
-
+    @JoinColumn(name = "police_station_id")
+    private PoliceStation policeStation;
 }
