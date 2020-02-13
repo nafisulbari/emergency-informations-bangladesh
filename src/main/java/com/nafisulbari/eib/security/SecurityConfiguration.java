@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/police/**").hasRole("POLICE")
                 .and()
                 //login parameter username set to email.  login success will redirect to /home-detector in LoginController
-                .formLogin().loginPage("/login").permitAll().usernameParameter("email").successForwardUrl("/")
+                .formLogin().loginPage("/login").permitAll().usernameParameter("email").successForwardUrl("/home-detect")
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
                 .and()

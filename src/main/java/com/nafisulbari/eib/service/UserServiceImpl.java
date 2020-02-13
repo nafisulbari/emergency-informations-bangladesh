@@ -6,7 +6,9 @@ import com.nafisulbari.eib.model.Citizen;
 import com.nafisulbari.eib.model.MedicalRecord;
 import com.nafisulbari.eib.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 
 @Component
@@ -14,6 +16,14 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    public String getAuthUserEmail() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (StringUtils.isEmpty(email)) {
+            email = "";
+        }
+        return email;
+    }
 
 
     public User findUserById(Long userId) {
@@ -24,7 +34,6 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
