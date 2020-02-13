@@ -18,8 +18,6 @@ public class Hospital extends User{
 
     private String address;
 
-    @OneToMany
-    private List<MedicalRecord> medicalRecords;
 
 
 }

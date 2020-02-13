@@ -6,8 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import java.util.List;
+
 
 @Entity
 @Getter
@@ -17,6 +16,6 @@ public class PoliceStation extends User{
 
     private String address;
 
-    @OneToMany
-    private List<CriminalRecord> criminalRecords;
+
+
 }

@@ -5,8 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+
 import javax.persistence.*;
+
 import java.util.Date;
+
 
 @Entity
 @Getter
@@ -36,4 +39,7 @@ public class CriminalRecord {
     @ManyToOne
     @JoinColumn(name = "police_station_id")
     private PoliceStation policeStation;
+
+
+
 }
