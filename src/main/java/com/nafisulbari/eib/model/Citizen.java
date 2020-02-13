@@ -6,7 +6,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -33,12 +32,6 @@ public class Citizen extends User {
     private int emergencyMobile;
 
     private String emergencyRelation;
-
-    @OneToMany
-    private List<MedicalRecord> medicalRecords;
-
-    @OneToMany
-    private List<CriminalRecord> criminalRecords;
 
 
 

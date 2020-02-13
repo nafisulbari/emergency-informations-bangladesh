@@ -37,4 +37,5 @@ public class MedicalRecord {
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
+
 }
