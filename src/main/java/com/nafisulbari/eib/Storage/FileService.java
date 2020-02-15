@@ -20,11 +20,11 @@ public class FileService {
 
     public String uploadDir= System.getProperty("user.dir")+"\\images";
 
-    public void uploadFile(MultipartFile file) {
-        System.out.println("--------up dir"+uploadDir);
+    public void uploadFile(MultipartFile file,String fileName) {
+
         try {
             Path copyLocation = Paths
-                    .get(uploadDir + File.separator + StringUtils.cleanPath("user"+Math.random()+file.getOriginalFilename().replaceAll("\\s+","")));
+                    .get(uploadDir + File.separator + StringUtils.cleanPath(fileName));
 
             Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {

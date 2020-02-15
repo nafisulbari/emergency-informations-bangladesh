@@ -19,11 +19,10 @@ public class Citizen extends User {
 
     private String address;
 
+    private int citizenPoint;
 
     @Temporal(TemporalType.DATE)
-    private Date date;
-
-    private int age;
+    private Date birthDate;
 
     private Long nid;
 
@@ -33,7 +32,7 @@ public class Citizen extends User {
 
     private String emergencyRelation;
 
-
+    private String imageUrl;
 
 
 }

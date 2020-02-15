@@ -17,10 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
-public class LoginController {
+public class HomeController {
 
-    @Autowired
-    FileService fileService;
 
     @Autowired
     private HospitalService hospitalService;
@@ -57,31 +55,6 @@ public class LoginController {
 
 
 
-
-
-
-
-
-
-
-    @GetMapping("/up")
-    public String index() {
-        return "upload";
-    }
-
-    @PostMapping("/uploadFile")
-    public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-
-
-        System.out.println("test--------"+file.getOriginalFilename());
-
-        fileService.uploadFile(file);
-
-        redirectAttributes.addFlashAttribute("message",
-                "You successfully uploaded " + file.getOriginalFilename() + "!");
-
-        return "redirect:/";
-    }
 
 
 
