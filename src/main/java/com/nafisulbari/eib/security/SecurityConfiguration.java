@@ -38,6 +38,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/citizen/**").hasRole("CITIZEN")
                 .antMatchers("/hospital/**").hasRole("HOSPITAL")
                 .antMatchers("/police/**").hasRole("POLICE")
+                .antMatchers("/up").anonymous()
+                .antMatchers("/upload").anonymous()
+                .antMatchers("/uploadStatus").anonymous()
                 .and()
                 //login parameter username set to email.  login success will redirect to /home-detector in LoginController
                 .formLogin().loginPage("/login").permitAll().usernameParameter("email").successForwardUrl("/home-detect")
@@ -45,6 +48,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
                 .and()
                 .rememberMe().tokenValiditySeconds(86400);
+
+
     }
 
     // Database entries to authenticate login
