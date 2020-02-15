@@ -18,7 +18,7 @@ import java.nio.file.StandardCopyOption;
 public class FileService {
 
 
-    public String uploadDir= System.getProperty("user.dir")+"\\images";
+    public String uploadDir= System.getProperty("user.dir")+"\\src\\main\\resources\\citizenImages";
 
     public void uploadFile(MultipartFile file,String fileName) {
 
