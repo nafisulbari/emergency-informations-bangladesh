@@ -15,7 +15,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+
     private CustomUserDetailsService customUserDetailsService;
+
 
     public SecurityConfiguration(CustomUserDetailsService customUserDetailsService) {
         this.customUserDetailsService = customUserDetailsService;
@@ -27,7 +29,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth
                 .authenticationProvider(authenticationProvider());
     }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -42,9 +43,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //login parameter username set to email.  login success will redirect to /home-detector in LoginController
                 .formLogin().loginPage("/login").permitAll().usernameParameter("email").successForwardUrl("/home-detect")
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
                 .and()
-                .rememberMe().tokenValiditySeconds(86400);
+                .rememberMe().key("uniqueAndSecret").rememberMeParameter("remember-me").tokenValiditySeconds(86400);
 
 
     }
