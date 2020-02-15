@@ -17,12 +17,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public String getAuthUserEmail() {
+    public String getAuthUserRole() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (StringUtils.isEmpty(email)) {
-            email = "";
+        String role = "";
+
+        if (!email.equals("anonymousUser")) {
+            role = userRepository.findByEmail(email).getRole();
         }
-        return email;
+
+        return role;
     }
 
 

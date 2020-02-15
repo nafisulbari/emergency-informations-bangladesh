@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h2>Hi ${authenticatedUser}</h2>
+<h2>Hi ${authUserRole}</h2>
 
 
 

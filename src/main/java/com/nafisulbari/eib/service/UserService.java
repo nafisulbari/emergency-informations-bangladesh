@@ -6,7 +6,7 @@ import com.nafisulbari.eib.model.User;
 public interface UserService {
 
 
-     String getAuthUserEmail();
+     String getAuthUserRole();
 
      User findUserById(Long userId);
 
