@@ -1,5 +1,6 @@
 package com.nafisulbari.eib.Controller;
 
+import com.nafisulbari.eib.Model.Citizen;
 import com.nafisulbari.eib.Service.CitizenService;
 import com.nafisulbari.eib.Service.HospitalService;
 import com.nafisulbari.eib.Service.UserService;
@@ -49,8 +50,16 @@ public class HomeController {
     @GetMapping("/{id}")
     public ModelAndView getCitizen(@PathVariable("id") int id, Model model) {
 
-        model.addAttribute("citizen", citizenService.findCitizenById((long) id));
-        model.addAttribute("authUserRole", userService.getAuthUserRole());
+        Citizen citizen =citizenService.findCitizenById((long) id);
+
+        if (citizen!=null) {
+            model.addAttribute("citizen", citizen);
+            model.addAttribute("authUserRole", userService.getAuthUserRole());
+            model.addAttribute("authUserEmail", userService.getAuthUserEmail());
+        }else {
+            model.addAttribute("errorMessage", "No citizen found with id: "+id);
+        }
+
 
         return new ModelAndView("citizen-info");
     }

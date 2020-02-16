@@ -36,11 +36,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //assigning link access to user type
                 .authorizeRequests()
 //                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/citizen/**").hasRole("CITIZEN")
+                .antMatchers("/citizen/**").hasRole("CITIZEN")
                 .antMatchers("/hospital/**").hasRole("HOSPITAL")
                 .antMatchers("/police/**").hasRole("POLICE")
                 .and()
-                //login parameter username set to email.  login success will redirect to /home-detector in LoginController
+                //login parameter username set to email.  login success will redirect to /home-detect in LoginController
                 .formLogin().loginPage("/login").permitAll().usernameParameter("email").successForwardUrl("/home-detect")
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")

@@ -7,6 +7,8 @@ public interface UserService {
 
      String getAuthUserRole();
 
+     String getAuthUserEmail();
+
      User findUserById(Long userId);
 
      void save(User user);

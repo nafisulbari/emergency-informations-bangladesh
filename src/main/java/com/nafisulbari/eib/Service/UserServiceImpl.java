@@ -24,6 +24,11 @@ public class UserServiceImpl implements UserService {
         return role;
     }
 
+    @Override
+    public String getAuthUserEmail() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
 
     public User findUserById(Long userId) {
         return userRepository.findUserById(userId);
