@@ -2,6 +2,7 @@ package com.nafisulbari.eib.Controller;
 
 
 import com.nafisulbari.eib.Model.Citizen;
+import com.nafisulbari.eib.Model.Hospital;
 import com.nafisulbari.eib.Model.PoliceStation;
 import com.nafisulbari.eib.Model.User;
 import com.nafisulbari.eib.Service.CitizenService;
@@ -52,6 +53,7 @@ public class AdminController {
 
         citizenService.saveCitizen(citizen, image);
 
+        model.addAttribute("flag", "Citizen Saved");
         return new ModelAndView("admin/add-citizen");
     }
 
@@ -61,7 +63,7 @@ public class AdminController {
         return new ModelAndView("admin/add-police-station");
     }
 
-    
+
     @PostMapping("/admin/add-police-station-action")
     public ModelAndView addPoliceStationAction(PoliceStation policeStation, Model model) {
 
@@ -70,9 +72,31 @@ public class AdminController {
             model.addAttribute("flag", "Another user exists with same email");
             return new ModelAndView("admin/add-police-station");
         }
-
+        model.addAttribute("flag", "Police Station Saved");
         policeStationService.savePoliceStation(policeStation);
 
         return new ModelAndView("admin/add-police-station");
+    }
+
+
+    @GetMapping("/admin/add-hospital")
+    public ModelAndView addHospital() {
+        return new ModelAndView("admin/add-hospital");
+    }
+
+
+    @PostMapping("/admin/add-hospital-action")
+    public ModelAndView addHospitalAction(Hospital hospital, Model model) {
+
+        User tempUser = userService.findByEmail(hospital.getEmail());
+        if (tempUser != null) {
+            model.addAttribute("flag", "Another user exists with same email");
+            return new ModelAndView("admin/add-hospital");
+        }
+
+        hospitalService.saveHospital(hospital);
+
+        model.addAttribute("flag", "Hospital Saved");
+        return new ModelAndView("admin/add-hospital");
     }
 }

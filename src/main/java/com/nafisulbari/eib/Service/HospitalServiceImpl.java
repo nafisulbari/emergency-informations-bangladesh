@@ -6,11 +6,14 @@ import com.nafisulbari.eib.Model.Citizen;
 import com.nafisulbari.eib.Model.Hospital;
 import com.nafisulbari.eib.Model.MedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class HospitalServiceImpl implements HospitalService {
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private HospitalRepository hospitalRepository;
@@ -20,6 +23,11 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public void saveHospital(Hospital hospital) {
+
+        hospital.setPassword(passwordEncoder.encode(hospital.getPassword()));
+        hospital.setRole("HOSPITAL");
+        hospital.setPermissions("");
+
         hospitalRepository.save(hospital);
     }
 
