@@ -26,9 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 
 @Component
@@ -83,6 +81,11 @@ public class CitizenServiceImpl implements CitizenService {
             fileService.uploadFile(image, fileName);
             citizen.setImageUrl(fileName);
         }
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(citizen.getBirthDate());
+        c.add(Calendar.DATE, 1);
+        citizen.setBirthDate(c.getTime());
 
         citizen.setPassword(passwordEncoder.encode(citizen.getPassword()));
         citizen.setRole("CITIZEN");
