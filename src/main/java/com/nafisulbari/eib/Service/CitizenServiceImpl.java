@@ -12,6 +12,7 @@ import com.nafisulbari.eib.Dao.MedicalRecordRepository;
 import com.nafisulbari.eib.Model.Citizen;
 import com.nafisulbari.eib.Model.Hospital;
 import com.nafisulbari.eib.Model.MedicalRecord;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
@@ -68,8 +71,9 @@ public class CitizenServiceImpl implements CitizenService {
 
     }
 
+    @SneakyThrows
     @Override
-    public void saveCitizen(Citizen citizen, MultipartFile image) {
+    public void saveCitizen(Citizen citizen, MultipartFile image){
 
         if (Objects.equals(image.getOriginalFilename(), "localhost") || Objects.equals(image.getOriginalFilename(), "")) {
             System.out.println("no files ");
