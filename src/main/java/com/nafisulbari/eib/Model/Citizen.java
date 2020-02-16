@@ -1,4 +1,4 @@
-package com.nafisulbari.eib.model;
+package com.nafisulbari.eib.Model;
 
 import lombok.Getter;
 import lombok.Setter;

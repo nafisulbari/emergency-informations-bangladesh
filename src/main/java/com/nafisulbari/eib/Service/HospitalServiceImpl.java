@@ -1,10 +1,10 @@
-package com.nafisulbari.eib.service;
+package com.nafisulbari.eib.Service;
 
-import com.nafisulbari.eib.dao.HospitalRepository;
-import com.nafisulbari.eib.dao.MedicalRecordRepository;
-import com.nafisulbari.eib.model.Citizen;
-import com.nafisulbari.eib.model.Hospital;
-import com.nafisulbari.eib.model.MedicalRecord;
+import com.nafisulbari.eib.Dao.HospitalRepository;
+import com.nafisulbari.eib.Dao.MedicalRecordRepository;
+import com.nafisulbari.eib.Model.Citizen;
+import com.nafisulbari.eib.Model.Hospital;
+import com.nafisulbari.eib.Model.MedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.nafisulbari.eib.security;
+package com.nafisulbari.eib.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

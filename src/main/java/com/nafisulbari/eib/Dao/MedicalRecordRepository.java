@@ -1,11 +1,9 @@
-package com.nafisulbari.eib.dao;
+package com.nafisulbari.eib.Dao;
 
-import com.nafisulbari.eib.model.Citizen;
-import com.nafisulbari.eib.model.MedicalRecord;
+import com.nafisulbari.eib.Model.Citizen;
+import com.nafisulbari.eib.Model.MedicalRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, Long> {

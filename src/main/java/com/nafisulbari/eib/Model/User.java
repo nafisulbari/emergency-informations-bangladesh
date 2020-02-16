@@ -1,13 +1,10 @@
-package com.nafisulbari.eib.model;
+package com.nafisulbari.eib.Model;
 
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

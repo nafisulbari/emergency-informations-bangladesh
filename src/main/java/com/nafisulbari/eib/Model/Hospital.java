@@ -1,4 +1,4 @@
-package com.nafisulbari.eib.model;
+package com.nafisulbari.eib.Model;
 
 
 import lombok.Getter;
@@ -6,8 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import java.util.List;
 
 
 @Entity

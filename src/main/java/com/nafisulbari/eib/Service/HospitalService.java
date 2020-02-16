@@ -1,8 +1,8 @@
-package com.nafisulbari.eib.service;
+package com.nafisulbari.eib.Service;
 
-import com.nafisulbari.eib.model.Citizen;
-import com.nafisulbari.eib.model.Hospital;
-import com.nafisulbari.eib.model.MedicalRecord;
+import com.nafisulbari.eib.Model.Citizen;
+import com.nafisulbari.eib.Model.Hospital;
+import com.nafisulbari.eib.Model.MedicalRecord;
 
 public interface HospitalService {
 

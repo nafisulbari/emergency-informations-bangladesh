@@ -1,7 +1,7 @@
-package com.nafisulbari.eib.service;
+package com.nafisulbari.eib.Service;
 
-import com.nafisulbari.eib.dao.PoliceStationRepository;
-import com.nafisulbari.eib.model.PoliceStation;
+import com.nafisulbari.eib.Dao.PoliceStationRepository;
+import com.nafisulbari.eib.Model.PoliceStation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

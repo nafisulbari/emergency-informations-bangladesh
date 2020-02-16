@@ -1,8 +1,8 @@
-package com.nafisulbari.eib.security;
+package com.nafisulbari.eib.Security;
 
 
-import com.nafisulbari.eib.dao.UserRepository;
-import com.nafisulbari.eib.model.User;
+import com.nafisulbari.eib.Dao.UserRepository;
+import com.nafisulbari.eib.Model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

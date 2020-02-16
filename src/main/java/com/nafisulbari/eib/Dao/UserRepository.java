@@ -1,6 +1,6 @@
-package com.nafisulbari.eib.dao;
+package com.nafisulbari.eib.Dao;
 
-import com.nafisulbari.eib.model.User;
+import com.nafisulbari.eib.Model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

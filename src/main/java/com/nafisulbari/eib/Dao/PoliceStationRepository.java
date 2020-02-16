@@ -1,6 +1,6 @@
-package com.nafisulbari.eib.dao;
+package com.nafisulbari.eib.Dao;
 
-import com.nafisulbari.eib.model.PoliceStation;
+import com.nafisulbari.eib.Model.PoliceStation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

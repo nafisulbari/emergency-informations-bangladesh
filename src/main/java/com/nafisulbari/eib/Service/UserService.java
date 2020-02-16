@@ -1,7 +1,6 @@
-package com.nafisulbari.eib.service;
+package com.nafisulbari.eib.Service;
 
-import com.nafisulbari.eib.model.MedicalRecord;
-import com.nafisulbari.eib.model.User;
+import com.nafisulbari.eib.Model.User;
 
 public interface UserService {
 

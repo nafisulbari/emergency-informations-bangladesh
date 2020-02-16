@@ -1,8 +1,8 @@
-package com.nafisulbari.eib.service;
+package com.nafisulbari.eib.Service;
 
 
 
-import com.nafisulbari.eib.model.PoliceStation;
+import com.nafisulbari.eib.Model.PoliceStation;
 
 public interface PoliceStationService {
 

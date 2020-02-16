@@ -1,14 +1,10 @@
-package com.nafisulbari.eib.service;
+package com.nafisulbari.eib.Service;
 
-import com.nafisulbari.eib.dao.MedicalRecordRepository;
-import com.nafisulbari.eib.dao.UserRepository;
-import com.nafisulbari.eib.model.Citizen;
-import com.nafisulbari.eib.model.MedicalRecord;
-import com.nafisulbari.eib.model.User;
+import com.nafisulbari.eib.Dao.UserRepository;
+import com.nafisulbari.eib.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 
 @Component
