@@ -9,10 +9,13 @@
 
 
 
-<h1>hi there all fellaas</h1>
 
 
+<#if flag??>
 
+    <p style="color: red">${flag}</p>
+
+</#if>
 
 <form action="/admin/add-citizen-action" enctype="multipart/form-data" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
