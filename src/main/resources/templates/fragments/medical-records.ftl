@@ -4,5 +4,13 @@
 
     <a href="/hospital/${citizen.getId()}/add-medical-record">Add Record</a>
 
-    ${citizen.getName()}
+    <#list medicalRecords as medicalRecord>
+
+        ${medicalRecord.getHospital().getName()}
+        ${medicalRecord.getDate()}
+        ${medicalRecord.getTitle()}
+        ${medicalRecord.getDescription()}
+
+    </#list>
+
 </div>

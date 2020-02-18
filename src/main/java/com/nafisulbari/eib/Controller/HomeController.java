@@ -47,18 +47,23 @@ public class HomeController {
     }
 
 
-    @GetMapping("/{id}")
-    public ModelAndView getCitizen(@PathVariable("id") int id, Model model) {
+    @GetMapping("/{citizenId}")
+    public ModelAndView getCitizen(@PathVariable("citizenId") Long citizenId, Model model) {
 
-        Citizen citizen =citizenService.findCitizenById((long) id);
+        Citizen citizen =citizenService.findCitizenById(citizenId);
 
         if (citizen!=null) {
+
+            if (userService.getAuthUserRole().equals("HOSPITAL")){
+                model.addAttribute("medicalRecords", hospitalService.findMedicalRecordByCitizenId(citizenId));
+            }
+
             model.addAttribute("citizen", citizen);
             model.addAttribute("authUserRole", userService.getAuthUserRole());
             model.addAttribute("authUserEmail", userService.getAuthUserEmail());
-            citizenService.generateQrCode((long) id);
+            citizenService.generateQrCode( citizenId);
         }else {
-            model.addAttribute("errorMessage", "No citizen found with id: "+id);
+            model.addAttribute("errorMessage", "No citizen found with id: "+citizenId);
         }
 
 

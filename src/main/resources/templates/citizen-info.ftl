@@ -17,7 +17,7 @@
     <#if authUserRole =='HOSPITAL' >
 
 
-        <img src="/citizen-images/${citizen.getImageUrl()}" alt="${citizen.getName()}">
+        <img src="/citizen-records/${citizen.getId()}/${citizen.getImageUrl()}" alt="${citizen.getName()}">
         ${citizen.getName()}
         ${citizen.getSex()}
         ${citizen.getBirthDate()}
@@ -29,11 +29,11 @@
         ${citizen.getEmergencyRelation()}
         ${citizen.getEmergencyMobile()}
 
-        <#include "fragments/medical-records.ftl" parse=true>
+        <#include "fragments/medical-records.ftl">
 
     <#elseif authUserRole =='POLICE' >
 
-        <img src="/citizen-images/${citizen.getImageUrl()}" alt="${citizen.getName()}">
+        <img src="/citizen-records/${citizen.getId()}/${citizen.getImageUrl()}" alt="${citizen.getName()}">
         ${citizen.getName()}
         ${citizen.getSex()}
         ${citizen.getBirthDate()}
@@ -48,11 +48,10 @@
         <#include "fragments/criminal-records.ftl">
 
     <#elseif authUserEmail == citizen.getEmail() >
-        <img src="/citizen-images/${citizen.getImageUrl()}" alt="${citizen.getName()}">
 
+        <img src="/citizen-records/${citizen.getId()}/${citizen.getImageUrl()}" alt="${citizen.getName()}">
 
-
-        <a href="/citizen-qr/${citizen.getId()}.png" download>Download QR</a>
+        <a href="/citizen-records/${citizen.getId()}/${citizen.getId()}.png" download>Download QR</a>
 
         ${citizen.getName()}
         ${citizen.getSex()}

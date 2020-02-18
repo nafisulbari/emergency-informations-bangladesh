@@ -11,12 +11,11 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -32,7 +31,6 @@ public class HospitalController {
         //Register it as custom editor for the Date type
         binder.registerCustomEditor(Date.class, editor);
     }
-
 
 
     @Autowired
@@ -65,4 +63,19 @@ public class HospitalController {
 
         return new ModelAndView("hospital/add-medical-record");
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -14,10 +14,15 @@ import java.nio.file.StandardCopyOption;
 public class FileService {
 
 
-    public String uploadDir = System.getProperty("user.dir") + "\\citizen-images";
 
 
-    public void uploadFile(MultipartFile file, String fileName) {
+
+    public void uploadFile(MultipartFile file, String fileName,Long id) {
+
+        String uploadDir = System.getProperty("user.dir") + "\\citizen-records\\"+id;
+
+        File theDir = new File(uploadDir);
+        theDir.mkdir();
 
         try {
             Path copyLocation = Paths

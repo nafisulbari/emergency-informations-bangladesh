@@ -10,8 +10,7 @@ import com.nafisulbari.eib.Storage.FileService;
 import com.nafisulbari.eib.Dao.CitizenRepository;
 import com.nafisulbari.eib.Dao.MedicalRecordRepository;
 import com.nafisulbari.eib.Model.Citizen;
-import com.nafisulbari.eib.Model.Hospital;
-import com.nafisulbari.eib.Model.MedicalRecord;
+
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,8 +23,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.*;
 
 
@@ -45,16 +43,7 @@ public class CitizenServiceImpl implements CitizenService {
     private MedicalRecordRepository medicalRecordRepository;
 
 
-    public void addMedicalRecord(Long citizenId, MedicalRecord medicalRecord) {
 
-        Citizen citizen = citizenRepository.findCitizenById(citizenId);
-        medicalRecord.setCitizen(citizen);
-        medicalRecordRepository.save(medicalRecord);
-
-        citizenRepository.save(citizen);
-
-
-    }
 
     @Override
     public Citizen findCitizenById(Long id) {
@@ -73,14 +62,9 @@ public class CitizenServiceImpl implements CitizenService {
     @Override
     public void saveCitizen(Citizen citizen, MultipartFile image){
 
-        if (Objects.equals(image.getOriginalFilename(), "localhost") || Objects.equals(image.getOriginalFilename(), "")) {
-            System.out.println("no files ");
 
-        } else {
-            String fileName = "citizen" + Math.random() + image.getOriginalFilename().replaceAll("\\s+", "");
-            fileService.uploadFile(image, fileName);
-            citizen.setImageUrl(fileName);
-        }
+        String fileName = "citizen" + image.getOriginalFilename().replaceAll("\\s+", "");
+        citizen.setImageUrl(fileName);
 
         Calendar c = Calendar.getInstance();
         c.setTime(citizen.getBirthDate());
@@ -91,12 +75,11 @@ public class CitizenServiceImpl implements CitizenService {
         citizen.setRole("CITIZEN");
         citizen.setPermissions("");
         citizenRepository.save(citizen);
-    }
 
-    @Override
-    public void addMedicalRecord(MedicalRecord medicalRecord, Citizen citizen, Hospital hospital) {
+        fileService.uploadFile(image, fileName, citizen.getId());
 
     }
+
 
     @Override
     public void generateQrCode(Long id) {
@@ -109,7 +92,7 @@ public class CitizenServiceImpl implements CitizenService {
                 "\nEmergency Contact: "+citizen.getEmergencyRelation()+
                 "\nEmergency Mobile: "+citizen.getEmergencyMobile()+
                 "\nhttp://eib.nafisulbari.com/"+citizen.getId();
-        String filePath = System.getProperty("user.dir")+"/citizen-qr/"+citizen.getId()+".png";
+        String filePath = System.getProperty("user.dir")+"/citizen-records/"+citizen.getId()+"/"+citizen.getId()+".png";
         int size = 250;
         String fileType = "png";
         File myFile = new File(filePath);
@@ -146,9 +129,8 @@ public class CitizenServiceImpl implements CitizenService {
             graphics.drawString(citizenId,(240/2)-(citizenId.length()*3),260);
 
             ImageIO.write(image, fileType, myFile);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+
+        } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
         System.out.println("\n\nYou have successfully created QR Code.");

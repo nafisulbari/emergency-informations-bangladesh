@@ -6,15 +6,11 @@ import com.nafisulbari.eib.Model.Citizen;
 import com.nafisulbari.eib.Model.Hospital;
 import com.nafisulbari.eib.Model.MedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 @Component
 public class HospitalServiceImpl implements HospitalService {
@@ -33,7 +29,7 @@ public class HospitalServiceImpl implements HospitalService {
 
 
 
-    
+
     @Override
     public void saveHospital(Hospital hospital) {
 
@@ -70,5 +66,10 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     public MedicalRecord findMedicalRecordById(Long id) {
         return medicalRecordRepository.findMedicalRecordById(id);
+    }
+
+    @Override
+    public List<MedicalRecord> findMedicalRecordByCitizenId(Long id) {
+        return medicalRecordRepository.findMedicalRecordByCitizen_Id(id);
     }
 }
