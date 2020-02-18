@@ -56,6 +56,7 @@ public class HomeController {
             model.addAttribute("citizen", citizen);
             model.addAttribute("authUserRole", userService.getAuthUserRole());
             model.addAttribute("authUserEmail", userService.getAuthUserEmail());
+            citizenService.generateQrCode((long) id);
         }else {
             model.addAttribute("errorMessage", "No citizen found with id: "+id);
         }

@@ -16,6 +16,7 @@
 
     <#if authUserRole =='HOSPITAL' >
 
+
         <img src="/citizen-images/${citizen.getImageUrl()}" alt="${citizen.getName()}">
         ${citizen.getName()}
         ${citizen.getSex()}
@@ -27,6 +28,8 @@
         ${citizen.getBloodGroup()}
         ${citizen.getEmergencyRelation()}
         ${citizen.getEmergencyMobile()}
+
+        <#include "fragments/medical-records.ftl" parse=true>
 
     <#elseif authUserRole =='POLICE' >
 
@@ -42,8 +45,15 @@
         ${citizen.getEmergencyRelation()}
         ${citizen.getEmergencyMobile()}
 
+        <#include "fragments/criminal-records.ftl">
+
     <#elseif authUserEmail == citizen.getEmail() >
         <img src="/citizen-images/${citizen.getImageUrl()}" alt="${citizen.getName()}">
+
+
+
+        <a href="/citizen-qr/${citizen.getId()}.png" download>Download QR</a>
+
         ${citizen.getName()}
         ${citizen.getSex()}
         ${citizen.getBirthDate()}
@@ -61,6 +71,7 @@
         ${citizen.getBloodGroup()}
         ${citizen.getEmergencyRelation()}
         ${citizen.getEmergencyMobile()}
+
 
     </#if>
 

@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface HospitalRepository extends JpaRepository<Hospital,Long> {
 
     Hospital findHospitalById(Long id);
+
+    Hospital findHospitalByEmail(String email);
 }

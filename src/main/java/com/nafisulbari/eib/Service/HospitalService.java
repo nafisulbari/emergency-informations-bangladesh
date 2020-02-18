@@ -11,6 +11,8 @@ public interface HospitalService {
 
     Hospital findHospitalById(Long id);
 
+    Hospital findHospitalByEmail(String email);
+
     void saveMedicalRecord(MedicalRecord medicalRecord, Hospital hospital, Citizen citizen);
 
     MedicalRecord findMedicalRecordById(Long id);
