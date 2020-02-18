@@ -47,9 +47,10 @@ public class HomeController {
     }
 
 
-    @GetMapping("/{citizenId}")
-    public ModelAndView getCitizen(@PathVariable("citizenId") Long citizenId, Model model) {
+    @GetMapping("/{id}")
+    public ModelAndView getCitizen(@PathVariable("id") int id, Model model) {
 
+        Long citizenId =(long)id;
         Citizen citizen =citizenService.findCitizenById(citizenId);
 
         if (citizen!=null) {

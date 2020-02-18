@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="/static/ei.ico" type="image/x-icon">
     <title>Emergency Information Bangladesh</title>
 </head>
 <body>
-
-<h2>Hi </h2>
-
-
+<h2>Hi</h2>
 <#if errorMessage??>
     <p style="color: red">${ errorMessage}</p>
 <#else>
