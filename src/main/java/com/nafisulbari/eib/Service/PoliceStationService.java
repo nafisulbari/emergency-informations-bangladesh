@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface PoliceStationService {
 
+PoliceStation findPoliceStationById(Long id);
 
     void savePoliceStation(PoliceStation policeStation);
 

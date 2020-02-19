@@ -29,6 +29,12 @@ public class HomeController {
     private UserService userService;
 
 
+    @GetMapping("favicon.ico")
+    @ResponseBody
+    void returnNoFavicon() {
+    }
+
+
     @GetMapping("/")
     public ModelAndView index(Model model) {
 

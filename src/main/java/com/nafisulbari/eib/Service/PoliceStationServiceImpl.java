@@ -27,6 +27,11 @@ public class PoliceStationServiceImpl implements PoliceStationService {
 
 
     @Override
+    public PoliceStation findPoliceStationById(Long id) {
+        return policeStationRepository.findPoliceStationById(id);
+    }
+
+    @Override
     public void savePoliceStation(PoliceStation policeStation) {
 
         policeStation.setPassword(passwordEncoder.encode(policeStation.getPassword()));

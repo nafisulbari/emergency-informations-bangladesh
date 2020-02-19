@@ -130,6 +130,37 @@ public class AdminController {
     }
 
 
+    @GetMapping("/admin/edit-police-station/{id}")
+    public ModelAndView editPoliceStation(@PathVariable("id") Long id, Model model) {
+
+        PoliceStation policeStation = policeStationService.findPoliceStationById(id);
+        if (policeStation == null) {
+            model.addAttribute("flag", "No police station found with id: " + id);
+            return new ModelAndView("admin/add-police-station");
+        }
+
+        model.addAttribute("policeStation", policeStation);
+        return new ModelAndView("admin/add-police-station");
+    }
+
+
+
+    @PostMapping("/admin/edit-police-station-action/{id}")
+    public ModelAndView editPoliceStationAction(@PathVariable("id") Long id,
+                                           PoliceStation policeStation, Model model, BindingResult result) {
+
+        policeStationService.savePoliceStation(policeStation);
+
+        model.addAttribute("policeStation", policeStation);
+        model.addAttribute("flag", "Police Station Updated");
+        return new ModelAndView("admin/add-police-station");
+    }
+
+
+
+
+
+
     @GetMapping("/admin/add-hospital")
     public ModelAndView addHospital() {
         return new ModelAndView("admin/add-hospital");
@@ -150,4 +181,33 @@ public class AdminController {
         model.addAttribute("flag", "Hospital Saved");
         return new ModelAndView("admin/add-hospital");
     }
+
+
+    @GetMapping("/admin/edit-hospital/{id}")
+    public ModelAndView editHospital(@PathVariable("id") Long id, Model model) {
+
+        Hospital hospital = hospitalService.findHospitalById(id);
+        if (hospital == null) {
+            model.addAttribute("flag", "No Hospital found with id: " + id);
+            return new ModelAndView("admin/add-hospital");
+        }
+
+        model.addAttribute("hospital", hospital);
+        return new ModelAndView("admin/add-hospital");
+    }
+
+
+
+    @PostMapping("/admin/edit-hospital-action/{id}")
+    public ModelAndView editHospitalAction(@PathVariable("id") Long id,
+                                          Hospital hospital, Model model, BindingResult result) {
+
+        hospitalService.saveHospital(hospital);
+
+        model.addAttribute("hospital", hospital);
+        model.addAttribute("flag", "Hospital Updated");
+        return new ModelAndView("admin/add-hospital");
+    }
+
+
 }
