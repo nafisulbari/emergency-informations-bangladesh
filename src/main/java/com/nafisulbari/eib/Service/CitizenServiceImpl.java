@@ -79,6 +79,23 @@ public class CitizenServiceImpl implements CitizenService {
         fileService.uploadFile(image, fileName, citizen.getId());
 
     }
+    @Override
+    public void saveCitizenOnly(Citizen citizen){
+
+        Citizen tempCitizen=citizenRepository.findCitizenById(citizen.getId());
+        citizen.setImageUrl(tempCitizen.getImageUrl());
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(citizen.getBirthDate());
+        c.add(Calendar.DATE, 1);
+        citizen.setBirthDate(c.getTime());
+
+        citizen.setPassword(passwordEncoder.encode(citizen.getPassword()));
+        citizen.setRole("CITIZEN");
+        citizen.setPermissions("");
+        citizenRepository.save(citizen);
+
+    }
 
 
     @Override

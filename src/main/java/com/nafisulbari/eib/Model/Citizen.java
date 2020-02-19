@@ -26,9 +26,9 @@ public class Citizen extends User {
 
     private Long nid;
 
-    private int mobile;
+    private String mobile;
 
-    private int emergencyMobile;
+    private String emergencyMobile;
 
     private String emergencyRelation;
 

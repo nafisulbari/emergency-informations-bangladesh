@@ -56,7 +56,6 @@ public class HomeController {
 
         Long citizenId =(long)id;
         Citizen citizen =citizenService.findCitizenById(citizenId);
-
         if (citizen!=null) {
 
             if (userService.getAuthUserRole().equals("HOSPITAL")){

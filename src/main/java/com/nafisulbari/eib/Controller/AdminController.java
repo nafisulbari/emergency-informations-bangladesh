@@ -13,16 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 
 @Controller
@@ -60,17 +60,50 @@ public class AdminController {
 
 
     @PostMapping("/admin/add-citizen-action")
-    public ModelAndView addCitizenAction(@RequestParam("file") MultipartFile image, Citizen citizen, Model model) {
+    public ModelAndView addCitizenAction(@RequestParam("file") MultipartFile image, Citizen citizen, Model model, BindingResult result) {
 
         User tempUser = userService.findByEmail(citizen.getEmail());
         if (tempUser != null) {
             model.addAttribute("flag", "Another user exists with same email");
+            model.addAttribute("citizen", citizen);
+
             return new ModelAndView("admin/add-citizen");
+
         }
 
         citizenService.saveCitizen(citizen, image);
 
         model.addAttribute("flag", "Citizen Saved");
+        return new ModelAndView("admin/add-citizen");
+    }
+
+
+    @GetMapping("/admin/edit-citizen/{id}")
+    public ModelAndView editCitizen(@PathVariable("id") Long id, Model model) {
+
+        Citizen citizen = citizenService.findCitizenById(id);
+        if (citizen == null) {
+            model.addAttribute("flag", "No citizen found with id: " + id);
+            return new ModelAndView("admin/add-citizen");
+        }
+
+        model.addAttribute("citizen", citizen);
+        return new ModelAndView("admin/add-citizen");
+    }
+
+    @PostMapping("/admin/edit-citizen-action/{id}")
+    public ModelAndView editCitizenAction(@RequestParam("file") MultipartFile image,
+                                          @PathVariable("id") Long id,
+                                          Citizen citizen, Model model, BindingResult result) {
+
+        if (Objects.equals(image.getOriginalFilename(), "")) {
+            citizenService.saveCitizenOnly(citizen);
+        }else {
+            citizenService.saveCitizen(citizen, image);
+        }
+
+        model.addAttribute("citizen", citizen);
+        model.addAttribute("flag", "Citizen Updated");
         return new ModelAndView("admin/add-citizen");
     }
 
@@ -91,6 +124,7 @@ public class AdminController {
         }
         model.addAttribute("flag", "Police Station Saved");
         policeStationService.savePoliceStation(policeStation);
+
 
         return new ModelAndView("admin/add-police-station");
     }

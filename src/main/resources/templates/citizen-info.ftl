@@ -63,7 +63,7 @@
         ${citizen.getEmergencyMobile()}
 
     <#else>
-
+        <img src="/citizen-records/${citizen.getId()}/${citizen.getImageUrl()}" alt="${citizen.getName()}">
         ${citizen.getName()}
         ${citizen.getBloodGroup()}
         ${citizen.getEmergencyRelation()}
