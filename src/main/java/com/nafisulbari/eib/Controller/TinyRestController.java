@@ -18,20 +18,18 @@ public class TinyRestController {
     private static int citizen_id;
 
 
-    @RequestMapping(value = "/hospital/images/{citizenId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/police/images/{citizenId}", method = RequestMethod.POST)
     @ResponseBody
-    public String handleTinyMCEUpload(@RequestParam("files") MultipartFile files, @PathVariable("citizenId") int citizenId) {
+    public String handleTinyMCEUploadPolice(@RequestParam("files") MultipartFile files, @PathVariable("citizenId") int citizenId) {
 
-        Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        strDate = dateFormat.format(date);
-        strDate = strDate.replace(':', '-').replace("\\s+", "-");
+        strDate = getStrDate();
 
         citizen_id = citizenId;
 
-        String filePath = "\\citizen-records\\" + citizen_id + "\\medical\\" + strDate + "\\" + files.getOriginalFilename();
+        String filePath = "\\citizen-records\\" + citizen_id + "\\criminal\\" + strDate + "\\" + files.getOriginalFilename();
 
-        String result = uploadFilesFromTinyMCE("", files, false);
+
+        String result = uploadFilesFromTinyMCE(files, "criminal");
 
         String location = "{\"location\":\"" + filePath + "\"}";
         location = location.replace('\\', '/');
@@ -40,13 +38,34 @@ public class TinyRestController {
 
     }
 
-    private String uploadFilesFromTinyMCE(String prefix, MultipartFile files, boolean isMain) {
+
+    @RequestMapping(value = "/hospital/images/{citizenId}", method = RequestMethod.POST)
+    @ResponseBody
+    public String handleTinyMCEUploadMedical(@RequestParam("files") MultipartFile files, @PathVariable("citizenId") int citizenId) {
+
+        strDate = getStrDate();
+
+        citizen_id = citizenId;
+
+        String filePath = "\\citizen-records\\" + citizen_id + "\\medical\\" + strDate + "\\" + files.getOriginalFilename();
+
+        String result = uploadFilesFromTinyMCE(files, "medical");
+
+        String location = "{\"location\":\"" + filePath + "\"}";
+        location = location.replace('\\', '/');
+
+        return location;
+
+    }
+
+    private String uploadFilesFromTinyMCE(MultipartFile files, String recordType) {
 
         try {
-            String folder = System.getProperty("user.dir") + "\\citizen-records\\" + citizen_id + "\\medical\\" + strDate + "\\" + prefix;
+            String folder = System.getProperty("user.dir") + "\\citizen-records\\" + citizen_id + "\\" + recordType + "\\" + strDate + "\\";
+            String folderPre = System.getProperty("user.dir") + "\\citizen-records\\" + citizen_id + "\\" + recordType + "\\";
 
             StringBuffer result = new StringBuffer();
-            byte[] bytes = null;
+
             result.append("Uploading of File(s) ");
 
             if (!files.isEmpty()) {
@@ -55,9 +74,11 @@ public class TinyRestController {
                     boolean created = false;
 
                     try {
+                        File theDirPre = new File(folderPre);
+                        theDirPre.mkdir();
                         File theDir = new File(folder);
-                        theDir.mkdir();
-                        created = true;
+                        created = theDir.mkdir();
+
                     } catch (SecurityException se) {
                         se.printStackTrace();
                     }
@@ -67,11 +88,13 @@ public class TinyRestController {
                     String path = "";
                     path = folder + files.getOriginalFilename();
                     File destination = new File(path);
+
                     System.out.println("--> " + destination);
+
                     files.transferTo(destination);
                     result.append(files.getOriginalFilename() + " Succsess. ");
                 } catch (Exception e) {
-                    throw new RuntimeException("Product Image saving failed", e);
+                    throw new RuntimeException("Image saving failed", e);
                 }
 
             } else
@@ -83,5 +106,14 @@ public class TinyRestController {
         } catch (Exception e) {
             return "Error Occured while uploading files." + " => " + e.getMessage();
         }
+    }
+
+
+    public String getStrDate() {
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        strDate = dateFormat.format(date);
+        strDate = strDate.replace(':', '-').replaceAll("\\s+", "_");
+        return strDate;
     }
 }

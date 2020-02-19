@@ -3,6 +3,7 @@ package com.nafisulbari.eib.Controller;
 import com.nafisulbari.eib.Model.Citizen;
 import com.nafisulbari.eib.Service.CitizenService;
 import com.nafisulbari.eib.Service.HospitalService;
+import com.nafisulbari.eib.Service.PoliceStationService;
 import com.nafisulbari.eib.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ public class HomeController {
 
     @Autowired
     private HospitalService hospitalService;
+
+    @Autowired
+    private PoliceStationService policeStationService;
 
     @Autowired
     private CitizenService citizenService;
@@ -56,13 +60,19 @@ public class HomeController {
         if (citizen!=null) {
 
             if (userService.getAuthUserRole().equals("HOSPITAL")){
-                model.addAttribute("medicalRecords", hospitalService.findMedicalRecordByCitizenId(citizenId));
+                model.addAttribute("medicalRecords", hospitalService.findMedicalRecordsByCitizenId(citizenId));
+            }
+            if (userService.getAuthUserRole().equals("POLICE")){
+                model.addAttribute("criminalRecords", policeStationService.findCriminalRecordsByCitizenId(citizenId));
+            }
+            if (userService.getAuthUserEmail().equals(citizen.getEmail())){
+                citizenService.generateQrCode( citizenId);
             }
 
             model.addAttribute("citizen", citizen);
             model.addAttribute("authUserRole", userService.getAuthUserRole());
             model.addAttribute("authUserEmail", userService.getAuthUserEmail());
-            citizenService.generateQrCode( citizenId);
+
         }else {
             model.addAttribute("errorMessage", "No citizen found with id: "+citizenId);
         }

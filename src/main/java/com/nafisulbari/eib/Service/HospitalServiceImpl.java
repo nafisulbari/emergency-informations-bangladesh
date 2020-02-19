@@ -69,7 +69,7 @@ public class HospitalServiceImpl implements HospitalService {
     }
 
     @Override
-    public List<MedicalRecord> findMedicalRecordByCitizenId(Long id) {
-        return medicalRecordRepository.findMedicalRecordByCitizen_Id(id);
+    public List<MedicalRecord> findMedicalRecordsByCitizenId(Long id) {
+        return medicalRecordRepository.findMedicalRecordsByCitizenId(id);
     }
 }

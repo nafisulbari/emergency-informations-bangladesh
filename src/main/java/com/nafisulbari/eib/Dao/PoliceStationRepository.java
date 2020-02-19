@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PoliceStationRepository extends JpaRepository<PoliceStation,Long> {
 
-
+    PoliceStation findPoliceStationByEmail(String email);
 }

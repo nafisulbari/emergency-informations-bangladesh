@@ -9,9 +9,12 @@ import java.util.List;
 
 @Repository
 public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, Long> {
+
+
     MedicalRecord findMedicalRecordById(Long id);
+
     void deleteByCitizen(Citizen citizen);
 
-    List<MedicalRecord> findMedicalRecordByCitizen_Id(Long id);
+    List<MedicalRecord> findMedicalRecordsByCitizenId(Long id);
 
 }

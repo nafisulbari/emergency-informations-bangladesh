@@ -19,7 +19,7 @@ public interface HospitalService {
 
     MedicalRecord findMedicalRecordById(Long id);
 
-    List<MedicalRecord> findMedicalRecordByCitizenId(Long id);
+    List<MedicalRecord> findMedicalRecordsByCitizenId(Long id);
 
 
 }
