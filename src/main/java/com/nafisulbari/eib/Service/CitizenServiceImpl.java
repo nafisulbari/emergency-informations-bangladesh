@@ -11,7 +11,7 @@ import com.nafisulbari.eib.Dao.CitizenRepository;
 import com.nafisulbari.eib.Dao.MedicalRecordRepository;
 import com.nafisulbari.eib.Model.Citizen;
 
-import lombok.SneakyThrows;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -58,7 +58,7 @@ public class CitizenServiceImpl implements CitizenService {
 
     }
 
-    @SneakyThrows
+
     @Override
     public void saveCitizen(Citizen citizen, MultipartFile image){
 
@@ -79,6 +79,8 @@ public class CitizenServiceImpl implements CitizenService {
         fileService.uploadFile(image, fileName, citizen.getId());
 
     }
+
+
     @Override
     public void saveCitizenOnly(Citizen citizen){
 

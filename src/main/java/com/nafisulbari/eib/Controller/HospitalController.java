@@ -1,8 +1,6 @@
 package com.nafisulbari.eib.Controller;
 
-import com.nafisulbari.eib.Model.Hospital;
 import com.nafisulbari.eib.Model.MedicalRecord;
-import com.nafisulbari.eib.Model.User;
 import com.nafisulbari.eib.Service.CitizenService;
 import com.nafisulbari.eib.Service.HospitalService;
 import com.nafisulbari.eib.Service.UserService;
@@ -12,10 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

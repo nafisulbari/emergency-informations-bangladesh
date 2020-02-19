@@ -1,9 +1,7 @@
 package com.nafisulbari.eib.Controller;
 
 import com.nafisulbari.eib.Model.CriminalRecord;
-import com.nafisulbari.eib.Model.MedicalRecord;
 import com.nafisulbari.eib.Service.CitizenService;
-import com.nafisulbari.eib.Service.HospitalService;
 import com.nafisulbari.eib.Service.PoliceStationService;
 import com.nafisulbari.eib.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
