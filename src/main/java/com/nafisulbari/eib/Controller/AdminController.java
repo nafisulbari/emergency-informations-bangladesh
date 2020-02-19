@@ -65,7 +65,7 @@ public class AdminController {
         User tempUser = userService.findByEmail(citizen.getEmail());
         if (tempUser != null) {
             model.addAttribute("flag", "Another user exists with same email");
-            return new ModelAndView("admin/add-police-station");
+            return new ModelAndView("admin/add-citizen");
         }
 
         citizenService.saveCitizen(citizen, image);
