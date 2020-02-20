@@ -3,7 +3,7 @@
 
 
 
-    <a href="/police/${citizen.getId()}/add-criminal-record">Add Record</a>
+    <a href="/police/${citizen.id}/add-criminal-record">Add Record</a>
 
     <#list criminalRecords as criminalRecord>
 

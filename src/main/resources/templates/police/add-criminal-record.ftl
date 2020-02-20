@@ -12,51 +12,46 @@
 <body>
 
 <#setting date_format="yyyy-MM-dd">
+
 <#if flag??>
-
     <p style="color: red">${flag}</p>
-
 </#if>
 
-<#if (criminalRecord.id)??>
-<form action="/police/edit-criminal-record-action/${citizenId}/${criminalRecord.policeStation.id}/${criminalRecord.id}"
+
+<form action="<#if (criminalRecord.id)??>/police/edit-criminal-record-action/${citizenId}/${criminalRecord.policeStation.id}/${criminalRecord.id}<#else>/police/${citizenId}/add-criminal-record-action</#if>"
       enctype="multipart/form-data" method="post">
-    <#else>
-    <form action="/police/${citizenId}/add-criminal-record-action" enctype="multipart/form-data" method="post">
-        </#if>
 
 
-        <input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-        <label for="title">Title</label><br>
-        <input type="text" name="title" placeholder="title"
-               value="<#if (criminalRecord.title)??>${criminalRecord.title}</#if>" required><br>
+    <label for="title">Title</label><br>
+    <input type="text" name="title" placeholder="title"
+           value="<#if (criminalRecord.title)??>${criminalRecord.title}</#if>" required><br>
 
-        <label for="date">Date</label><br>
-        <input type="date" name="date" value="<#if (criminalRecord.date)??>${criminalRecord.date?date}</#if>"
-               required><br>
+    <label for="date">Date</label><br>
+    <input type="date" name="date" value="<#if (criminalRecord.date)??>${criminalRecord.date?date}</#if>"
+           required><br>
 
-        <label for="location">Location</label><br>
-        <input type="text" name="location" placeholder="location"
-               value="<#if (criminalRecord.location)??>${criminalRecord.location}</#if>" required><br>
-
-
-        <label for="description">Description</label><br>
-        <textarea name="description"
-                  required><#if (criminalRecord.description)??>${criminalRecord.description}</#if></textarea>
+    <label for="location">Location</label><br>
+    <input type="text" name="location" placeholder="location"
+           value="<#if (criminalRecord.location)??>${criminalRecord.location}</#if>" required><br>
 
 
-        <br>
-
-            <input type="submit" value="<#if (criminalRecord.id)??>Update Record<#else>Add Record</#if>">
-    </form>
-
-
-    <script>
+    <label for="description">Description</label><br>
+    <textarea name="description" id="textarea-tiny"
+              required><#if (criminalRecord.description)??>${criminalRecord.description}</#if></textarea>
 
 
+    <br><br>
+    <input type="submit" id="submitBt" value="<#if (criminalRecord.id)??>Update Record<#else>Add Record</#if>">
+</form>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(new function () {
         tinymce.init({
-            selector: 'textarea',
+            selector: '#textarea-tiny',
             toolbar_drawer: 'floating',
             plugins: 'image code',
             toolbar: 'bold italic underline strikethrough ' +
@@ -93,9 +88,15 @@
                 formData.append('files', blobInfo.blob(), blobInfo.filename());
                 xhr.send(formData);
             }
-
-
         });
-    </script>
+
+        $(document).on('click', '#submitBt', function (e) {
+
+            var content = tinymce.activeEditor.getContent();
+
+            $("#textarea-tiny").val(content);
+        });
+    });
+</script>
 </body>
 </html>
