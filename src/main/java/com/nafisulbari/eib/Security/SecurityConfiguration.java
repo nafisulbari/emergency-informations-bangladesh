@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 //assigning link access to user type
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+//                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/citizen/**").hasRole("CITIZEN")
                 .antMatchers("/hospital/**").hasRole("HOSPITAL")
                 .antMatchers("/police/**").hasRole("POLICE")

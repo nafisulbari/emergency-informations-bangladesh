@@ -43,7 +43,7 @@ public class PoliceStationController {
 
 
     @GetMapping("/police/{citizenId}/add-criminal-record")
-    public ModelAndView addMedicalRecordPage(@PathVariable("citizenId") Long citizenId, Model model) {
+    public ModelAndView addCriminalRecordPage(@PathVariable("citizenId") Long citizenId, Model model) {
 
         model.addAttribute("citizenId", citizenId);
         return new ModelAndView("police/add-criminal-record");
@@ -51,7 +51,7 @@ public class PoliceStationController {
 
 
     @PostMapping("/police/{citizenId}/add-criminal-record-action")
-    public ModelAndView addMedicalRecordAction(@PathVariable("citizenId") Long citizenId, CriminalRecord criminalRecord, Model model) {
+    public ModelAndView addCriminalRecordAction(@PathVariable("citizenId") Long citizenId, CriminalRecord criminalRecord, Model model) {
 
         policeStationService.saveCriminalRecord(criminalRecord,
                 policeStationService.findPoliceStationByEmail(userService.getAuthUserEmail()),
@@ -61,4 +61,39 @@ public class PoliceStationController {
 
         return new ModelAndView("police/add-criminal-record");
     }
+
+    @GetMapping("/police/edit-criminal-record/{id}/{citizenId}")
+    public ModelAndView editCriminalRecord(@PathVariable("id") Long id,
+                                           @PathVariable("citizenId") Long citizenId,
+                                           Model model) {
+
+        CriminalRecord criminalRecord = policeStationService.findCriminalRecordById(id);
+        if (criminalRecord == null) {
+            model.addAttribute("flag", "You do not have access to view this record");
+            return new ModelAndView("police/add-criminal-record");
+        }
+
+        model.addAttribute("citizenId", citizenId);
+        model.addAttribute("criminalRecord", criminalRecord);
+        return new ModelAndView("police/add-criminal-record");
+    }
+
+
+    @PostMapping("/police/edit-criminal-record-action/{citizenId}/{policeStationId}/{recordId}")
+    public ModelAndView editCriminalRecordAction(@PathVariable("citizenId") Long citizenId,
+                                                 @PathVariable("policeStationId") Long policeStationId,
+                                                 @PathVariable("recordId") Long recordId,
+                                                 CriminalRecord criminalRecord, Model model) {
+
+        criminalRecord.setId(recordId);
+        policeStationService.saveCriminalRecord(criminalRecord,
+                policeStationService.findPoliceStationById(policeStationId),
+                citizenService.findCitizenById(citizenId));
+
+        model.addAttribute("citizenId", criminalRecord.getCitizen().getId());
+        model.addAttribute("flag", "Criminal Record Updated");
+        return new ModelAndView("police/add-criminal-record");
+    }
+
+
 }

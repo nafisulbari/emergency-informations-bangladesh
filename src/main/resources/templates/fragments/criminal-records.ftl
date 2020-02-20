@@ -13,5 +13,11 @@
         ${criminalRecord.getLocation()}
         ${criminalRecord.getDescription()}
 
+
+        <#if authUserEmail==criminalRecord.policeStation.email>
+            <a href="/police/edit-criminal-record/${criminalRecord.getId()}/${citizen.getId()}">Edit</a>
+        </#if>
+
+
     </#list>
 </div>

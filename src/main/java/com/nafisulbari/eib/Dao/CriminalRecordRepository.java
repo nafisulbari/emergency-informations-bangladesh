@@ -10,4 +10,6 @@ import java.util.List;
 public interface CriminalRecordRepository extends JpaRepository<CriminalRecord,Long> {
 
     List<CriminalRecord> findCriminalRecordsByCitizenId(Long id);
+
+    CriminalRecord findCriminalRecordById(Long id);
 }

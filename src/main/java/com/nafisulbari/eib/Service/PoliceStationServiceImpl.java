@@ -25,6 +25,9 @@ public class PoliceStationServiceImpl implements PoliceStationService {
     @Autowired
     private CriminalRecordRepository criminalRecordRepository;
 
+    @Autowired
+    private UserService userService;
+
 
     @Override
     public PoliceStation findPoliceStationById(Long id) {
@@ -61,6 +64,18 @@ public class PoliceStationServiceImpl implements PoliceStationService {
     @Override
     public List<CriminalRecord> findCriminalRecordsByCitizenId(Long id) {
         return criminalRecordRepository.findCriminalRecordsByCitizenId(id);
+    }
+
+    @Override
+    public CriminalRecord findCriminalRecordById(Long id) {
+
+        CriminalRecord criminalRecord =criminalRecordRepository.findCriminalRecordById(id);
+        PoliceStation policeStation = policeStationRepository.findPoliceStationByEmail(userService.getAuthUserEmail());
+
+        if (criminalRecord.getPoliceStation()==policeStation){
+            return criminalRecord;
+        }
+        return null;
     }
 
 

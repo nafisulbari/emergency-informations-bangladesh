@@ -19,4 +19,6 @@ PoliceStation findPoliceStationById(Long id);
     PoliceStation findPoliceStationByEmail(String email);
 
     List<CriminalRecord> findCriminalRecordsByCitizenId(Long id);
+
+    CriminalRecord findCriminalRecordById(Long id);
 }
