@@ -19,7 +19,8 @@
 </#if>
 
 <#if (criminalRecord.id)??>
-<form action="/police/edit-criminal-record-action/${citizenId}/${criminalRecord.policeStation.id}/${criminalRecord.id}" enctype="multipart/form-data" method="post">
+<form action="/police/edit-criminal-record-action/${citizenId}/${criminalRecord.policeStation.id}/${criminalRecord.id}"
+      enctype="multipart/form-data" method="post">
     <#else>
     <form action="/police/${citizenId}/add-criminal-record-action" enctype="multipart/form-data" method="post">
         </#if>
@@ -32,7 +33,8 @@
                value="<#if (criminalRecord.title)??>${criminalRecord.title}</#if>" required><br>
 
         <label for="date">Date</label><br>
-        <input type="date" name="date" value="<#if (criminalRecord.date)??>${criminalRecord.date?date}</#if>" required><br>
+        <input type="date" name="date" value="<#if (criminalRecord.date)??>${criminalRecord.date?date}</#if>"
+               required><br>
 
         <label for="location">Location</label><br>
         <input type="text" name="location" placeholder="location"
@@ -40,17 +42,13 @@
 
 
         <label for="description">Description</label><br>
-        <textarea name="description" required><#if (criminalRecord.description)??>${criminalRecord.description}</#if></textarea>
+        <textarea name="description"
+                  required><#if (criminalRecord.description)??>${criminalRecord.description}</#if></textarea>
 
 
         <br>
-        <#if (criminalRecord.id)??>
-            <input type="submit" value="Update Record">
-        <#else>
-            <input type="submit" value="Add Record">
-        </#if>
 
-
+            <input type="submit" value="<#if (criminalRecord.id)??>Update Record<#else>Add Record</#if>">
     </form>
 
 

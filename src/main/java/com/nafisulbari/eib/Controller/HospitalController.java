@@ -1,5 +1,6 @@
 package com.nafisulbari.eib.Controller;
 
+import com.nafisulbari.eib.Model.CriminalRecord;
 import com.nafisulbari.eib.Model.MedicalRecord;
 import com.nafisulbari.eib.Service.CitizenService;
 import com.nafisulbari.eib.Service.HospitalService;
@@ -51,6 +52,7 @@ public class HospitalController {
     @PostMapping("/hospital/{citizenId}/add-medical-record-action")
     public ModelAndView addMedicalRecordAction(@PathVariable("citizenId") Long citizenId,MedicalRecord medicalRecord, Model model) {
 
+        System.out.println(medicalRecord.toString());
         hospitalService.saveMedicalRecord(medicalRecord,
                 hospitalService.findHospitalByEmail(userService.getAuthUserEmail()),
                 citizenService.findCitizenById(citizenId));
@@ -61,7 +63,38 @@ public class HospitalController {
     }
 
 
+    @GetMapping("/hospital/edit-medical-record/{id}/{citizenId}")
+    public ModelAndView editMedicalRecord(@PathVariable("id") Long id,
+                                           @PathVariable("citizenId") Long citizenId,
+                                           Model model) {
 
+        MedicalRecord medicalRecord = hospitalService.findMedicalRecordById(id);
+        if (medicalRecord == null) {
+            model.addAttribute("flag", "You do not have access to view this record");
+            return new ModelAndView("hospital/add-medical-record");
+        }
+
+        model.addAttribute("citizenId", citizenId);
+        model.addAttribute("medicalRecord", medicalRecord);
+        return new ModelAndView("police/add-criminal-record");
+    }
+
+
+    @PostMapping("/hospital/edit-medical-record-action/{citizenId}/{hospitalId}/{recordId}")
+    public ModelAndView editMedicalRecordAction(@PathVariable("citizenId") Long citizenId,
+                                                 @PathVariable("hospitalId") Long hospitalId,
+                                                 @PathVariable("recordId") Long recordId,
+                                                 MedicalRecord medicalRecord, Model model) {
+
+        medicalRecord.setId(recordId);
+        hospitalService.saveMedicalRecord(medicalRecord,
+                hospitalService.findHospitalById(hospitalId),
+                citizenService.findCitizenById(citizenId));
+
+        model.addAttribute("citizenId", medicalRecord.getCitizen().getId());
+        model.addAttribute("flag", "Medical Record Updated");
+        return new ModelAndView("hospital/add-medical-record");
+    }
 
 
 

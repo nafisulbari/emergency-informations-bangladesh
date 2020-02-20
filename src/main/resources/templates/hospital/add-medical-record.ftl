@@ -9,7 +9,7 @@
 
 </head>
 <body>
-
+<#setting date_format="yyyy-MM-dd">
 
 <#if flag??>
 
@@ -17,28 +17,35 @@
 
 </#if>
 
+<#if (medicalRecord.id)??>
+<form action="/hospital/edit-medical-record-action/${citizenId}/${medicalRecord.hospital.id}/${medicalRecord.id}" enctype="multipart/form-data" method="post">
+    <#else>
+    <form action="/hospital/${citizenId}/add-medical-record-action" enctype="multipart/form-data" method="post">
+        </#if>
 
-<form action="/hospital/${citizenId}/add-medical-record-action" enctype="multipart/form-data" method="post">
-    <input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+        <label for="title">Title</label><br>
+        <input type="text" name="title" placeholder="title"
+               value="<#if (medicalRecord.title)??>${medicalRecord.title}</#if>" required><br>
+
+        <label for="date">Date</label><br>
+        <input type="date" name="date" value="<#if (medicalRecord.date)??>${medicalRecord.date?date}</#if>" required><br>
+
+        <label for="doctor">Doctor</label><br>
+        <input type="text" name="doctor" placeholder="doctor"
+               value="<#if (medicalRecord.doctor)??>${medicalRecord.doctor}</#if>" required><br>
+
+        <label for="description">Description</label><br>
+        <textarea name="description" required><#if (medicalRecord.description)??>${medicalRecord.description}</#if></textarea>
 
 
-    <label for="date">Birthday</label>
-    <input type="date" name="date">
-
-    <label for="doctor">Doctor</label><br>
-    <input type="text" name="doctor" placeholder="Name" ><br>
-
-    <label for="title">Title</label><br>
-    <input type="text" name="title" placeholder="title" ><br>
-
-    <label for="description">Description</label><br>
-    <textarea name="description"></textarea>
-
-
-
-    <br>
-
-    <input type="submit" value="Add Record">
+        <br>
+        <#if (medicalRecord.id)??>
+            <input type="submit" value="Update Record">
+        <#else>
+            <input type="submit" value="Add Record">
+        </#if>
 </form>
 
 

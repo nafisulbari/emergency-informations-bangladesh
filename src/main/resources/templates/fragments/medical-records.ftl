@@ -11,6 +11,10 @@
         ${medicalRecord.getTitle()}
         ${medicalRecord.getDescription()}
 
+        <#if authUserEmail==medicalRecord.policeStation.email>
+            <a href="/hospital/edit-medical-record/${medicalRecord.getId()}/${citizen.getId()}">Edit</a>
+        </#if>
+
     </#list>
 
 </div>
