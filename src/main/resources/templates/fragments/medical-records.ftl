@@ -2,7 +2,7 @@
 
     med rec
 
-    <a href="/hospital/${citizen.getId()}/add-medical-record">Add Record</a>
+    <a href="/hospital/${citizen.id}/add-medical-record">Add Record</a>
 
     <#list medicalRecords as medicalRecord>
 
@@ -11,7 +11,7 @@
         ${medicalRecord.getTitle()}
         ${medicalRecord.getDescription()}
 
-        <#if authUserEmail==medicalRecord.policeStation.email>
+        <#if authUserEmail==medicalRecord.hospital.email>
             <a href="/hospital/edit-medical-record/${medicalRecord.getId()}/${citizen.getId()}">Edit</a>
         </#if>
 

@@ -2,7 +2,6 @@
     criminal rec
 
 
-
     <a href="/police/${citizen.id}/add-criminal-record">Add Record</a>
 
     <#list criminalRecords as criminalRecord>
