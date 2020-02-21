@@ -44,6 +44,10 @@ public class HospitalController {
     public ModelAndView addMedicalRecordPage(@PathVariable("citizenId") Long citizenId, Model model) {
 
         Citizen citizen = citizenService.findCitizenById(citizenId);
+
+        String authUserEmail =userService.getAuthUserEmail();
+        model.addAttribute("authUserEmail", authUserEmail);
+
         model.addAttribute("citizenId", citizenId);
         model.addAttribute("citizen", citizen);
         return new ModelAndView("hospital/add-medical-record");
@@ -59,6 +63,9 @@ public class HospitalController {
                 hospitalService.findHospitalByEmail(userService.getAuthUserEmail()),
                 citizen);
 
+        String authUserEmail =userService.getAuthUserEmail();
+
+        model.addAttribute("authUserEmail", authUserEmail);
         model.addAttribute("flag", "Medical Record Saved");
         model.addAttribute("citizen", citizen);
 
@@ -71,16 +78,20 @@ public class HospitalController {
                                           @PathVariable("citizenId") Long citizenId,
                                           Model model) {
 
-        Citizen citizen = citizenService.findCitizenById(citizenId);
 
         MedicalRecord medicalRecord = hospitalService.findMedicalRecordById(id);
+
         if (medicalRecord == null) {
             model.addAttribute("flag", "You do not have access to view this record");
             return new ModelAndView("hospital/add-medical-record");
         }
 
+        Citizen citizen = citizenService.findCitizenById(citizenId);
+        String authUserEmail =userService.getAuthUserEmail();
+
         model.addAttribute("citizenId", citizenId);
         model.addAttribute("medicalRecord", medicalRecord);
+        model.addAttribute("authUserEmail", authUserEmail);
         model.addAttribute("citizen", citizen);
         return new ModelAndView("hospital/add-medical-record");
     }
@@ -94,14 +105,20 @@ public class HospitalController {
 
 
         Citizen citizen = citizenService.findCitizenById(citizenId);
+
+
         medicalRecord.setId(recordId);
         hospitalService.saveMedicalRecord(medicalRecord,
                 hospitalService.findHospitalById(hospitalId),
                 citizen);
 
+        String authUserEmail =userService.getAuthUserEmail();
+        model.addAttribute("authUserEmail", authUserEmail);
+
         model.addAttribute("citizenId", medicalRecord.getCitizen().getId());
         model.addAttribute("flag", "Medical Record Updated");
         model.addAttribute("citizen", citizen);
+
         return new ModelAndView("hospital/add-medical-record");
     }
 
