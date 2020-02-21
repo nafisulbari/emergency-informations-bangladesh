@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="/static/assets/css/Contact-Form-Clean.css">
     <link rel="stylesheet" href="/static/assets/css/styles.css">
 
-
 </head>
 
 <body>

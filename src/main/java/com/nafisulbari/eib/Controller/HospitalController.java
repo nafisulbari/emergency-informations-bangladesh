@@ -1,5 +1,6 @@
 package com.nafisulbari.eib.Controller;
 
+import com.nafisulbari.eib.Model.Citizen;
 import com.nafisulbari.eib.Model.MedicalRecord;
 import com.nafisulbari.eib.Service.CitizenService;
 import com.nafisulbari.eib.Service.HospitalService;
@@ -41,9 +42,14 @@ public class HospitalController {
 
     @GetMapping("/hospital/{citizenId}/add-medical-record")
     public ModelAndView addMedicalRecordPage(@PathVariable("citizenId") Long citizenId, Model model) {
-        System.out.println(model.toString());
+
+        Citizen citizen = citizenService.findCitizenById(citizenId);
+
+        String authUserEmail =userService.getAuthUserEmail();
+        model.addAttribute("authUserEmail", authUserEmail);
 
         model.addAttribute("citizenId", citizenId);
+        model.addAttribute("citizen", citizen);
         return new ModelAndView("hospital/add-medical-record");
     }
 
@@ -51,12 +57,17 @@ public class HospitalController {
     @PostMapping("/hospital/{citizenId}/add-medical-record-action")
     public ModelAndView addMedicalRecordAction(@PathVariable("citizenId") Long citizenId, MedicalRecord medicalRecord, Model model) {
 
-        System.out.println(medicalRecord.toString());
+        Citizen citizen = citizenService.findCitizenById(citizenId);
+
         hospitalService.saveMedicalRecord(medicalRecord,
                 hospitalService.findHospitalByEmail(userService.getAuthUserEmail()),
-                citizenService.findCitizenById(citizenId));
+                citizen);
 
+        String authUserEmail =userService.getAuthUserEmail();
+
+        model.addAttribute("authUserEmail", authUserEmail);
         model.addAttribute("flag", "Medical Record Saved");
+        model.addAttribute("citizen", citizen);
 
         return new ModelAndView("hospital/add-medical-record");
     }
@@ -67,14 +78,21 @@ public class HospitalController {
                                           @PathVariable("citizenId") Long citizenId,
                                           Model model) {
 
+
         MedicalRecord medicalRecord = hospitalService.findMedicalRecordById(id);
+
         if (medicalRecord == null) {
             model.addAttribute("flag", "You do not have access to view this record");
             return new ModelAndView("hospital/add-medical-record");
         }
 
+        Citizen citizen = citizenService.findCitizenById(citizenId);
+        String authUserEmail =userService.getAuthUserEmail();
+
         model.addAttribute("citizenId", citizenId);
         model.addAttribute("medicalRecord", medicalRecord);
+        model.addAttribute("authUserEmail", authUserEmail);
+        model.addAttribute("citizen", citizen);
         return new ModelAndView("hospital/add-medical-record");
     }
 
@@ -85,13 +103,22 @@ public class HospitalController {
                                                 @PathVariable("recordId") Long recordId,
                                                 MedicalRecord medicalRecord, Model model) {
 
+
+        Citizen citizen = citizenService.findCitizenById(citizenId);
+
+
         medicalRecord.setId(recordId);
         hospitalService.saveMedicalRecord(medicalRecord,
                 hospitalService.findHospitalById(hospitalId),
-                citizenService.findCitizenById(citizenId));
+                citizen);
+
+        String authUserEmail =userService.getAuthUserEmail();
+        model.addAttribute("authUserEmail", authUserEmail);
 
         model.addAttribute("citizenId", medicalRecord.getCitizen().getId());
         model.addAttribute("flag", "Medical Record Updated");
+        model.addAttribute("citizen", citizen);
+
         return new ModelAndView("hospital/add-medical-record");
     }
 
