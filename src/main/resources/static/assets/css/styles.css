@@ -121,3 +121,22 @@
   margin:40px 0;
 }
 
+#form-div{
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+#textarea-tiny{
+  height: 1080px;
+}
+
+
+#text-left{
+margin-bottom: 30px;
+}
+#med-rec-title{
+text-decoration: none;
+  color: #353535;
+}
+#med-rec-title :hover{
+  color: #2986d5;
+}

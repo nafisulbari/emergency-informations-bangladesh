@@ -24,7 +24,8 @@
             <div class="col" id="record-list">
                 <div>
                     <div class="col-md-12">
-                        <h2>${medicalRecord.getTitle()}</h2>
+                        <a id="med-rec-title" href="/hospital/edit-medical-record/${medicalRecord.getId()}/${citizen.getId()}">
+                        <h2>${medicalRecord.getTitle()}</h2></a>
                         <div class="row">
                             <div class="col-md-6">
                                 <h4>${medicalRecord.getHospital().getName()}</h4>
