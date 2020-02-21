@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Emergency Information Bangladesh</title>
 
-    <script src="https://cdn.tiny.cloud/1/0mfdsilngywfygs9tbl0b40723kmi9tidztyrtr534whm93a/tinymce/5/tinymce.min.js"
-            referrerpolicy="origin"></script>
-
-
-</head>
-<body>
 
 <#setting date_format="yyyy-MM-dd">
 
@@ -18,28 +7,40 @@
 </#if>
 
 
-<form action="<#if (medicalRecord.id)??>/hospital/edit-medical-record-action/${citizenId}/${medicalRecord.hospital.id}/${medicalRecord.id}<#else>/hospital/${citizenId}/add-medical-record-action</#if>"
-      enctype="multipart/form-data" method="post">
+<div id="form-div">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="<#if (medicalRecord.id)??>/hospital/edit-medical-record-action/${citizenId}/${medicalRecord.hospital.id}/${medicalRecord.id}<#else>/hospital/${citizenId}/add-medical-record-action</#if>" enctype="multipart/form-data" method="post">
+
+                    <input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                    <h2 class="text-left">Add Medical Record<button class="btn btn-success float-right" type="submit">Add Record</button></h2>
+
+                    <div class="form-group"><input class="form-control" type="text" name="title" placeholder="title" value="<#if (medicalRecord.title)??>${medicalRecord.title}</#if>" required></div>
+
+                    <div class="form-group"><input type="date" name="date" value="<#if (medicalRecord.date)??>${medicalRecord.date?date}</#if>" required></div>
+
+                    <div class="form-group"><input class="form-control " type="text" name="doctor" placeholder="Doctor" value="<#if (medicalRecord.doctor)??>${medicalRecord.doctor}</#if>" required></div>
+
+                    <div class="form-group"><textarea class="form-control" rows="14" name="description" placeholder="Message" id="textarea-tiny" required><#if (medicalRecord.description)??>${medicalRecord.description}</#if></textarea></div>
+
+                    <div class="form-group"></div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-    <input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-    <label for="title">Title</label><br>
-    <input type="text" name="title" placeholder="title"
-           value="<#if (medicalRecord.title)??>${medicalRecord.title}</#if>" required><br>
 
-    <label for="date">Date</label><br>
-    <input type="date" name="date" value="<#if (medicalRecord.date)??>${medicalRecord.date?date}</#if>"
-           required><br>
-
-    <label for="doctor">Doctor</label><br>
-    <input type="text" name="doctor" placeholder="doctor"
-           value="<#if (medicalRecord.doctor)??>${medicalRecord.doctor}</#if>" required><br>
 
 
     <label for="description">Description</label><br>
-    <textarea name="description" id="textarea-tiny"
-              required><#if (medicalRecord.description)??>${medicalRecord.description}</#if></textarea>
+    <textarea name="description"
+
 
 
     <br><br>
@@ -98,5 +99,3 @@
         });
     });
 </script>
-</body>
-</html>

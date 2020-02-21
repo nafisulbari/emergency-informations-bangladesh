@@ -15,7 +15,10 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="/static/assets/css/Navigation-with-Search.css">
     <link rel="stylesheet" href="/static/assets/css/Testimonials.css">
+    <link rel="stylesheet" href="/static/assets/css/Contact-Form-Clean.css">
     <link rel="stylesheet" href="/static/assets/css/styles.css">
+
+
 </head>
 
 <body>
