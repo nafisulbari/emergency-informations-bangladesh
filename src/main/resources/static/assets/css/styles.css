@@ -149,3 +149,6 @@ text-decoration: none;
   height: 100%;
 }
 
+#navbar-hov{
+  z-index: 222;
+}

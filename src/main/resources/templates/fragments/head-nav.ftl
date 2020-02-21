@@ -27,7 +27,7 @@
 
 <nav class="navbar navbar-light navbar-expand-md navigation-clean-search" id="nav-eib"
      style="background-color:#f4f5ec;">
-    <div class="container"><a class="navbar-brand" href="/"><img src="/static/assets/img/bd-govt-logo copy.png"
+    <div class="container" id="navbar-hov"><a class="navbar-brand" href="/"><img src="/static/assets/img/bd-govt-logo copy.png"
                                                                  id="logo"></a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
                     class="navbar-toggler-icon"></span></button>

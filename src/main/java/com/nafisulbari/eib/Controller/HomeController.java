@@ -35,12 +35,12 @@ public class HomeController {
     }
 
 
-   @GetMapping("/")
+    @GetMapping("/")
     public ModelAndView index(@RequestParam(name = "search", required = false) String search) {
 
         if (search != null) {
 
-            return new ModelAndView("redirect:/"+search);
+            return new ModelAndView("redirect:/" + search);
         }
         return new ModelAndView("index");
     }
@@ -61,12 +61,17 @@ public class HomeController {
 
 
     @GetMapping("/{id}")
-    public ModelAndView getCitizen(@PathVariable("id") int id,
-
+    public ModelAndView getCitizen(@PathVariable("id") String id,
                                    Model model) {
+        Long citizenId;
+        try {
+            citizenId = Long.parseLong(id);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Wrong citizen id Perhaps?");
+            return new ModelAndView("citizen-info");
+        }
 
-
-        Long citizenId = (long) id;
+        citizenId = Long.parseLong(id);
         Citizen citizen = citizenService.findCitizenById(citizenId);
         if (citizen != null) {
 
