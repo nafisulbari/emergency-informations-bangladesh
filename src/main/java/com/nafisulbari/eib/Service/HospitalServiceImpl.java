@@ -70,6 +70,6 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public List<MedicalRecord> findMedicalRecordsByCitizenId(Long id) {
-        return medicalRecordRepository.findMedicalRecordsByCitizenId(id);
+        return medicalRecordRepository.findMedicalRecordsByCitizenIdOrderByIdDesc(id);
     }
 }

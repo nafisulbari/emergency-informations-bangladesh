@@ -15,6 +15,6 @@ public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, Lo
 
     void deleteByCitizen(Citizen citizen);
 
-    List<MedicalRecord> findMedicalRecordsByCitizenId(Long id);
+    List<MedicalRecord> findMedicalRecordsByCitizenIdOrderByIdDesc(Long id);
 
 }
