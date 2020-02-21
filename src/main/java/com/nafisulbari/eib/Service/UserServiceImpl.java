@@ -15,6 +15,7 @@ public class UserServiceImpl implements UserService {
 
     public String getAuthUserRole() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
+
         String role = "";
 
         if (!email.equals("anonymousUser")) {

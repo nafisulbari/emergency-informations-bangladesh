@@ -1,4 +1,4 @@
-package com.nafisulbari.eib.Storage;
+package com.nafisulbari.eib.Config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

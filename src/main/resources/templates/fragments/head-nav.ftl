@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -21,19 +20,49 @@
 </head>
 
 <body>
-<nav class="navbar navbar-light navbar-expand-md navigation-clean-search" id="nav-eib" style="background-color:#f4f5ec;">
-    <div class="container"><a class="navbar-brand" href="#"><img src="/static/assets/img/bd-govt-logo copy.png" id="logo"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+
+<#assign sec=JspTaglibs["http://www.springframework.org/security/tags"]/>
+
+
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-search" id="nav-eib"
+     style="background-color:#f4f5ec;">
+    <div class="container"><a class="navbar-brand" href="/"><img src="/static/assets/img/bd-govt-logo copy.png"
+                                                                 id="logo"></a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+                    class="navbar-toggler-icon"></span></button>
         <div
                 class="collapse navbar-collapse" id="navcol-1">
             <ul class="nav navbar-nav">
-                <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Home</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#">Profile</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/">Home</a></li>
+
+                <@sec.authorize access="hasRole('CITIZEN')">
+                    <li class="nav-item" role="presentation"><a class="nav-link"
+                                                                href="/<@sec.authentication property="principal.id"/>">Profile</a>
+                    </li>
+                </@sec.authorize>
+
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#"></a></li>
             </ul>
             <form class="form-inline mr-auto" target="_self">
-                <div class="form-group"><label for="search-field"><i class="fa fa-search" style="font-size:25px;color:rgb(253,191,15);"></i></label><input class="form-control search-field" type="search" name="search" placeholder="Search..." id="search-field" style="color:rgb(67,67,67);"></div>
+                <div class="form-group"><label for="search-field"><i class="fa fa-search"
+                                                                     style="font-size:25px;color:rgb(253,191,15);"></i></label><input
+                            class="form-control search-field" type="search" name="search" placeholder="Search..."
+                            id="search-field" style="color:rgb(67,67,67);"></div>
             </form>
-            <p class="navbar-text" id="welcome-name">Welcome, Ahmed Nafisul Bari</p><a class="btn btn-light action-button" role="button" href="#">Login</a></div>
+            <p class="navbar-text" id="welcome-name">
+                <@sec.authorize access="isAuthenticated()">
+                    Welcome, <@sec.authentication property="principal.name"/>
+                </@sec.authorize>
+            </p>
+            <@sec.authorize access="!isAuthenticated()">
+                <a class="btn btn-light action-button" role="button" href="/login">Login</a>
+            </@sec.authorize>
+
+            <@sec.authorize access="isAuthenticated()">
+                <a class="btn btn-danger active action-button" role="button" href="/logout">Logout</a>
+            </@sec.authorize>
+
+        </div>
     </div>
 </nav>
 

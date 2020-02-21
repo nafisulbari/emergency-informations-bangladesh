@@ -4,13 +4,18 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <h1 id="med-rec-headding">Medical Records<a class="btn btn-warning float-right" role="button" href="/hospital/${citizen.id}/add-medical-record" id="add-record-btn">Add Record</a></h1>
+                    <h1 id="med-rec-headding">Medical Records
+                        <@sec.authorize access="hasRole('HOSPITAL')">
+                            <a class="btn btn-warning float-right" role="button" href="/hospital/${citizen.id}/add-medical-record" id="add-record-btn">Add Record</a>
+                        </@sec.authorize>
+                    </h1>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<#if medicalRecords?? >
 <#list medicalRecords as medicalRecord>
 
 <div id="record-list-block">
@@ -36,7 +41,7 @@
 </div>
 
 </#list>
-
+</#if>
 
 
 

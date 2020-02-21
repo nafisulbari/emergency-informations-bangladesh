@@ -37,6 +37,9 @@
                             <p style="color:rgb(77,77,77);">Blood Group: ${citizen.getBloodGroup()}<br></p>
                             <p style="color:rgb(77,77,77);">Emergency Contact: ${citizen.getEmergencyRelation()}<br></p>
                             <p style="color:rgb(77,77,77);">Contact Mobile: ${citizen.getEmergencyMobile()}<br></p>
+                            <#if authUserEmail == citizen.getEmail()>
+                            <a class="btn btn-info" role="button" href="/citizen-records/${citizen.getId()}/${citizen.getId()}.png" download>Download QR Code</a>
+                            </#if>
                         </div>
                     </div>
                 </div>
@@ -52,7 +55,6 @@
         <#elseif authUserEmail == citizen.getEmail()>
             <#include "fragments/medical-records.ftl">
             <#include "fragments/criminal-records.ftl">
-            <a href="/citizen-records/${citizen.getId()}/${citizen.getId()}.png" download>Download QR</a>
 
         <#else>
         </#if>

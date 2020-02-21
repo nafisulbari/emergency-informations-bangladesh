@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CustomUserDetails implements UserDetails{
+public class CustomUserDetails implements UserDetails {
 
     private User user;
 
@@ -35,11 +35,20 @@ public class CustomUserDetails implements UserDetails{
         });
         return authorities;
     }
+
     //some user UserDetails methods are set from db, some are kept true to spring security to work
     @Override
     public String getPassword() {
         System.out.println(this.user.getPassword());
         return this.user.getPassword();
+    }
+
+    public Long getId() {
+        return this.user.getId();
+    }
+
+    public String getName() {
+        return this.user.getName();
     }
 
     @Override

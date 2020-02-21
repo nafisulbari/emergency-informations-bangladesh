@@ -71,6 +71,8 @@ public class HomeController {
                 model.addAttribute("criminalRecords", policeStationService.findCriminalRecordsByCitizenId(citizenId));
             }
             if (userService.getAuthUserEmail().equals(citizen.getEmail())){
+                model.addAttribute("medicalRecords", hospitalService.findMedicalRecordsByCitizenId(citizenId));
+                model.addAttribute("criminalRecords", policeStationService.findCriminalRecordsByCitizenId(citizenId));
                 citizenService.generateQrCode( citizenId);
             }
 
