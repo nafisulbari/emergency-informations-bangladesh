@@ -1,22 +1,40 @@
 <div>
-    criminal rec
-
-
-    <a href="/police/${citizen.id}/add-criminal-record">Add Record</a>
-
-    <#list criminalRecords as criminalRecord>
-
-        ${criminalRecord.getPoliceStation().getName()}
-        ${criminalRecord.getTitle()}
-        ${criminalRecord.getDate()}
-        ${criminalRecord.getLocation()}
-        ${criminalRecord.getDescription()}
-
-
-        <#if authUserEmail==criminalRecord.policeStation.email>
-            <a href="/police/edit-criminal-record/${criminalRecord.getId()}/${citizen.getId()}">Edit</a>
-        </#if>
-
-
-    </#list>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <h1 id="med-rec-headding">Criminal Records<a class="btn btn-warning float-right" role="button" href="/police/${citizen.id}/add-criminal-record" id="add-record-btn">Add Record</a></h1>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<#list criminalRecords as criminalRecord>
+
+    <div id="record-list-block">
+        <div class="container">
+            <div class="row">
+                <div class="col" id="record-list">
+                    <div>
+                        <div class="col-md-12">
+                            <h2> ${criminalRecord.getTitle()}</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>${criminalRecord.getPoliceStation().getName()}</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4>${criminalRecord.getDate()}<br></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</#list>
+
+
+

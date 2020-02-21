@@ -1,0 +1,117 @@
+.navbar.navbar-light.navbar-expand-md.navigation-clean-search {
+  max-height:90px;
+}
+
+#logo {
+  max-height:80px;
+}
+
+@media (max-width: 769px) {
+  #farmer-img {
+    visibility:hidden;
+  }
+}
+
+#testimonial-text {
+  margin-bottom:0;
+  padding-top:50px;
+}
+
+#testi-block {
+  padding:30px 0;
+}
+
+#hero-block {
+  padding:70px 0;
+}
+
+#how-work-block {
+  padding:50px 0;
+}
+
+@media (min-height: 768px) {
+  #nav-eib {
+    min-height:100px;
+    box-shadow:0px 0px 5px 1px rgba(204,204,204,0.74);
+  }
+}
+
+#image-box {
+  max-width:100px;
+}
+
+#col-left {
+}
+
+#col-right {
+}
+
+#profile-img {
+  width:300px;
+  height:300px;
+  object-fit:cover;
+}
+
+@media (max-width: 992px) {
+  #profile-img {
+    width:220px;
+    height:220px;
+  }
+}
+
+#emergency {
+  padding-top:30px;
+}
+
+#block-info {
+  padding-top:40px;
+  padding-bottom:40px;
+}
+
+#record-list {
+  margin-bottom:25px;
+  padding:15px;
+  -webkit-box-shadow:1px 1px 5px 1px rgba(204,204,204,0.74);
+  -moz-box-shadow:1px 1px 5px 1px rgba(204,204,204,0.74);
+  box-shadow:1px 1px 5px 1px rgba(204,204,204,0.74);
+}
+
+#info-block {
+  -webkit-box-shadow:1px 1px 5px 1px rgba(204,204,204,0.74);
+  -moz-box-shadow:1px 1px 5px 1px rgba(204,204,204,0.74);
+  box-shadow:1px 1px 5px 1px rgba(204,204,204,0.74);
+}
+
+#name {
+  margin-top:15px;
+}
+
+#citizen-heading {
+  margin-bottom:25px;
+}
+
+#med-rec-headding {
+  margin-bottom:25px;
+  margin-top:5px;
+}
+
+#footer {
+  margin-top:35px;
+}
+
+#e-info-text {
+  margin-bottom:12px;
+}
+
+#record-title {
+  margin-bottom:20px;
+}
+
+#welcome-name {
+  margin:0px 20px 0px 0px;
+}
+
+#table-block {
+  margin:40px 0;
+}
+
