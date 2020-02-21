@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/assets/css/Data-Table.css">
-    <link rel="stylesheet" href="/static/assets/css/Data-Table.css">
     <link rel="stylesheet" href="/static/assets/css/dh-row-text-image-right-responsive.css">
     <link rel="stylesheet" href="/static/assets/css/Features-Clean.css">
     <link rel="stylesheet" href="/static/assets/css/Footer-Basic.css">
@@ -43,7 +42,7 @@
 
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#"></a></li>
             </ul>
-            <form class="form-inline mr-auto" target="_self">
+            <form class="form-inline mr-auto" target="_self" action="/">
                 <div class="form-group"><label for="search-field"><i class="fa fa-search"
                                                                      style="font-size:25px;color:rgb(253,191,15);"></i></label><input
                             class="form-control search-field" type="search" name="search" placeholder="Search..."

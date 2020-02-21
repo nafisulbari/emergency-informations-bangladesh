@@ -35,10 +35,13 @@ public class HomeController {
     }
 
 
-    @GetMapping("/")
-    public ModelAndView index(Model model) {
+   @GetMapping("/")
+    public ModelAndView index(@RequestParam(name = "search", required = false) String search) {
 
-        model.addAttribute("authUserRole", userService.getAuthUserRole());
+        if (search != null) {
+
+            return new ModelAndView("redirect:/"+search);
+        }
         return new ModelAndView("index");
     }
 
@@ -58,30 +61,33 @@ public class HomeController {
 
 
     @GetMapping("/{id}")
-    public ModelAndView getCitizen(@PathVariable("id") int id, Model model) {
+    public ModelAndView getCitizen(@PathVariable("id") int id,
 
-        Long citizenId =(long)id;
-        Citizen citizen =citizenService.findCitizenById(citizenId);
-        if (citizen!=null) {
+                                   Model model) {
 
-            if (userService.getAuthUserRole().equals("HOSPITAL")){
+
+        Long citizenId = (long) id;
+        Citizen citizen = citizenService.findCitizenById(citizenId);
+        if (citizen != null) {
+
+            if (userService.getAuthUserRole().equals("HOSPITAL")) {
                 model.addAttribute("medicalRecords", hospitalService.findMedicalRecordsByCitizenId(citizenId));
             }
-            if (userService.getAuthUserRole().equals("POLICE")){
+            if (userService.getAuthUserRole().equals("POLICE")) {
                 model.addAttribute("criminalRecords", policeStationService.findCriminalRecordsByCitizenId(citizenId));
             }
-            if (userService.getAuthUserEmail().equals(citizen.getEmail())){
+            if (userService.getAuthUserEmail().equals(citizen.getEmail())) {
                 model.addAttribute("medicalRecords", hospitalService.findMedicalRecordsByCitizenId(citizenId));
                 model.addAttribute("criminalRecords", policeStationService.findCriminalRecordsByCitizenId(citizenId));
-                citizenService.generateQrCode( citizenId);
+                citizenService.generateQrCode(citizenId);
             }
 
             model.addAttribute("citizen", citizen);
             model.addAttribute("authUserRole", userService.getAuthUserRole());
             model.addAttribute("authUserEmail", userService.getAuthUserEmail());
 
-        }else {
-            model.addAttribute("errorMessage", "No citizen found with id: "+citizenId);
+        } else {
+            model.addAttribute("errorMessage", "No citizen found with id: " + citizenId);
         }
 
 
