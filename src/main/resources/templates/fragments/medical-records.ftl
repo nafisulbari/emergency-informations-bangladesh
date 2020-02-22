@@ -24,7 +24,11 @@
             <div class="col" id="record-list">
                 <div>
                     <div class="col-md-12">
-                        <a id="med-rec-title" href="/hospital/edit-medical-record/${medicalRecord.getId()}/${citizen.getId()}">
+                        <a id="med-rec-title" href="<#if authUserEmail==medicalRecord.getCitizen().getEmail()>
+                                                    /citizen/medical-record/${medicalRecord.getId()}
+                                                   <#else>
+                                                      /hospital/edit-medical-record/${medicalRecord.getId()}/${citizen.getId()}
+                                                   </#if>">
                         <h2>${medicalRecord.getTitle()}</h2></a>
                         <div class="row">
                             <div class="col-md-6">

@@ -45,7 +45,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form action="<#if (medicalRecord.id)??>/hospital/edit-medical-record-action/${citizenId}/${medicalRecord.hospital.id}/${medicalRecord.id}<#else>/hospital/${citizenId}/add-medical-record-action</#if>"
+                <form action="<#if (medicalRecord.id)??>/hospital/edit-medical-record-action/${citizen.getId()}/${medicalRecord.hospital.id}/${medicalRecord.id}<#else>/hospital/${citizen.getId()}/add-medical-record-action</#if>"
                       enctype="multipart/form-data" method="post">
                     <input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
@@ -130,7 +130,7 @@
                 var xhr, formData;
                 xhr = new XMLHttpRequest();
                 xhr.withCredentials = false;
-                xhr.open('POST', '/hospital/images/${citizenId}');
+                xhr.open('POST', '/hospital/images/${citizen.getId()}');
                 var token = document.getElementById("csrf").value;
                 xhr.setRequestHeader("X-CSRF-Token", token);
                 xhr.onload = function () {

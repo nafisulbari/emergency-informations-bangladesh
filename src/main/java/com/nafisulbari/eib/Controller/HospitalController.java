@@ -48,7 +48,6 @@ public class HospitalController {
         String authUserEmail =userService.getAuthUserEmail();
         model.addAttribute("authUserEmail", authUserEmail);
 
-        model.addAttribute("citizenId", citizenId);
         model.addAttribute("citizen", citizen);
         return new ModelAndView("hospital/add-medical-record");
     }
@@ -89,7 +88,6 @@ public class HospitalController {
         Citizen citizen = citizenService.findCitizenById(citizenId);
         String authUserEmail =userService.getAuthUserEmail();
 
-        model.addAttribute("citizenId", citizenId);
         model.addAttribute("medicalRecord", medicalRecord);
         model.addAttribute("authUserEmail", authUserEmail);
         model.addAttribute("citizen", citizen);
@@ -114,8 +112,6 @@ public class HospitalController {
 
         String authUserEmail =userService.getAuthUserEmail();
         model.addAttribute("authUserEmail", authUserEmail);
-
-        model.addAttribute("citizenId", medicalRecord.getCitizen().getId());
         model.addAttribute("flag", "Medical Record Updated");
         model.addAttribute("citizen", citizen);
 

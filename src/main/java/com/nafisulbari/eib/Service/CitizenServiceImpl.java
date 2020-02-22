@@ -50,6 +50,11 @@ public class CitizenServiceImpl implements CitizenService {
         return citizenRepository.findCitizenById(id);
     }
 
+    @Override
+    public Citizen findCitizenByEmail(String email) {
+        return citizenRepository.findCitizenByEmail(email);
+    }
+
     @Transactional
     @Override
     public void deleteCitizenById(Long id) {

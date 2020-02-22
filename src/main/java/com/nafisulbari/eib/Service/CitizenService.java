@@ -9,6 +9,8 @@ public interface CitizenService {
 
     Citizen findCitizenById(Long id);
 
+    Citizen findCitizenByEmail(String email);
+
     void deleteCitizenById(Long id);
 
     void saveCitizen(Citizen citizen, MultipartFile image);
