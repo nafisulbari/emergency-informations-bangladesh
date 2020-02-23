@@ -9,12 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 @Component
 public class HospitalServiceImpl implements HospitalService {
 
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -71,5 +76,15 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     public List<MedicalRecord> findMedicalRecordsByCitizenId(Long id) {
         return medicalRecordRepository.findMedicalRecordsByCitizenIdOrderByIdDesc(id);
+    }
+
+    @Override
+    public List<MedicalRecord> findAdmittedCitizensOfHospital() {
+
+        Hospital hospital=hospitalRepository.findHospitalByEmail(userService.getAuthUserEmail());
+
+        List<MedicalRecord> medicalRecords =medicalRecordRepository.findMedicalRecordsByHospitalOrderByDateDesc(hospital);
+
+        return medicalRecords;
     }
 }

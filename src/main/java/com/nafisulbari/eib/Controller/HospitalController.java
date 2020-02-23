@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class HospitalController {
@@ -45,7 +46,7 @@ public class HospitalController {
 
         Citizen citizen = citizenService.findCitizenById(citizenId);
 
-        String authUserEmail =userService.getAuthUserEmail();
+        String authUserEmail = userService.getAuthUserEmail();
         model.addAttribute("authUserEmail", authUserEmail);
 
         model.addAttribute("citizen", citizen);
@@ -62,7 +63,7 @@ public class HospitalController {
                 hospitalService.findHospitalByEmail(userService.getAuthUserEmail()),
                 citizen);
 
-        String authUserEmail =userService.getAuthUserEmail();
+        String authUserEmail = userService.getAuthUserEmail();
 
         model.addAttribute("authUserEmail", authUserEmail);
         model.addAttribute("flag", "Medical Record Saved");
@@ -86,7 +87,7 @@ public class HospitalController {
         }
 
         Citizen citizen = citizenService.findCitizenById(citizenId);
-        String authUserEmail =userService.getAuthUserEmail();
+        String authUserEmail = userService.getAuthUserEmail();
 
         model.addAttribute("medicalRecord", medicalRecord);
         model.addAttribute("authUserEmail", authUserEmail);
@@ -110,7 +111,7 @@ public class HospitalController {
                 hospitalService.findHospitalById(hospitalId),
                 citizen);
 
-        String authUserEmail =userService.getAuthUserEmail();
+        String authUserEmail = userService.getAuthUserEmail();
         model.addAttribute("authUserEmail", authUserEmail);
         model.addAttribute("flag", "Medical Record Updated");
         model.addAttribute("citizen", citizen);
@@ -118,5 +119,15 @@ public class HospitalController {
         return new ModelAndView("hospital/add-medical-record");
     }
 
+
+    @GetMapping("/hospital/hospitals-records")
+    public ModelAndView citizensOfHospital(Model model) {
+
+        List<MedicalRecord> medicalRecords = hospitalService.findAdmittedCitizensOfHospital();
+
+        model.addAttribute("medicalRecords", medicalRecords);
+
+        return new ModelAndView("/hospital/hospitals-records");
+    }
 
 }

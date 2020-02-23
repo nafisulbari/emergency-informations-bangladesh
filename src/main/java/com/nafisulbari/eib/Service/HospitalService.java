@@ -21,5 +21,7 @@ public interface HospitalService {
 
     List<MedicalRecord> findMedicalRecordsByCitizenId(Long id);
 
+    List<MedicalRecord> findAdmittedCitizensOfHospital();
+
 
 }

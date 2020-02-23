@@ -46,6 +46,12 @@
                     </li>
                 </@sec.authorize>
 
+                <@sec.authorize access="hasRole('HOSPITAL')">
+                    <li class="nav-item" role="presentation"><a class="nav-link"
+                                                                href="/hospital/hospitals-records">Medical Records</a>
+                    </li>
+                </@sec.authorize>
+
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#"></a></li>
             </ul>
             <form class="form-inline mr-auto" target="_self" action="/">

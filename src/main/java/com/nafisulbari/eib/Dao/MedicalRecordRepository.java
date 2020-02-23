@@ -1,6 +1,7 @@
 package com.nafisulbari.eib.Dao;
 
 import com.nafisulbari.eib.Model.Citizen;
+import com.nafisulbari.eib.Model.Hospital;
 import com.nafisulbari.eib.Model.MedicalRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,5 +17,7 @@ public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, Lo
     void deleteByCitizen(Citizen citizen);
 
     List<MedicalRecord> findMedicalRecordsByCitizenIdOrderByIdDesc(Long id);
+
+    List<MedicalRecord> findMedicalRecordsByHospitalOrderByDateDesc(Hospital hospital);
 
 }
