@@ -23,5 +23,6 @@ public interface HospitalService {
 
     List<MedicalRecord> findAdmittedCitizensOfHospital();
 
+    List<MedicalRecord> searchMedicalRecordsByCitizen(String key);
 
 }

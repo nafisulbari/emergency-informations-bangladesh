@@ -34,6 +34,7 @@
                     <div class="col-md-4">
                         <div id="emergency">
                             <h3 class="text-warning" id="e-info-text">Emergency Info</h3>
+                            <p style="color:rgb(77,77,77);">ID: ${citizen.getId()}<br></p>
                             <p style="color:rgb(77,77,77);">Blood Group: ${citizen.getBloodGroup()}<br></p>
                             <p style="color:rgb(77,77,77);">Emergency Contact: ${citizen.getEmergencyRelation()}<br></p>
                             <p style="color:rgb(77,77,77);">Contact Mobile: ${citizen.getEmergencyMobile()}<br></p>
@@ -63,7 +64,7 @@
 
 
     <#else>
-
+        ${citizen.getId()}
         ${citizen.getName()}
         ${citizen.getBloodGroup()}
         ${citizen.getEmergencyRelation()}

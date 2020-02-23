@@ -5,8 +5,12 @@ import com.nafisulbari.eib.Dao.MedicalRecordRepository;
 import com.nafisulbari.eib.Model.Citizen;
 import com.nafisulbari.eib.Model.Hospital;
 import com.nafisulbari.eib.Model.MedicalRecord;
+import jdk.nashorn.internal.objects.annotations.Where;
+import org.hibernate.jpa.spi.JpaCompliance;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.jpa.repository.JpaContext;
+import org.springframework.data.jpa.repository.query.JpaParameters;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -83,8 +87,14 @@ public class HospitalServiceImpl implements HospitalService {
 
         Hospital hospital=hospitalRepository.findHospitalByEmail(userService.getAuthUserEmail());
 
-        List<MedicalRecord> medicalRecords =medicalRecordRepository.findMedicalRecordsByHospitalOrderByDateDesc(hospital);
 
-        return medicalRecords;
+
+        return medicalRecordRepository.findMedicalRecordsByHospitalOrderByDateDesc(hospital);
+    }
+
+    @Override
+    public List<MedicalRecord> searchMedicalRecordsByCitizen(String key) {
+        Hospital hospital=hospitalRepository.findHospitalByEmail(userService.getAuthUserEmail());
+        return medicalRecordRepository.findMedicalRecordsByCitizenNameContainingOrderByDateDesc(hospital,key);
     }
 }

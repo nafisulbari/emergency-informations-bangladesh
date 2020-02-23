@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 
 @Component
@@ -41,8 +42,6 @@ public class CitizenServiceImpl implements CitizenService {
 
     @Autowired
     private MedicalRecordRepository medicalRecordRepository;
-
-
 
 
     @Override
@@ -65,7 +64,7 @@ public class CitizenServiceImpl implements CitizenService {
 
 
     @Override
-    public void saveCitizen(Citizen citizen, MultipartFile image){
+    public void saveCitizen(Citizen citizen, MultipartFile image) {
 
 
         String fileName = "citizen" + image.getOriginalFilename().replaceAll("\\s+", "");
@@ -87,9 +86,9 @@ public class CitizenServiceImpl implements CitizenService {
 
 
     @Override
-    public void saveCitizenOnly(Citizen citizen){
+    public void saveCitizenOnly(Citizen citizen) {
 
-        Citizen tempCitizen=citizenRepository.findCitizenById(citizen.getId());
+        Citizen tempCitizen = citizenRepository.findCitizenById(citizen.getId());
         citizen.setImageUrl(tempCitizen.getImageUrl());
 
         Calendar c = Calendar.getInstance();
@@ -104,19 +103,41 @@ public class CitizenServiceImpl implements CitizenService {
 
     }
 
+    @Override
+    public String addCitizenPoints(String id) {
+
+        if (id != null && Pattern.matches("(?<=\\s|^)\\d+(?=\\s|$)", id)) {
+            try {
+                Citizen citizen = citizenRepository.findCitizenById(Long.parseLong(id));
+                citizen.setCitizenPoint(citizen.getCitizenPoint() + 1);
+                citizenRepository.save(citizen);
+                return "added";
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+                return "noCitizenFound";
+            }
+
+        } else if (!id.equals("") && !Pattern.matches("(?<=\\s|^)\\d+(?=\\s|$)", id)) {
+            return "noCitizenFound";
+        }
+
+        return "";
+
+    }
+
 
     @Override
     public void generateQrCode(Long id) {
-       //Source: http://zxing.github.io/zxing/apidocs/index.html
+        //Source: http://zxing.github.io/zxing/apidocs/index.html
 
-       Citizen citizen= citizenRepository.findCitizenById(id);
+        Citizen citizen = citizenRepository.findCitizenById(id);
 
-        String myCodeText = "Name: "+citizen.getName()+"" +
-                "\nBlood Group: "+citizen.getBloodGroup()+
-                "\nEmergency Contact: "+citizen.getEmergencyRelation()+
-                "\nEmergency Mobile: "+citizen.getEmergencyMobile()+
-                "\nhttp://eib.nafisulbari.com/"+citizen.getId();
-        String filePath = System.getProperty("user.dir")+"/citizen-records/"+citizen.getId()+"/"+citizen.getId()+".png";
+        String myCodeText = "Name: " + citizen.getName() + "" +
+                "\nBlood Group: " + citizen.getBloodGroup() +
+                "\nEmergency Contact: " + citizen.getEmergencyRelation() +
+                "\nEmergency Mobile: " + citizen.getEmergencyMobile() +
+                "\nhttp://eib.nafisulbari.com/" + citizen.getId();
+        String filePath = System.getProperty("user.dir") + "/citizen-records/" + citizen.getId() + "/" + citizen.getId() + ".png";
         int size = 250;
         String fileType = "png";
         File myFile = new File(filePath);
@@ -133,13 +154,13 @@ public class CitizenServiceImpl implements CitizenService {
             BitMatrix byteMatrix = qrCodeWriter.encode(myCodeText, BarcodeFormat.QR_CODE, size,
                     size, hintMap);
             int CrunchifyWidth = byteMatrix.getWidth();
-            BufferedImage image = new BufferedImage(CrunchifyWidth, CrunchifyWidth+24,
+            BufferedImage image = new BufferedImage(CrunchifyWidth, CrunchifyWidth + 24,
                     BufferedImage.TYPE_INT_RGB);
             image.createGraphics();
 
             Graphics2D graphics = (Graphics2D) image.getGraphics();
             graphics.setColor(Color.WHITE);
-            graphics.fillRect(0, 0, CrunchifyWidth, CrunchifyWidth+25);
+            graphics.fillRect(0, 0, CrunchifyWidth, CrunchifyWidth + 25);
             graphics.setColor(Color.BLACK);
 
             for (int i = 0; i < CrunchifyWidth; i++) {
@@ -149,8 +170,8 @@ public class CitizenServiceImpl implements CitizenService {
                     }
                 }
             }
-            String citizenId=""+citizen.getId();
-            graphics.drawString(citizenId,(240/2)-(citizenId.length()*3),260);
+            String citizenId = "" + citizen.getId();
+            graphics.drawString(citizenId, (240 / 2) - (citizenId.length() * 3), 260);
 
             ImageIO.write(image, fileType, myFile);
 

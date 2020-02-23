@@ -13,4 +13,5 @@ public interface CitizenRepository extends JpaRepository<Citizen, Long>{
 
     void deleteCitizenById(Long id);
 
+
 }

@@ -16,5 +16,8 @@ public interface CitizenService {
     void saveCitizen(Citizen citizen, MultipartFile image);
 
     void generateQrCode(Long id);
+
     void saveCitizenOnly(Citizen citizen);
+
+    String addCitizenPoints(String id);
 }

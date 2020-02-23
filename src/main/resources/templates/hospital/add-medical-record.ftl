@@ -58,34 +58,49 @@
                             <p style="color: red">${flag}</p>
                         </#if></h2>
 
+                    <#if flagCp??>
+                        <p style="color: red">${flagCp}</p>
+                    </#if>
+
+
+
+                    <#if (medicalRecord.id)??>
+                    <#else>
+
+                        <div class="form-group"><input class="form-control" type="text" name="citizenPoint"
+                                                       placeholder="Give citizen point to"></div>
+
+                    </#if>
+
+
                     <div class="form-group"><input class="form-control" type="text" name="title" placeholder="Title"
                                                    value="<#if (medicalRecord.title)??>${medicalRecord.title}</#if>"
                                                    required
-                                                   <#if !medicalRecord?? || authUserEmail==medicalRecord.hospital.email>
+                                <#if !medicalRecord?? || authUserEmail==medicalRecord.hospital.email>
 
-                                                   <#else>
-                                                       disabled
-                                                   </#if>
+                                <#else>
+                                    disabled
+                                </#if>
                         ></div>
 
 
                     <div class="form-group"><input class="form-control" type="date" name="date"
                                                    value="<#if (medicalRecord.date)??>${medicalRecord.date?date}</#if>"
                                                    required
-                                                   <#if !medicalRecord?? || authUserEmail ==medicalRecord.hospital.email>
-                                                   <#else>
-                                                       disabled
-                                                   </#if>
+                                <#if !medicalRecord?? || authUserEmail ==medicalRecord.hospital.email>
+                                <#else>
+                                    disabled
+                                </#if>
                         ></div>
 
 
                     <div class="form-group"><input class="form-control" type="text" name="doctor" placeholder="Doctor"
                                                    value="<#if (medicalRecord.doctor)??>${medicalRecord.doctor}</#if>"
                                                    required
-                                                   <#if !medicalRecord?? || authUserEmail==medicalRecord.hospital.email>
-                                                   <#else>
-                                                       disabled
-                                                   </#if>
+                                <#if !medicalRecord?? || authUserEmail==medicalRecord.hospital.email>
+                                <#else>
+                                    disabled
+                                </#if>
                         ></div>
 
 
