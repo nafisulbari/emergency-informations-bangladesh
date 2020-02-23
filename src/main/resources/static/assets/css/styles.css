@@ -161,3 +161,8 @@ text-decoration: none;
 .content-login {
   min-height: calc(100vh - 322px);
 }
+
+#med-rec-link{
+text-decoration: none;
+}
+
