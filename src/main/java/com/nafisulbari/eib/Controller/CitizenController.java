@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -34,7 +33,7 @@ public class CitizenController {
 
 
     @GetMapping("/citizen/medical-record/{id}")
-    public ModelAndView index(@PathVariable(name = "id") Long id,
+    public ModelAndView profile(@PathVariable(name = "id") Long id,
                               Model model) {
 
         String authUserEmail = userService.getAuthUserEmail();
@@ -52,6 +51,15 @@ public class CitizenController {
         }
 
         return new ModelAndView("index");
+    }
+
+
+
+    @GetMapping("/citizen/request-update")
+    public ModelAndView editPage(Model model) {
+
+
+        return new ModelAndView("citizen/request-update");
     }
 
 

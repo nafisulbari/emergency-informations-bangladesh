@@ -33,13 +33,20 @@
                     </div>
                     <div class="col-md-4">
                         <div id="emergency">
-                            <h3 class="text-warning" id="e-info-text">Emergency Info</h3>
+                            <h3 class="text-warning" id="e-info-text">Emergency Info &nbsp;
+                                <#if authUserEmail == citizen.getEmail()>
+                                    <a class="btn btn-warning btn-sm" role="button"
+                                       href="/citizen/request-update">Edit</a>
+                                </#if>
+                            </h3>
                             <p style="color:rgb(77,77,77);">ID: ${citizen.getId()}<br></p>
                             <p style="color:rgb(77,77,77);">Blood Group: ${citizen.getBloodGroup()}<br></p>
                             <p style="color:rgb(77,77,77);">Emergency Contact: ${citizen.getEmergencyRelation()}<br></p>
                             <p style="color:rgb(77,77,77);">Contact Mobile: ${citizen.getEmergencyMobile()}<br></p>
                             <#if authUserEmail == citizen.getEmail()>
-                            <a class="btn btn-info" role="button" href="/citizen-records/${citizen.getId()}/${citizen.getId()}.png" download>Download QR Code</a>
+                                <a class="btn btn-info" role="button"
+                                   href="/citizen-records/${citizen.getId()}/${citizen.getId()}.png" download>Download
+                                    QR Code</a>
                             </#if>
                         </div>
                     </div>

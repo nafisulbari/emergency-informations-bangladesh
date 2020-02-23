@@ -1,94 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Emergency Information Bangladesh</title>
-</head>
-<body>
+<#include "*/fragments/head-nav.ftl">
 
 <#setting date_format="yyyy-MM-dd">
 
 
+<div class="contact-clean" style="background-color:rgb(255,255,255);">
 
-<#if flag??>
+    <#if (citizen.id)??>
+    <form action="/admin/edit-citizen-action/${citizen.id}" enctype="multipart/form-data" method="post">
+        <h2 class="text-center">Update Information</h2>
+        <#else>
+        <form action="/admin/add-citizen-action" enctype="multipart/form-data" method="post">
+            <h2 class="text-center">Registration</h2>
+            </#if>
+            <#if flag??>
+                <p style="color: red">${flag}</p>
+            </#if>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-    <p style="color: red">${flag}</p>
+            <label>Name</label><br>
+            <div class="form-group"><input class="form-control" type="text" name="name"
+                                           value="<#if (citizen.name)??>${citizen.name}</#if>"
+                                           required></div>
 
-</#if>
-<h1></h1>
+            <label>Birth Date</label><br>
+            <div class="form-group"><input class="form-control" type="date" name="birthDate"
+                                           value="<#if (citizen.birthDate)??>${citizen.birthDate?date}</#if>" required>
+            </div>
 
-<#if (citizen.id)??>
-<form action="/admin/edit-citizen-action/${citizen.id}" enctype="multipart/form-data" method="post">
-    <#else>
-    <form action="/admin/add-citizen-action" enctype="multipart/form-data" method="post">
-        </#if>
-
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-        <label for="name">Name</label><br>
-        <input type="text" name="name" placeholder="Name" value="<#if (citizen.name)??>${citizen.name}</#if>"
-               required><br>
-
-        <label for="birthDate">Birthday</label><br>
-        <input type="date" name="birthDate" value="<#if (citizen.birthDate)??>${citizen.birthDate?date}</#if>" required><br>
-
-        <label for="sex">Sex</label><br>
-        <input type="radio" name="sex" value="Male"
-               <#if  (citizen.sex)??><#if (citizen.sex) == 'Male'>checked</#if></#if> >Male<br>
-        <input type="radio" name="sex" value="Female"
-               <#if  (citizen.sex)??><#if (citizen.sex) == 'Female'>checked</#if></#if> >Female<br>
-
-        <input type="radio" name="sex" value="Other"
-               <#if  (citizen.sex)??><#if (citizen.sex) == 'Other'>checked</#if></#if> >Other<br>
-
-        <label for="nid">NID</label><br>
-        <input type="text" name="nid" placeholder="nid"
-               value="<#if (citizen.nid)??>${citizen.nid?replace(",","")}</#if>" required><br>
-
-        <label for="address">Address</label><br>
-        <input type="text" name="address" placeholder="address"
-               value="<#if (citizen.address)??>${citizen.address}</#if>"
-               required><br>
-
-        <label for="mobile">Mobile</label><br>
-        <input type="text" name="mobile" placeholder="mobile"
-               value="<#if (citizen.mobile)??>${citizen.mobile?replace(",","")}</#if>"
-               required><br>
-
-        <label for="bloodGroup">Blood Group</label><br>
-        <input type="text" name="bloodGroup" placeholder="bloodGroup"
-               value="<#if (citizen.bloodGroup)??>${citizen.bloodGroup}</#if>" required><br>
-
-        <label for="emergencyRelation">Emergency Contact Relation</label><br>
-        <input type="text" name="emergencyRelation" placeholder="emergencyRelation"
-               value="<#if (citizen.emergencyRelation)??>${citizen.emergencyRelation}</#if>" required><br>
-
-        <label for="emergencyMobile">Emergency Contact Mobile</label><br>
-        <input type="text" name="emergencyMobile" placeholder="emergencyMobile"
-               value="<#if (citizen.emergencyMobile)??>${citizen.emergencyMobile}</#if>" required><br>
-
-        <label for="email">Email</label><br>
-        <input type="text" name="email" placeholder="Email" value="<#if (citizen.email)??>${citizen.email}</#if>"
-               required><br>
-
-        <label for="password">Password</label><br>
-        <input type="password" name="password" placeholder="Password" required><br>
+            <label for="sex">Sex</label><br>
+            <input type="radio" name="sex" value="Male"
+                   <#if  (citizen.sex)??><#if (citizen.sex) == 'Male'>checked</#if></#if> >Male &nbsp;
+            <input type="radio" name="sex" value="Female"
+                   <#if  (citizen.sex)??><#if (citizen.sex) == 'Female'>checked</#if></#if> >Female &nbsp;
+            <input type="radio" name="sex" value="Other"
+                   <#if  (citizen.sex)??><#if (citizen.sex) == 'Other'>checked</#if></#if> >Other<br><br>
 
 
-        <#if (citizen.id)??>
-            <br>
-            <input type="file" name="file"/><br/><br/>
+            <label>NID</label><br>
+            <div class="form-group"><input class="form-control" type="text" name="nid"
+                                           value="<#if (citizen.nid)??>${citizen.nid?replace(",","")}</#if>" required>
+            </div>
 
-            <input type="submit" value="Update Citizen">
+            <label>Address</label><br>
+            <div class="form-group"><input class="form-control" type="text" name="address"
+                                           value="<#if (citizen.address)??>${citizen.address}</#if>"
+                                           required></div>
+
+            <label>Mobile</label><br>
+            <div class="form-group"><input class="form-control" type="text" name="mobile"
+                                           value="<#if (citizen.mobile)??>${citizen.mobile?replace(",","")}</#if>"
+                                           required></div>
+
+            <label>Blood Group</label><br>
+            <div class="form-group"><input class="form-control" type="text" name="bloodGroup"
+                                           value="<#if (citizen.bloodGroup)??>${citizen.bloodGroup}</#if>" required>
+            </div>
+
+            <label>Emergency Contact Relation</label><br>
+            <div class="form-group"><input class="form-control" type="text" name="emergencyRelation"
+                                           value="<#if (citizen.emergencyRelation)??>${citizen.emergencyRelation}</#if>"
+                                           required></div>
+
+            <label>Emergency Contact Mobile</label><br>
+            <div class="form-group"><input class="form-control" type="text" name="emergencyMobile"
+                                           value="<#if (citizen.emergencyMobile)??>${citizen.emergencyMobile}</#if>"
+                                           required></div>
+
+            <label>Email</label><br>
+            <div class="form-group"><input class="form-control" type="text" name="email"
+                                           value="<#if (citizen.email)??>${citizen.email}</#if>"
+                                           required></div>
+
+            <label>Password</label><br>
+            <div class="form-group"><input class="form-control" type="password" name="password" required></div>
+
+            <label>Image size should be less than 500KB, square image is recommended</label>
+
+            <#if (citizen.id)??>
+                <br>
+                <input type="file" name="file"/><br/><br/>
+                <div class="form-group text-center"><button class="btn btn-warning" type="submit">Update</button></div>
             <#else>
                 <br>
                 <input type="file" name="file" required/><br/><br/>
+                <div class="form-group text-center"><button class="btn btn-primary" type="submit">Add Citizen</button></div>
+            </#if>
 
-                <input type="submit" value="Add Citizen">
-                </#if>
-
-    </form>
+        </form>
 
 
-</body>
-</html>
+</div>
+
+
+<#include "*/fragments/footer.ftl">
