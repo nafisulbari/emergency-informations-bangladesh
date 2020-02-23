@@ -152,3 +152,12 @@ text-decoration: none;
 #navbar-hov{
   z-index: 222;
 }
+
+#login-form-div{
+  margin-top: 25px;
+
+}
+
+.content-login {
+  min-height: calc(100vh - 322px);
+}
