@@ -18,13 +18,17 @@ public class CitizenRequest {
     @Column(columnDefinition="BIGINT(32)")
     private Long id;
 
-    private String mobile;
-
     private String address;
+
+    private String mobile;
 
     private String emergencyRelation;
 
     private String emergencyMobile;
+
+    private String email;
+
+    private String password;
 
     private String imageUrl;
 

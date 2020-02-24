@@ -6,6 +6,8 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.nafisulbari.eib.Dao.CitizenRequestRepository;
+import com.nafisulbari.eib.Model.CitizenRequest;
 import com.nafisulbari.eib.Storage.FileService;
 import com.nafisulbari.eib.Dao.CitizenRepository;
 import com.nafisulbari.eib.Dao.MedicalRecordRepository;
@@ -24,7 +26,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 import java.util.regex.Pattern;
 
 
@@ -41,6 +46,9 @@ public class CitizenServiceImpl implements CitizenService {
     private CitizenRepository citizenRepository;
 
     @Autowired
+    private CitizenRequestRepository citizenRequestRepository;
+
+    @Autowired
     private MedicalRecordRepository medicalRecordRepository;
 
 
@@ -53,6 +61,16 @@ public class CitizenServiceImpl implements CitizenService {
     public Citizen findCitizenByEmail(String email) {
         return citizenRepository.findCitizenByEmail(email);
     }
+
+
+    public String getStrDate() {
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String strDate = dateFormat.format(date);
+        strDate = strDate.replace(':', '-').replaceAll("\\s+", "_");
+        return strDate;
+    }
+
 
     @Transactional
     @Override
@@ -67,7 +85,7 @@ public class CitizenServiceImpl implements CitizenService {
     public void saveCitizen(Citizen citizen, MultipartFile image) {
 
 
-        String fileName = "citizen" + image.getOriginalFilename().replaceAll("\\s+", "");
+        String fileName = "citizen" + getStrDate() + image.getOriginalFilename().replaceAll("\\s+", "");
         citizen.setImageUrl(fileName);
 
         Calendar c = Calendar.getInstance();
@@ -123,6 +141,54 @@ public class CitizenServiceImpl implements CitizenService {
 
         return "";
 
+    }
+
+    @Override
+    public void saveCitizenRequest(CitizenRequest citizenRequest, MultipartFile image, Citizen citizen) {
+
+        String fileName = "citizen" + getStrDate() + image.getOriginalFilename().replaceAll("\\s+", "");
+        citizenRequest.setImageUrl(fileName);
+        citizenRequest.setCitizen(citizen);
+        citizenRequestRepository.save(citizenRequest);
+
+        fileService.uploadFile(image, fileName, citizen.getId());
+    }
+
+    @Override
+    public void saveCitizenRequestOnly(CitizenRequest citizenRequest, Citizen citizen) {
+        citizenRequest.setImageUrl(citizen.getImageUrl());
+        citizenRequest.setCitizen(citizen);
+        citizenRequestRepository.save(citizenRequest);
+    }
+
+    @Override
+    public void updateCitizenFromRequest(Long id) {
+
+        CitizenRequest citizenRequest=citizenRequestRepository.findCitizenRequestById(id);
+        Citizen citizen=citizenRepository.findCitizenById(citizenRequest.getCitizen().getId());
+
+        citizen.setAddress(citizenRequest.getAddress());
+        citizen.setMobile(citizenRequest.getMobile());
+        citizen.setEmergencyRelation(citizenRequest.getEmergencyRelation());
+        citizen.setEmergencyMobile(citizenRequest.getEmergencyMobile());
+        citizen.setEmail(citizenRequest.getEmail());
+        citizen.setPassword(passwordEncoder.encode(citizenRequest.getPassword()));
+        citizen.setImageUrl(citizenRequest.getImageUrl());
+
+        citizenRepository.save(citizen);
+
+        citizenRequestRepository.delete(citizenRequest);
+
+    }
+
+    @Override
+    public void deleteCitizenRequestById(Long id) {
+        citizenRequestRepository.delete(citizenRequestRepository.findCitizenRequestById(id));
+    }
+
+    @Override
+    public List<CitizenRequest> findAllCitizenRequest() {
+        return citizenRequestRepository.findAll();
     }
 
 

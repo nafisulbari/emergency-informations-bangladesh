@@ -97,7 +97,7 @@ public class AdminController {
 
         if (Objects.equals(image.getOriginalFilename(), "")) {
             citizenService.saveCitizenOnly(citizen);
-        }else {
+        } else {
             citizenService.saveCitizen(citizen, image);
         }
 
@@ -143,10 +143,9 @@ public class AdminController {
     }
 
 
-
     @PostMapping("/admin/edit-police-station-action/{id}")
     public ModelAndView editPoliceStationAction(@PathVariable("id") Long id,
-                                           PoliceStation policeStation, Model model, BindingResult result) {
+                                                PoliceStation policeStation, Model model, BindingResult result) {
 
         policeStationService.savePoliceStation(policeStation);
 
@@ -154,10 +153,6 @@ public class AdminController {
         model.addAttribute("flag", "Police Station Updated");
         return new ModelAndView("admin/add-police-station");
     }
-
-
-
-
 
 
     @GetMapping("/admin/add-hospital")
@@ -196,10 +191,9 @@ public class AdminController {
     }
 
 
-
     @PostMapping("/admin/edit-hospital-action/{id}")
     public ModelAndView editHospitalAction(@PathVariable("id") Long id,
-                                          Hospital hospital, Model model, BindingResult result) {
+                                           Hospital hospital, Model model, BindingResult result) {
 
         hospitalService.saveHospital(hospital);
 
@@ -209,4 +203,29 @@ public class AdminController {
     }
 
 
+    @GetMapping("/admin/citizen-update-request")
+    public ModelAndView citizenUpdateRequestPage(Model model) {
+
+        model.addAttribute("citizenRequests", citizenService.findAllCitizenRequest());
+        return new ModelAndView("admin/citizen-update-request");
+    }
+
+
+    @PostMapping("/admin/citizen-update-request-accept/{id}")
+    public ModelAndView citizenRequestAccept(@PathVariable("id") Long id, Model model) {
+
+        citizenService.updateCitizenFromRequest(id);
+
+        model.addAttribute("citizenRequests", citizenService.findAllCitizenRequest());
+        return new ModelAndView("admin/citizen-update-request");
+    }
+
+    @PostMapping("/admin/citizen-update-request-decline/{id}")
+    public ModelAndView citizenRequestDecline(@PathVariable("id") Long id, Model model) {
+
+        citizenService.deleteCitizenRequestById(id);
+
+        model.addAttribute("citizenRequests", citizenService.findAllCitizenRequest());
+        return new ModelAndView("admin/citizen-update-request");
+    }
 }
