@@ -3,6 +3,7 @@ package com.nafisulbari.eib.Service;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
+import com.google.zxing.client.result.VCardResultParser;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
@@ -14,6 +15,10 @@ import com.nafisulbari.eib.Dao.MedicalRecordRepository;
 import com.nafisulbari.eib.Model.Citizen;
 
 
+import ezvcard.Ezvcard;
+import ezvcard.VCard;
+import ezvcard.VCardVersion;
+import ezvcard.property.StructuredName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -198,13 +203,18 @@ public class CitizenServiceImpl implements CitizenService {
 
         Citizen citizen = citizenRepository.findCitizenById(id);
 
-        String myCodeText = "Name: " + citizen.getName() + "" +
-                "\nBlood Group: " + citizen.getBloodGroup() +
-                "\nEmergency Contact: " + citizen.getEmergencyRelation() +
-                "\nEmergency Mobile: " + citizen.getEmergencyMobile() +
-                "\nhttp://eib.nafisulbari.com/" + citizen.getId();
+        String myCodeText="BEGIN:VCARD\n" +
+                "VERSION:3.0\n" +
+                "FN:"+citizen.getName()+"\n" +
+                "ADR;PREF:ID: ;;"+citizen.getId()+"\n"+
+                "ADR;PREF:Blood Group: ;;"+citizen.getBloodGroup()+"\n"+
+                "ADR;PREF:Emergency Contact: ;;"+citizen.getEmergencyRelation()+"\n"+
+                "TEL;TYPE=VOICE,pref:+88 "+citizen.getEmergencyMobile()+"\n" +
+                "URL:https://eib.nafisulbari.com/"+citizen.getId()+"\n"+
+                "END:VCARD";
+
         String filePath = System.getProperty("user.dir") + "/citizen-records/" + citizen.getId() + "/" + citizen.getId() + ".png";
-        int size = 250;
+        int size = 300;
         String fileType = "png";
         File myFile = new File(filePath);
         try {
@@ -220,7 +230,7 @@ public class CitizenServiceImpl implements CitizenService {
             BitMatrix byteMatrix = qrCodeWriter.encode(myCodeText, BarcodeFormat.QR_CODE, size,
                     size, hintMap);
             int CrunchifyWidth = byteMatrix.getWidth();
-            BufferedImage image = new BufferedImage(CrunchifyWidth, CrunchifyWidth + 24,
+            BufferedImage image = new BufferedImage(CrunchifyWidth, CrunchifyWidth + 25,
                     BufferedImage.TYPE_INT_RGB);
             image.createGraphics();
 
@@ -237,7 +247,7 @@ public class CitizenServiceImpl implements CitizenService {
                 }
             }
             String citizenId = "" + citizen.getId();
-            graphics.drawString(citizenId, (240 / 2) - (citizenId.length() * 3), 260);
+            graphics.drawString(citizenId, (310 / 2) - (citizenId.length() * 2), 310);
 
             ImageIO.write(image, fileType, myFile);
 
