@@ -170,3 +170,9 @@ text-decoration: none;
  margin-top: 60px;
   margin-bottom: -10px;
 }
+
+#btn-war{
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}

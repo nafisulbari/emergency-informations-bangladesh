@@ -79,11 +79,11 @@
             <#if (citizen.id)??>
                 <br>
                 <input type="file" name="file"/><br/><br/>
-                <div class="form-group text-center"><button class="btn btn-warning" type="submit">Update</button></div>
+                <div class="form-group text-center"><button id="btn-war" class="btn btn-warning" role="button" type="submit">Update</button></div>
             <#else>
                 <br>
                 <input type="file" name="file" required/><br/><br/>
-                <div class="form-group text-center"><button class="btn btn-primary" type="submit">Add Citizen</button></div>
+                <div class="form-group text-center"><button class="btn btn-primary" role="button" type="submit">Add Citizen</button></div>
             </#if>
 
         </form>
