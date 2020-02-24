@@ -4,6 +4,7 @@ package com.nafisulbari.eib.Controller;
 import com.nafisulbari.eib.Model.Citizen;
 import com.nafisulbari.eib.Model.CitizenRequest;
 import com.nafisulbari.eib.Model.MedicalRecord;
+import com.nafisulbari.eib.Model.User;
 import com.nafisulbari.eib.Service.CitizenService;
 import com.nafisulbari.eib.Service.HospitalService;
 import com.nafisulbari.eib.Service.PoliceStationService;
@@ -70,6 +71,13 @@ public class CitizenController {
 
     @PostMapping("/citizen/request-update-action")
     public ModelAndView requestUpdateAction(@RequestParam("file") MultipartFile image, CitizenRequest citizenRequest, Model model, BindingResult result) {
+
+        User tempUser = userService.findByEmail(citizenRequest.getEmail());
+        if (tempUser != null) {
+            model.addAttribute("flagUserExists", "Another user exists with same email");
+            model.addAttribute("citizen", citizenService.findCitizenByEmail(userService.getAuthUserEmail()));
+            return new ModelAndView("citizen/request-update");
+        }
 
         Citizen citizen=citizenService.findCitizenByEmail(userService.getAuthUserEmail());
 
