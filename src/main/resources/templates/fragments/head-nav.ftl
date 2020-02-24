@@ -51,6 +51,11 @@
                                                                 href="/hospital/hospitals-records">Medical Records</a>
                     </li>
                 </@sec.authorize>
+                <@sec.authorize access="hasRole('POLICE')">
+                    <li class="nav-item" role="presentation"><a class="nav-link"
+                                                                href="/police/police-stations-records">Criminal Records</a>
+                    </li>
+                </@sec.authorize>
 
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#"></a></li>
             </ul>

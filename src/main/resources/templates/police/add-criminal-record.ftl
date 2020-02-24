@@ -1,52 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Emergency Information Bangladesh</title>
-
-    <script src="https://cdn.tiny.cloud/1/0mfdsilngywfygs9tbl0b40723kmi9tidztyrtr534whm93a/tinymce/5/tinymce.min.js"
-            referrerpolicy="origin"></script>
-
-
-</head>
-<body>
+<#include "*/fragments/head-nav.ftl">
 
 <#setting date_format="yyyy-MM-dd">
 
-<#if flag??>
-    <p style="color: red">${flag}</p>
-</#if>
+
+<div id="block-info">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 id="citizen-heading">Citizen Information</h1>
+            </div>
+        </div>
+        <div class="row" id="info-block">
+            <div class="col-md-4">
+                <div><img src="/citizen-records/${citizen.getId()}/${citizen.getImageUrl()}" id="profile-img"
+                          alt="${citizen.getName()}"></div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <h2 id="name">${citizen.getName()}</h2>
+                    <p style="color:rgb(77,77,77);">Sex: ${citizen.getSex()}</p>
+                    <p style="color:rgb(77,77,77);">DOB:&nbsp;${citizen.getBirthDate()}<br></p>
+                    <p style="color:rgb(77,77,77);">Mobile: ${citizen.getMobile()}</p>
+                    <p style="color:rgb(77,77,77);">NID:&nbsp;${citizen.getNid()}<br></p>
+                    <p style="color:rgb(77,77,77);">Address:&nbsp;${citizen.getAddress()}<br></p>
+                    <p style="color:rgb(77,77,77);">Citizen Points: ${citizen.getCitizenPoint()}<br></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="emergency">
+                    <h3 class="text-warning" id="e-info-text">Emergency Info</h3>
+                    <p style="color:rgb(77,77,77);">ID: ${citizen.getId()}<br></p>
+                    <p style="color:rgb(77,77,77);">Blood Group: ${citizen.getBloodGroup()}<br></p>
+                    <p style="color:rgb(77,77,77);">Emergency Contact: ${citizen.getEmergencyRelation()}<br></p>
+                    <p style="color:rgb(77,77,77);">Contact Mobile: ${citizen.getEmergencyMobile()}<br></p>
 
 
-<form action="<#if (criminalRecord.id)??>/police/edit-criminal-record-action/${citizenId}/${criminalRecord.policeStation.id}/${criminalRecord.id}<#else>/police/${citizenId}/add-criminal-record-action</#if>"
-      enctype="multipart/form-data" method="post">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-    <input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+<div id="form-div">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="<#if (criminalRecord.id)??>/police/edit-criminal-record-action/${citizen.getId()}/${criminalRecord.policeStation.id}/${criminalRecord.id}<#else>/police/${citizen.getId()}/add-criminal-record-action</#if>"
+                      enctype="multipart/form-data" method="post">
+                    <input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-    <label for="title">Title</label><br>
-    <input type="text" name="title" placeholder="title"
-           value="<#if (criminalRecord.title)??>${criminalRecord.title}</#if>" required><br>
+                    <h2 class="text-left" id="text-left">Criminal Record
+                        <#if !criminalRecord?? || authUserEmail==criminalRecord.policeStation.email>
+                            <button class="btn btn-success float-right" id="submitBt"
+                                    type="submit"><#if (criminalRecord.id)??>Update Record<#else>Add Record</#if></button>
+                        </#if>
+                        <#if flag??>
+                            <p style="color: red">${flag}</p>
+                        </#if></h2>
 
-    <label for="date">Date</label><br>
-    <input type="date" name="date" value="<#if (criminalRecord.date)??>${criminalRecord.date?date}</#if>"
-           required><br>
-
-    <label for="location">Location</label><br>
-    <input type="text" name="location" placeholder="location"
-           value="<#if (criminalRecord.location)??>${criminalRecord.location}</#if>" required><br>
-
-
-    <label for="description">Description</label><br>
-    <textarea name="description" id="textarea-tiny"
-              required><#if (criminalRecord.description)??>${criminalRecord.description}</#if></textarea>
-
-
-    <br><br>
-    <input type="submit" id="submitBt" value="<#if (criminalRecord.id)??>Update Record<#else>Add Record</#if>">
-</form>
+                    <#if flagCp??>
+                        <p style="color: red">${flagCp}</p>
+                    </#if>
 
 
+
+                    <#if (criminalRecord.id)??>
+                    <#else>
+
+                        <div class="form-group"><input class="form-control" type="text" name="citizenPoint"
+                                                       placeholder="Give citizen point to"></div>
+
+                    </#if>
+
+
+                    <div class="form-group"><input class="form-control" type="text" name="title" placeholder="Title"
+                                                   value="<#if (criminalRecord.title)??>${criminalRecord.title}</#if>"
+                                                   required
+                                <#if !criminalRecord?? || authUserEmail==criminalRecord.policeStation.email>
+
+                                <#else>
+                                    disabled
+                                </#if>
+                        ></div>
+
+
+                    <div class="form-group"><input class="form-control" type="date" name="date"
+                                                   value="<#if (criminalRecord.date)??>${criminalRecord.date?date}</#if>"
+                                                   required
+                                <#if !criminalRecord?? || authUserEmail ==criminalRecord.policeStation.email>
+                                <#else>
+                                    disabled
+                                </#if>
+                        ></div>
+
+
+                    <div class="form-group"><input class="form-control" type="text" name="location" placeholder="Location of crime"
+                                                   value="<#if (criminalRecord.location)??>${criminalRecord.location}</#if>"
+                                                   required
+                                <#if !criminalRecord?? || authUserEmail==criminalRecord.policeStation.email>
+                                <#else>
+                                    disabled
+                                </#if>
+                        ></div>
+
+
+                    <#if !criminalRecord?? || authUserEmail==criminalRecord.policeStation.email>
+
+                        <div class="form-group"><textarea class="form-control" name="description" id="textarea-tiny"
+                                                          placeholder="Criminal record details and images"
+                                                          required
+                            ><#if (criminalRecord.description)??>${criminalRecord.description}</#if></textarea>
+                        </div>
+
+
+                    <#else>
+                        <div id="record-description" class="form-group form-control">${criminalRecord.description}</div>
+                    </#if>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.tiny.cloud/1/0mfdsilngywfygs9tbl0b40723kmi9tidztyrtr534whm93a/tinymce/5/tinymce.min.js"
+        referrerpolicy="origin"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     $(document).ready(new function () {
@@ -67,7 +146,7 @@
                 var xhr, formData;
                 xhr = new XMLHttpRequest();
                 xhr.withCredentials = false;
-                xhr.open('POST', '/police/images/${citizenId}');
+                xhr.open('POST', '/police/images/${citizen.getId()}');
                 var token = document.getElementById("csrf").value;
                 xhr.setRequestHeader("X-CSRF-Token", token);
                 xhr.onload = function () {
@@ -98,5 +177,5 @@
         });
     });
 </script>
-</body>
-</html>
+
+<#include "*/fragments/footer.ftl">

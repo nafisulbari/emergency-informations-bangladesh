@@ -21,4 +21,8 @@ PoliceStation findPoliceStationById(Long id);
     List<CriminalRecord> findCriminalRecordsByCitizenId(Long id);
 
     CriminalRecord findCriminalRecordById(Long id);
+
+    List<CriminalRecord> findCriminalRecordsOfPoliceStation();
+
+    List<CriminalRecord> searchCriminalRecordsByCitizen(String key);
 }

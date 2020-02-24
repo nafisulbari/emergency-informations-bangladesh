@@ -70,14 +70,20 @@ public class PoliceStationServiceImpl implements PoliceStationService {
 
     @Override
     public CriminalRecord findCriminalRecordById(Long id) {
+        return criminalRecordRepository.findCriminalRecordById(id);
 
-        CriminalRecord criminalRecord =criminalRecordRepository.findCriminalRecordById(id);
-        PoliceStation policeStation = policeStationRepository.findPoliceStationByEmail(userService.getAuthUserEmail());
+    }
 
-        if (criminalRecord.getPoliceStation()==policeStation){
-            return criminalRecord;
-        }
-        return null;
+    @Override
+    public List<CriminalRecord> findCriminalRecordsOfPoliceStation() {
+        PoliceStation policeStation=policeStationRepository.findPoliceStationByEmail(userService.getAuthUserEmail());
+        return criminalRecordRepository.findCriminalRecordsByPoliceStationOrderByDateDesc(policeStation);
+    }
+
+    @Override
+    public List<CriminalRecord> searchCriminalRecordsByCitizen(String key) {
+        PoliceStation policeStation=policeStationRepository.findPoliceStationByEmail(userService.getAuthUserEmail());
+        return criminalRecordRepository.findCriminalRecordsByCitizenNameContainingOrderByDateDesc(policeStation,key);
     }
 
 

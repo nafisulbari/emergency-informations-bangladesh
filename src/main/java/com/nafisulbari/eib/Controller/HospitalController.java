@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Pattern;
+
 
 @Controller
 public class HospitalController {
@@ -94,7 +94,7 @@ public class HospitalController {
 
         if (medicalRecord == null) {
             model.addAttribute("flag", "You do not have access to view this record");
-            return new ModelAndView("hospital/add-medical-record");
+            return new ModelAndView("redirect:/error");
         }
 
         Citizen citizen = citizenService.findCitizenById(citizenId);
