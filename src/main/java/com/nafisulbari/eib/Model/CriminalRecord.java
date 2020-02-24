@@ -22,6 +22,8 @@ public class CriminalRecord {
     @Column(columnDefinition="BIGINT(32)")
     private Long id;
 
+    private boolean active;
+
     @Temporal(TemporalType.DATE)
     private Date date;
 

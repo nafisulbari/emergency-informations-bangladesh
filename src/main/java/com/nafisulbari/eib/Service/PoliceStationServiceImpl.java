@@ -51,6 +51,8 @@ public class PoliceStationServiceImpl implements PoliceStationService {
         c.add(Calendar.DATE, 1);
         criminalRecord.setDate(c.getTime());
 
+        criminalRecord.setActive(false);
+
         criminalRecord.setPoliceStation(policeStation);
         criminalRecord.setCitizen(citizen);
         criminalRecordRepository.save(criminalRecord);
