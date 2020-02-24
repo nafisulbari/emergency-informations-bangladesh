@@ -40,6 +40,13 @@
             <ul class="nav navbar-nav">
                 <li class="nav-item" role="presentation"><a class="nav-link" href="/">Home</a></li>
 
+
+                <@sec.authorize access="hasRole('ADMIN')">
+                    <li class="nav-item" role="presentation"><a class="nav-link"
+                                                                href="/admin/dashboard">Dashboard</a>
+                    </li>
+                </@sec.authorize>
+
                 <@sec.authorize access="hasRole('CITIZEN')">
                     <li class="nav-item" role="presentation"><a class="nav-link"
                                                                 href="/<@sec.authentication property="principal.id"/>">Profile</a>

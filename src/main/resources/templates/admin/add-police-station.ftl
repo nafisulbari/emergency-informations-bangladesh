@@ -2,6 +2,7 @@
 
 <#setting date_format="yyyy-MM-dd">
 
+<#include "*/fragments/admin-dashboard-block.ftl">
 
 
 <div class="contact-clean" style="background-color:rgb(255,255,255);">
@@ -55,6 +56,14 @@
 
 
 </div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
 
 
 <#include "*/fragments/footer.ftl">

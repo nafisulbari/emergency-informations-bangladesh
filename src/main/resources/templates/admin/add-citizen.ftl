@@ -3,14 +3,17 @@
 <#setting date_format="yyyy-MM-dd">
 
 
-<div class="contact-clean" style="background-color:rgb(255,255,255);">
+
+<#include "*/fragments/admin-dashboard-block.ftl">
+
+<div  class="contact-clean" style="background-color:rgb(255,255,255);">
 
     <#if (citizen.id)??>
     <form action="/admin/edit-citizen-action/${citizen.id}" enctype="multipart/form-data" method="post">
         <h2 class="text-center">Update Information</h2>
         <#else>
         <form action="/admin/add-citizen-action" enctype="multipart/form-data" method="post">
-            <h2 class="text-center">Registration</h2>
+            <h2 class="text-center">Citizen Registration</h2>
             </#if>
             <#if flag??>
                 <p style="color: red">${flag}</p>
@@ -90,6 +93,14 @@
 
 
 </div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
 
 
 <#include "*/fragments/footer.ftl">

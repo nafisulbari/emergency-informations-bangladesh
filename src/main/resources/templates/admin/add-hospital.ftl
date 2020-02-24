@@ -3,7 +3,7 @@
 <#setting date_format="yyyy-MM-dd">
 
 
-
+<#include "*/fragments/admin-dashboard-block.ftl">
 <div class="contact-clean" style="background-color:rgb(255,255,255);">
     <#if (hospital.id)??>
     <form action="/admin/edit-hospital-action/${hospital.id}" enctype="multipart/form-data" method="post">
@@ -48,6 +48,18 @@
 
 
 </div>
+
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
 
 
 <#include "*/fragments/footer.ftl">

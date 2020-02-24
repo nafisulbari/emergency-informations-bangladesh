@@ -52,6 +52,15 @@ public class AdminController {
     }
 
 
+
+    @GetMapping("/admin/dashboard")
+    public ModelAndView dashboard() {
+        return new ModelAndView("admin/dashboard");
+    }
+
+
+
+
     @GetMapping("/admin/add-citizen")
     public ModelAndView addCitizen() {
         return new ModelAndView("admin/add-citizen");
