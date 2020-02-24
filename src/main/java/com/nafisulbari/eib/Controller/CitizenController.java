@@ -72,14 +72,15 @@ public class CitizenController {
     @PostMapping("/citizen/request-update-action")
     public ModelAndView requestUpdateAction(@RequestParam("file") MultipartFile image, CitizenRequest citizenRequest, Model model, BindingResult result) {
 
+        Citizen citizen=citizenService.findCitizenByEmail(userService.getAuthUserEmail());
         User tempUser = userService.findByEmail(citizenRequest.getEmail());
-        if (tempUser != null) {
+
+        if (tempUser != null && !tempUser.getEmail().equals(citizen.getEmail())) {
             model.addAttribute("flagUserExists", "Another user exists with same email");
             model.addAttribute("citizen", citizenService.findCitizenByEmail(userService.getAuthUserEmail()));
             return new ModelAndView("citizen/request-update");
         }
 
-        Citizen citizen=citizenService.findCitizenByEmail(userService.getAuthUserEmail());
 
         if (Objects.equals(image.getOriginalFilename(), "")) {
             citizenService.saveCitizenRequestOnly(citizenRequest, citizen);

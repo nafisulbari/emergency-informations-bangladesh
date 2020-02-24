@@ -3,7 +3,6 @@ package com.nafisulbari.eib.Service;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
-import com.google.zxing.client.result.VCardResultParser;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
@@ -15,10 +14,7 @@ import com.nafisulbari.eib.Dao.MedicalRecordRepository;
 import com.nafisulbari.eib.Model.Citizen;
 
 
-import ezvcard.Ezvcard;
-import ezvcard.VCard;
-import ezvcard.VCardVersion;
-import ezvcard.property.StructuredName;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
