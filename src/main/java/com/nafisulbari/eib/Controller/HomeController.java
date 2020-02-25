@@ -1,9 +1,7 @@
 package com.nafisulbari.eib.Controller;
 
-import com.nafisulbari.eib.Model.Citizen;
-import com.nafisulbari.eib.Service.CitizenService;
-import com.nafisulbari.eib.Service.HospitalService;
-import com.nafisulbari.eib.Service.PoliceStationService;
+import com.nafisulbari.eib.Model.User;
+
 import com.nafisulbari.eib.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,15 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
-
-    @Autowired
-    private HospitalService hospitalService;
-
-    @Autowired
-    private PoliceStationService policeStationService;
-
-    @Autowired
-    private CitizenService citizenService;
 
     @Autowired
     private UserService userService;
@@ -47,8 +36,7 @@ public class HomeController {
 
 
     @GetMapping("/login")
-    public ModelAndView homeToLoginPage() {
-
+    public ModelAndView loginPage() {
         return new ModelAndView("login");
     }
 
@@ -60,44 +48,7 @@ public class HomeController {
     }
 
 
-    @GetMapping("/{id}")
-    public ModelAndView getCitizen(@PathVariable("id") String id,
-                                   Model model) {
-        Long citizenId;
-        try {
-            citizenId = Long.parseLong(id);
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", "Wrong citizen id Perhaps?");
-            return new ModelAndView("citizen-info");
-        }
 
-        citizenId = Long.parseLong(id);
-        Citizen citizen = citizenService.findCitizenById(citizenId);
-        if (citizen != null) {
-
-            if (userService.getAuthUserRole().equals("HOSPITAL")) {
-                model.addAttribute("medicalRecords", hospitalService.findMedicalRecordsByCitizenId(citizenId));
-            }
-            if (userService.getAuthUserRole().equals("POLICE")) {
-                model.addAttribute("criminalRecords", policeStationService.findCriminalRecordsByCitizenId(citizenId));
-            }
-            if (userService.getAuthUserEmail().equals(citizen.getEmail())) {
-                model.addAttribute("medicalRecords", hospitalService.findMedicalRecordsByCitizenId(citizenId));
-                model.addAttribute("criminalRecords", policeStationService.findCriminalRecordsByCitizenId(citizenId));
-                citizenService.generateQrCode(citizenId);
-            }
-
-            model.addAttribute("citizen", citizen);
-            model.addAttribute("authUserRole", userService.getAuthUserRole());
-            model.addAttribute("authUserEmail", userService.getAuthUserEmail());
-
-        } else {
-            model.addAttribute("errorMessage", "No citizen found with id: " + citizenId);
-        }
-
-
-        return new ModelAndView("citizen-info");
-    }
 
 
 }

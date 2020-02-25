@@ -37,6 +37,55 @@ public class CitizenController {
     private PoliceStationService policeStationService;
 
 
+
+
+
+
+
+
+    @GetMapping("/{id}")
+    public ModelAndView getCitizen(@PathVariable("id") String id,
+                                   Model model) {
+        Long citizenId;
+        try {
+            citizenId = Long.parseLong(id);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Wrong citizen id Perhaps?");
+            return new ModelAndView("citizen-info");
+        }
+
+        citizenId = Long.parseLong(id);
+        Citizen citizen = citizenService.findCitizenById(citizenId);
+        if (citizen != null) {
+
+            if (userService.getAuthUserRole().equals("HOSPITAL")) {
+                model.addAttribute("medicalRecords", hospitalService.findMedicalRecordsByCitizenId(citizenId));
+            }
+            if (userService.getAuthUserRole().equals("POLICE")) {
+                model.addAttribute("criminalRecords", policeStationService.findCriminalRecordsByCitizenId(citizenId));
+            }
+            if (userService.getAuthUserEmail().equals(citizen.getEmail())) {
+                model.addAttribute("medicalRecords", hospitalService.findMedicalRecordsByCitizenId(citizenId));
+                model.addAttribute("criminalRecords", policeStationService.findCriminalRecordsByCitizenId(citizenId));
+                citizenService.generateQrCode(citizenId);
+            }
+
+            model.addAttribute("citizen", citizen);
+            model.addAttribute("authUserRole", userService.getAuthUserRole());
+            model.addAttribute("authUserEmail", userService.getAuthUserEmail());
+
+        } else {
+            model.addAttribute("errorMessage", "No citizen found with id: " + citizenId);
+        }
+
+
+        return new ModelAndView("citizen-info");
+    }
+
+
+
+
+
     @GetMapping("/citizen/criminal-record/{id}")
     public ModelAndView medicalRecord(@PathVariable(name = "id") Long id,
                                 Model model) {

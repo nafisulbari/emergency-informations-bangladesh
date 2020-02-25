@@ -22,7 +22,7 @@ public class CustomErrorController implements ErrorController {
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request, Model model) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-
+        System.err.println("ErrorController: Error code: "+status.toString());
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());
 

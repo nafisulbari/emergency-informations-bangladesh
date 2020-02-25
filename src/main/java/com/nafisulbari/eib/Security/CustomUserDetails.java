@@ -39,6 +39,11 @@ public class CustomUserDetails implements UserDetails {
     //some user UserDetails methods are set from db, some are kept true to spring security to work
     @Override
     public String getPassword() {
+
+        if (this.user==null){
+            System.err.println("Wrong credentials");
+            return "";
+        }
         System.out.println(this.user.getPassword());
         return this.user.getPassword();
     }
