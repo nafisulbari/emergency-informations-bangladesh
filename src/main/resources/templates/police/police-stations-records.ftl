@@ -17,8 +17,8 @@
 </div>
 
 
-<div id="table-block">
-    <div class="container">
+<div>
+    <div id="hos-pol-rec-con" class="container">
         <div class="row">
             <div class="col-md-12">
                 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
