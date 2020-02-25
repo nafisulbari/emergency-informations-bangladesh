@@ -25,4 +25,7 @@ public interface HospitalService {
 
     List<MedicalRecord> searchMedicalRecordsByCitizen(String key);
 
+
+    List<Hospital> searchByHospitalName(String key);
+
 }

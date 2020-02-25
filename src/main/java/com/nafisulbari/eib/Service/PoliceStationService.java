@@ -32,4 +32,6 @@ PoliceStation findPoliceStationById(Long id);
     void saveActiveCriminalRecord(Long id);
 
     void deleteCriminalRecord(Long id);
+
+    List<PoliceStation> searchPoliceStationByName(String key);
 }

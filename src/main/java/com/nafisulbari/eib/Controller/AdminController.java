@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -278,18 +279,14 @@ public class AdminController {
     }
 
 
-
-
-
-
     @GetMapping("/admin/view-criminal-record/{id}")
     public ModelAndView viewCriminalRecord(@PathVariable(name = "id") Long id,
-                                      Model model) {
-        String authUserEmail=userService.getAuthUserEmail();
+                                           Model model) {
+        String authUserEmail = userService.getAuthUserEmail();
         String authUserRole = userService.getAuthUserRole();
         CriminalRecord criminalRecord = policeStationService.findCriminalRecordById(id);
 
-        if (authUserRole.equals("ADMIN")){
+        if (authUserRole.equals("ADMIN")) {
             model.addAttribute("authUserEmail", authUserEmail);
             model.addAttribute("citizen", criminalRecord.getCitizen());
             model.addAttribute("criminalRecord", criminalRecord);
@@ -302,12 +299,12 @@ public class AdminController {
 
     @GetMapping("/admin/view-medical-record/{id}")
     public ModelAndView viewMedicalRecord(@PathVariable(name = "id") Long id,
-                                           Model model) {
-        String authUserEmail=userService.getAuthUserEmail();
+                                          Model model) {
+        String authUserEmail = userService.getAuthUserEmail();
         String authUserRole = userService.getAuthUserRole();
         MedicalRecord medicalRecord = hospitalService.findMedicalRecordById(id);
 
-        if (authUserRole.equals("ADMIN")){
+        if (authUserRole.equals("ADMIN")) {
             model.addAttribute("authUserEmail", authUserEmail);
             model.addAttribute("citizen", medicalRecord.getCitizen());
             model.addAttribute("medicalRecord", medicalRecord);
@@ -317,4 +314,30 @@ public class AdminController {
         model.addAttribute("flag", "You are not authorized to view this record");
         return new ModelAndView("error");
     }
+
+
+    @GetMapping("/admin/search-hospital")
+    public ModelAndView searchHospitals(@RequestParam(name = "search", required = false) String key,
+                                        Model model) {
+        if (key != null && !key.equals("")) {
+
+            model.addAttribute("searchedHospitals", hospitalService.searchByHospitalName(key));
+            return new ModelAndView("/admin/add-hospital");
+        }
+
+        return new ModelAndView("/admin/add-hospital");
+    }
+
+    @GetMapping("/admin/search-police-station")
+    public ModelAndView searchPoliceStations(@RequestParam(name = "search", required = false) String key,
+                                             Model model) {
+        if (key != null && !key.equals("")) {
+
+            model.addAttribute("searchedPoliceStations", policeStationService.searchPoliceStationByName(key));
+            return new ModelAndView("/admin/add-police-station");
+        }
+
+        return new ModelAndView("/admin/add-police-station");
+    }
+
 }

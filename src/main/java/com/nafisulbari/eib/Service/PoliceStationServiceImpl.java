@@ -103,6 +103,11 @@ public class PoliceStationServiceImpl implements PoliceStationService {
         criminalRecordRepository.deleteById(id);
     }
 
+    @Override
+    public List<PoliceStation> searchPoliceStationByName(String key) {
+        return policeStationRepository.findByNameContaining(key);
+    }
+
 
 }
 

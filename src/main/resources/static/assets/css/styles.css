@@ -214,3 +214,12 @@ text-decoration: none;
   margin-top: 35px;
 }
 
+#ad-search{
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+#ad-search-bar{
+height: 45px;
+}
+

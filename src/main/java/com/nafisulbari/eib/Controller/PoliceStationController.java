@@ -76,7 +76,7 @@ public class PoliceStationController {
         String authUserEmail = userService.getAuthUserEmail();
 
         model.addAttribute("authUserEmail", authUserEmail);
-        model.addAttribute("flag", "Criminal record add requested");
+        model.addAttribute("flag", "Criminal record add requested for review");
         model.addAttribute("citizen", citizen);
 
         return new ModelAndView("police/add-criminal-record");
@@ -122,7 +122,7 @@ public class PoliceStationController {
 
         String authUserEmail = userService.getAuthUserEmail();
         model.addAttribute("authUserEmail", authUserEmail);
-        model.addAttribute("flag", "Criminal record update request for review");
+        model.addAttribute("flag", "Criminal record update requested for review");
         model.addAttribute("citizen", citizen);
 
         return new ModelAndView("police/add-criminal-record");

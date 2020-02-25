@@ -5,7 +5,7 @@
             <div id="dashboard-contatiner" class="col-md-3 px-5 px-md-4">
 
 
-                <h4>Add Account</h4>
+                <h4>Account</h4>
                 <div id="dashboard-button" class="row">
                     <div class="col"><a class="btn btn-secondary btn-block" role="button" href="/admin/add-citizen">Citizen</a></div>
                 </div>

@@ -12,7 +12,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <h1 id="citizen-heading">Citizen Information</h1>
+                        <h1 id="citizen-heading">Citizen Information
+                            <#if authUserRole == "ADMIN">
+                                <a class="btn btn-warning" role="button"
+                                   href="/admin/edit-citizen/${citizen.getId()}">Edit</a>
+                            </#if>
+                        </h1>
                     </div>
                 </div>
                 <div class="row" id="info-block">

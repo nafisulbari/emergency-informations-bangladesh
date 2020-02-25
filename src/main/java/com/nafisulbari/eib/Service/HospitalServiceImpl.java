@@ -97,4 +97,9 @@ public class HospitalServiceImpl implements HospitalService {
         Hospital hospital=hospitalRepository.findHospitalByEmail(userService.getAuthUserEmail());
         return medicalRecordRepository.findMedicalRecordsByCitizenNameContainingOrderByDateDesc(hospital,key);
     }
+
+    @Override
+    public List<Hospital> searchByHospitalName(String key) {
+        return hospitalRepository.findByNameContaining(key);
+    }
 }
