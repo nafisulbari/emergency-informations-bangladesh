@@ -25,4 +25,11 @@ PoliceStation findPoliceStationById(Long id);
     List<CriminalRecord> findCriminalRecordsOfPoliceStation();
 
     List<CriminalRecord> searchCriminalRecordsByCitizen(String key);
+
+    List<CriminalRecord> findCriminalRecordsByActiveFalse();
+
+
+    void saveActiveCriminalRecord(Long id);
+
+    void deleteCriminalRecord(Long id);
 }

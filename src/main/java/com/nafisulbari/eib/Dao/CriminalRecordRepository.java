@@ -21,4 +21,6 @@ public interface CriminalRecordRepository extends JpaRepository<CriminalRecord,L
 
     @Query(value = "SELECT u FROM CriminalRecord u WHERE u.policeStation IN :policeStation and u.citizen.name like %:name%")
     List<CriminalRecord> findCriminalRecordsByCitizenNameContainingOrderByDateDesc(PoliceStation policeStation, String name);
+
+    List<CriminalRecord> findCriminalRecordsByActiveFalse();
 }

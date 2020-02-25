@@ -86,6 +86,23 @@ public class PoliceStationServiceImpl implements PoliceStationService {
         return criminalRecordRepository.findCriminalRecordsByCitizenNameContainingOrderByDateDesc(policeStation,key);
     }
 
+    @Override
+    public List<CriminalRecord> findCriminalRecordsByActiveFalse() {
+        return criminalRecordRepository.findCriminalRecordsByActiveFalse();
+    }
+
+    @Override
+    public void saveActiveCriminalRecord(Long id) {
+        CriminalRecord criminalRecord=criminalRecordRepository.findCriminalRecordById(id);
+        criminalRecord.setActive(true);
+        criminalRecordRepository.save(criminalRecord);
+    }
+
+    @Override
+    public void deleteCriminalRecord(Long id) {
+        criminalRecordRepository.deleteById(id);
+    }
+
 
 }
 

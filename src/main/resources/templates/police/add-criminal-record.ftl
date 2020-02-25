@@ -46,78 +46,103 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form action="<#if (criminalRecord.id)??>/police/edit-criminal-record-action/${citizen.getId()}/${criminalRecord.policeStation.id}/${criminalRecord.id}<#else>/police/${citizen.getId()}/add-criminal-record-action</#if>"
-                      enctype="multipart/form-data" method="post">
-                    <input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <#if (adminDeleteFlag)??>
+                    <p id="admin-dl-flag" style="color: red">${adminDeleteFlag}</p>
+                <#else>
 
-                    <h2 class="text-left" id="text-left">Criminal Record
-                        <#if !criminalRecord?? || authUserEmail==criminalRecord.policeStation.email>
-                            <button class="btn btn-success float-right" id="submitBt"
-                                    type="submit"><#if (criminalRecord.id)??>Update Record<#else>Add Record</#if></button>
+
+                    <form action="<#if (criminalRecord.id)??>/police/edit-criminal-record-action/${citizen.getId()}/${criminalRecord.policeStation.id}/${criminalRecord.id}<#else>/police/${citizen.getId()}/add-criminal-record-action</#if>"
+                          enctype="multipart/form-data" method="post">
+                        <input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                        <h2 class="text-left" id="text-left">Criminal Record
+
+
+                            <@sec.authorize access="hasRole('ADMIN')">
+                                <#if criminalRecord.active==false>
+
+                                    <a class="btn btn-danger pull-right" id="btn-ad"
+                                       href="/admin/criminal-record-review/delete/${criminalRecord.getId()}">Delete</a>
+
+                                    <a class="btn btn-success pull-right" id="btn-ad"
+                                       href="/admin/criminal-record-review/accept/${criminalRecord.getId()}">Accept</a>
+
+                                </#if>
+                            </@sec.authorize>
+
+                            <#if !criminalRecord?? || authUserEmail==criminalRecord.policeStation.email>
+                                <button class=" btn btn-success float-right" id="submitBt"
+                                        type="submit"><#if (criminalRecord.id)??>Update Record<#else>Add Record</#if></button>
+                            </#if>
+                            <#if flag??>
+                                <p style="color: red">${flag}</p>
+                            </#if></h2>
+
+                        <#if flagCp??>
+                            <p style="color: red">${flagCp}</p>
                         </#if>
-                        <#if flag??>
-                            <p style="color: red">${flag}</p>
-                        </#if></h2>
-
-                    <#if flagCp??>
-                        <p style="color: red">${flagCp}</p>
-                    </#if>
 
 
 
-                    <#if (criminalRecord.id)??>
-                    <#else>
+                        <#if (criminalRecord.id)??>
+                        <#else>
 
-                        <div class="form-group"><input class="form-control" type="text" name="citizenPoint"
-                                                       placeholder="Give citizen point to"></div>
+                            <div class="form-group"><input class="form-control" type="text" name="citizenPoint"
+                                                           placeholder="Give citizen point to"></div>
 
-                    </#if>
-
-
-                    <div class="form-group"><input class="form-control" type="text" name="title" placeholder="Title"
-                                                   value="<#if (criminalRecord.title)??>${criminalRecord.title}</#if>"
-                                                   required
-                                <#if !criminalRecord?? || authUserEmail==criminalRecord.policeStation.email>
-
-                                <#else>
-                                    disabled
-                                </#if>
-                        ></div>
+                        </#if>
 
 
-                    <div class="form-group"><input class="form-control" type="date" name="date"
-                                                   value="<#if (criminalRecord.date)??>${criminalRecord.date?date}</#if>"
-                                                   required
-                                <#if !criminalRecord?? || authUserEmail ==criminalRecord.policeStation.email>
-                                <#else>
-                                    disabled
-                                </#if>
-                        ></div>
+                        <div class="form-group"><input class="form-control" type="text" name="title" placeholder="Title"
+                                                       value="<#if (criminalRecord.title)??>${criminalRecord.title}</#if>"
+                                                       required
+                                    <#if !criminalRecord?? || authUserEmail==criminalRecord.policeStation.email>
+
+                                    <#else>
+                                        disabled
+                                    </#if>
+                            ></div>
 
 
-                    <div class="form-group"><input class="form-control" type="text" name="location" placeholder="Location of crime"
-                                                   value="<#if (criminalRecord.location)??>${criminalRecord.location}</#if>"
-                                                   required
-                                <#if !criminalRecord?? || authUserEmail==criminalRecord.policeStation.email>
-                                <#else>
-                                    disabled
-                                </#if>
-                        ></div>
+                        <div class="form-group"><input class="form-control" type="date" name="date"
+                                                       value="<#if (criminalRecord.date)??>${criminalRecord.date?date}</#if>"
+                                                       required
+                                    <#if !criminalRecord?? || authUserEmail ==criminalRecord.policeStation.email>
+                                    <#else>
+                                        disabled
+                                    </#if>
+                            ></div>
 
 
-                    <#if !criminalRecord?? || authUserEmail==criminalRecord.policeStation.email>
+                        <div class="form-group"><input class="form-control" type="text" name="location"
+                                                       placeholder="Location of crime"
+                                                       value="<#if (criminalRecord.location)??>${criminalRecord.location}</#if>"
+                                                       required
+                                    <#if !criminalRecord?? || authUserEmail==criminalRecord.policeStation.email>
+                                    <#else>
+                                        disabled
+                                    </#if>
+                            ></div>
 
-                        <div class="form-group"><textarea class="form-control" name="description" id="textarea-tiny"
-                                                          placeholder="Criminal record details and images"
-                                                          required
-                            ><#if (criminalRecord.description)??>${criminalRecord.description}</#if></textarea>
-                        </div>
+
+                        <#if !criminalRecord?? || authUserEmail==criminalRecord.policeStation.email>
+
+                            <div class="form-group"><textarea class="form-control" name="description" id="textarea-tiny"
+                                                              placeholder="Criminal record details and images"
+                                                              required
+                                ><#if (criminalRecord.description)??>${criminalRecord.description}</#if></textarea>
+                            </div>
 
 
-                    <#else>
-                        <div id="record-description" class="form-group form-control">${criminalRecord.description}</div>
-                    </#if>
-                </form>
+                        <#else>
+                            <div id="record-description"
+                                 class="form-group form-control">${criminalRecord.description}</div>
+                        </#if>
+                    </form>
+
+
+
+                </#if>
             </div>
         </div>
     </div>

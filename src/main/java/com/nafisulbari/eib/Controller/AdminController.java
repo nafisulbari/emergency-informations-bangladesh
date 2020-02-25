@@ -1,10 +1,7 @@
 package com.nafisulbari.eib.Controller;
 
 
-import com.nafisulbari.eib.Model.Citizen;
-import com.nafisulbari.eib.Model.Hospital;
-import com.nafisulbari.eib.Model.PoliceStation;
-import com.nafisulbari.eib.Model.User;
+import com.nafisulbari.eib.Model.*;
 import com.nafisulbari.eib.Service.CitizenService;
 import com.nafisulbari.eib.Service.HospitalService;
 import com.nafisulbari.eib.Service.PoliceStationService;
@@ -52,13 +49,10 @@ public class AdminController {
     }
 
 
-
     @GetMapping("/admin/dashboard")
     public ModelAndView dashboard() {
         return new ModelAndView("admin/dashboard");
     }
-
-
 
 
     @GetMapping("/admin/add-citizen")
@@ -237,4 +231,51 @@ public class AdminController {
         model.addAttribute("citizenRequests", citizenService.findAllCitizenRequest());
         return new ModelAndView("admin/citizen-update-request");
     }
+
+    @GetMapping("/admin/criminal-record-review")
+    public ModelAndView criminalRecordReview(Model model) {
+
+        model.addAttribute("criminalRecords", policeStationService.findCriminalRecordsByActiveFalse());
+        return new ModelAndView("admin/criminal-record-review");
+    }
+
+
+    @GetMapping("/admin/criminal-record-review/{id}")
+    public ModelAndView criminalRecordReviewRecord(@PathVariable("id") Long id, Model model) {
+
+        CriminalRecord criminalRecord = policeStationService.findCriminalRecordById(id);
+
+        model.addAttribute("authUserEmail", userService.getAuthUserEmail());
+        model.addAttribute("citizen", criminalRecord.getCitizen());
+        model.addAttribute("criminalRecord", criminalRecord);
+        return new ModelAndView("police/add-criminal-record");
+    }
+
+
+    @GetMapping("/admin/criminal-record-review/accept/{id}")
+    public ModelAndView criminalRecordAccept(@PathVariable("id") Long id, Model model) {
+
+        policeStationService.saveActiveCriminalRecord(id);
+
+        CriminalRecord criminalRecord = policeStationService.findCriminalRecordById(id);
+
+        model.addAttribute("authUserEmail", userService.getAuthUserEmail());
+        model.addAttribute("citizen", criminalRecord.getCitizen());
+        model.addAttribute("criminalRecord", criminalRecord);
+        model.addAttribute("flag", "Criminal record added to citizen");
+        return new ModelAndView("police/add-criminal-record");
+    }
+
+    @GetMapping("/admin/criminal-record-review/delete/{id}")
+    public ModelAndView criminalRecordDelete(@PathVariable("id") Long id, Model model) {
+
+        CriminalRecord criminalRecord = policeStationService.findCriminalRecordById(id);
+        policeStationService.deleteCriminalRecord(id);
+
+        model.addAttribute("citizen", criminalRecord.getCitizen());
+        model.addAttribute("adminDeleteFlag", "Criminal record deleted");
+        return new ModelAndView("police/add-criminal-record");
+    }
+
+
 }

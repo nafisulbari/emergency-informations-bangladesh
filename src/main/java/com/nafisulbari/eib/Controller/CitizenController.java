@@ -1,10 +1,7 @@
 package com.nafisulbari.eib.Controller;
 
 
-import com.nafisulbari.eib.Model.Citizen;
-import com.nafisulbari.eib.Model.CitizenRequest;
-import com.nafisulbari.eib.Model.MedicalRecord;
-import com.nafisulbari.eib.Model.User;
+import com.nafisulbari.eib.Model.*;
 import com.nafisulbari.eib.Service.CitizenService;
 import com.nafisulbari.eib.Service.HospitalService;
 import com.nafisulbari.eib.Service.PoliceStationService;
@@ -40,8 +37,30 @@ public class CitizenController {
     private PoliceStationService policeStationService;
 
 
+    @GetMapping("/citizen/criminal-record/{id}")
+    public ModelAndView medicalRecord(@PathVariable(name = "id") Long id,
+                                Model model) {
+
+        String authUserEmail = userService.getAuthUserEmail();
+        CriminalRecord criminalRecord = policeStationService.findCriminalRecordById(id);
+
+        if (authUserEmail.equals(criminalRecord.getCitizen().getEmail())) {
+
+            Citizen citizen = citizenService.findCitizenByEmail(authUserEmail);
+
+            model.addAttribute("authUserEmail", authUserEmail);
+            model.addAttribute("citizen", citizen);
+            model.addAttribute("criminalRecord", criminalRecord);
+
+            return new ModelAndView("police/add-criminal-record");
+        }
+        model.addAttribute("flag", "You are not authorized to view this record");
+        return new ModelAndView("error");
+    }
+
+
     @GetMapping("/citizen/medical-record/{id}")
-    public ModelAndView profile(@PathVariable(name = "id") Long id,
+    public ModelAndView criminalRecord(@PathVariable(name = "id") Long id,
                                 Model model) {
 
         String authUserEmail = userService.getAuthUserEmail();
@@ -60,6 +79,7 @@ public class CitizenController {
 
         return new ModelAndView("index");
     }
+
 
 
     @GetMapping("/citizen/request-update")

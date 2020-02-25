@@ -27,7 +27,7 @@
                 <br>
                 <h4>Police Station Request</h4>
                 <div id="dashboard-button" class="row">
-                    <div class="col"><a class="btn btn-secondary btn-block" role="button" href="#">Review Record</a></div>
+                    <div class="col"><a class="btn btn-secondary btn-block" role="button" href="/admin/criminal-record-review">Review Record</a></div>
                 </div>
 
             </div>
