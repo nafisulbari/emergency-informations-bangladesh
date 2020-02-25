@@ -4,7 +4,7 @@
 
 
 
-    <#if authUserRole =='HOSPITAL' || authUserRole == 'POLICE' || authUserEmail == citizen.getEmail()>
+    <#if authUserRole =='HOSPITAL' || authUserRole == 'POLICE' || authUserRole == 'ADMIN' || authUserEmail == citizen.getEmail()>
 
         <#include "fragments/head-nav.ftl">
 
@@ -54,12 +54,13 @@
             </div>
         </div>
 
-        <#if authUserRole =='HOSPITAL' >
+        <#if authUserRole =='ADMIN' >
             <#include "fragments/medical-records.ftl">
-
+            <#include "fragments/criminal-records.ftl">
+        <#elseif authUserRole =='HOSPITAL' >
+            <#include "fragments/medical-records.ftl">
         <#elseif authUserRole =='POLICE' >
             <#include "fragments/criminal-records.ftl">
-
         <#elseif authUserEmail == citizen.getEmail()>
             <#include "fragments/medical-records.ftl">
             <#include "fragments/criminal-records.ftl">

@@ -1,11 +1,7 @@
 package com.nafisulbari.eib.Controller;
 
-import com.nafisulbari.eib.Model.User;
 
-import com.nafisulbari.eib.Service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,8 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
 
-    @Autowired
-    private UserService userService;
 
 
     @GetMapping("favicon.ico")

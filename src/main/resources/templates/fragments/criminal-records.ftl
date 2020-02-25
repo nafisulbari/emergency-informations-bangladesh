@@ -25,6 +25,8 @@
                             <div class="col-md-12">
                                 <a id="med-rec-title" href="<#if authUserEmail==criminalRecord.getCitizen().getEmail()>
                                                     /citizen/criminal-record/${criminalRecord.getId()}
+                                                   <#elseif authUserRole =='ADMIN'>
+                                                   /admin/view-criminal-record/${criminalRecord.getId()}
                                                    <#else>
                                                       /police/edit-criminal-record/${criminalRecord.getId()}/${citizen.getId()}
                                                    </#if>">

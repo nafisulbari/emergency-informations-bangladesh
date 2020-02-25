@@ -278,4 +278,43 @@ public class AdminController {
     }
 
 
+
+
+
+
+    @GetMapping("/admin/view-criminal-record/{id}")
+    public ModelAndView viewCriminalRecord(@PathVariable(name = "id") Long id,
+                                      Model model) {
+        String authUserEmail=userService.getAuthUserEmail();
+        String authUserRole = userService.getAuthUserRole();
+        CriminalRecord criminalRecord = policeStationService.findCriminalRecordById(id);
+
+        if (authUserRole.equals("ADMIN")){
+            model.addAttribute("authUserEmail", authUserEmail);
+            model.addAttribute("citizen", criminalRecord.getCitizen());
+            model.addAttribute("criminalRecord", criminalRecord);
+
+            return new ModelAndView("police/add-criminal-record");
+        }
+        model.addAttribute("flag", "You are not authorized to view this record");
+        return new ModelAndView("error");
+    }
+
+    @GetMapping("/admin/view-medical-record/{id}")
+    public ModelAndView viewMedicalRecord(@PathVariable(name = "id") Long id,
+                                           Model model) {
+        String authUserEmail=userService.getAuthUserEmail();
+        String authUserRole = userService.getAuthUserRole();
+        MedicalRecord medicalRecord = hospitalService.findMedicalRecordById(id);
+
+        if (authUserRole.equals("ADMIN")){
+            model.addAttribute("authUserEmail", authUserEmail);
+            model.addAttribute("citizen", medicalRecord.getCitizen());
+            model.addAttribute("medicalRecord", medicalRecord);
+
+            return new ModelAndView("hospital/add-medical-record");
+        }
+        model.addAttribute("flag", "You are not authorized to view this record");
+        return new ModelAndView("error");
+    }
 }

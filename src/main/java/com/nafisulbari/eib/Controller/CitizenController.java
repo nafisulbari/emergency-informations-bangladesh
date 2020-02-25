@@ -46,6 +46,8 @@ public class CitizenController {
     @GetMapping("/{id}")
     public ModelAndView getCitizen(@PathVariable("id") String id,
                                    Model model) {
+        String authUserRole=userService.getAuthUserRole();
+        String authUserEmail =userService.getAuthUserEmail();
         Long citizenId;
         try {
             citizenId = Long.parseLong(id);
@@ -54,25 +56,26 @@ public class CitizenController {
             return new ModelAndView("citizen-info");
         }
 
-        citizenId = Long.parseLong(id);
         Citizen citizen = citizenService.findCitizenById(citizenId);
         if (citizen != null) {
 
-            if (userService.getAuthUserRole().equals("HOSPITAL")) {
+            if (authUserRole.equals("HOSPITAL")) {
                 model.addAttribute("medicalRecords", hospitalService.findMedicalRecordsByCitizenId(citizenId));
             }
-            if (userService.getAuthUserRole().equals("POLICE")) {
+            if (authUserRole.equals("POLICE")) {
                 model.addAttribute("criminalRecords", policeStationService.findCriminalRecordsByCitizenId(citizenId));
             }
-            if (userService.getAuthUserEmail().equals(citizen.getEmail())) {
+            if (authUserEmail.equals(citizen.getEmail()) || authUserRole.equals("ADMIN")) {
                 model.addAttribute("medicalRecords", hospitalService.findMedicalRecordsByCitizenId(citizenId));
                 model.addAttribute("criminalRecords", policeStationService.findCriminalRecordsByCitizenId(citizenId));
-                citizenService.generateQrCode(citizenId);
+                if (authUserEmail.equals(citizen.getEmail())) {
+                    citizenService.generateQrCode(citizenId);
+                }
             }
 
             model.addAttribute("citizen", citizen);
-            model.addAttribute("authUserRole", userService.getAuthUserRole());
-            model.addAttribute("authUserEmail", userService.getAuthUserEmail());
+            model.addAttribute("authUserRole", authUserRole);
+            model.addAttribute("authUserEmail", authUserEmail);
 
         } else {
             model.addAttribute("errorMessage", "No citizen found with id: " + citizenId);
@@ -87,7 +90,7 @@ public class CitizenController {
 
 
     @GetMapping("/citizen/criminal-record/{id}")
-    public ModelAndView medicalRecord(@PathVariable(name = "id") Long id,
+    public ModelAndView viewCriminalRecord(@PathVariable(name = "id") Long id,
                                 Model model) {
 
         String authUserEmail = userService.getAuthUserEmail();
@@ -109,7 +112,7 @@ public class CitizenController {
 
 
     @GetMapping("/citizen/medical-record/{id}")
-    public ModelAndView criminalRecord(@PathVariable(name = "id") Long id,
+    public ModelAndView viewMedicalRecord(@PathVariable(name = "id") Long id,
                                 Model model) {
 
         String authUserEmail = userService.getAuthUserEmail();
