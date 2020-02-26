@@ -40,7 +40,7 @@
 
 
             <label>NID</label><br>
-            <div class="form-group"><input class="form-control" type="text" name="nid"
+            <div class="form-group"><input class="form-control" type="number" name="nid"
                                            value="<#if (citizen.nid)??>${citizen.nid?replace(",","")}</#if>" required>
             </div>
 

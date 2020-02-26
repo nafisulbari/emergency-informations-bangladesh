@@ -7,6 +7,8 @@
             <p style="color: red">${ errorMessage}</p>
         </div>
     </div>
+</div>
+    <div id="push"></div>
     <#include "fragments/footer.ftl">
     <#else>
 

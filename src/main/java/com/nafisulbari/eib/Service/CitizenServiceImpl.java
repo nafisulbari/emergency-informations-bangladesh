@@ -38,19 +38,19 @@ import java.util.regex.Pattern;
 public class CitizenServiceImpl implements CitizenService {
 
     @Autowired
-    private FileService fileService;
+    FileService fileService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
 
     @Autowired
-    private CitizenRepository citizenRepository;
+    CitizenRepository citizenRepository;
 
     @Autowired
-    private CitizenRequestRepository citizenRequestRepository;
+    CitizenRequestRepository citizenRequestRepository;
 
     @Autowired
-    private MedicalRecordRepository medicalRecordRepository;
+    MedicalRecordRepository medicalRecordRepository;
 
 
     @Override
@@ -85,6 +85,10 @@ public class CitizenServiceImpl implements CitizenService {
     @Override
     public void saveCitizen(Citizen citizen, MultipartFile image) {
 
+        Citizen tempCitizen =citizenRepository.findCitizenById(citizen.getId());
+        if (tempCitizen!=null){
+            citizen.setCitizenPoint(tempCitizen.getCitizenPoint());
+        }
 
         String fileName = "citizen" + getStrDate() + image.getOriginalFilename().replaceAll("\\s+", "");
         citizen.setImageUrl(fileName);
@@ -97,6 +101,7 @@ public class CitizenServiceImpl implements CitizenService {
         citizen.setPassword(passwordEncoder.encode(citizen.getPassword()));
         citizen.setRole("CITIZEN");
         citizen.setPermissions("");
+
         citizenRepository.save(citizen);
 
         fileService.uploadFile(image, fileName, citizen.getId());
@@ -109,6 +114,7 @@ public class CitizenServiceImpl implements CitizenService {
 
         Citizen tempCitizen = citizenRepository.findCitizenById(citizen.getId());
         citizen.setImageUrl(tempCitizen.getImageUrl());
+        citizen.setCitizenPoint(tempCitizen.getCitizenPoint());
 
         Calendar c = Calendar.getInstance();
         c.setTime(citizen.getBirthDate());
@@ -118,6 +124,8 @@ public class CitizenServiceImpl implements CitizenService {
         citizen.setPassword(passwordEncoder.encode(citizen.getPassword()));
         citizen.setRole("CITIZEN");
         citizen.setPermissions("");
+
+
         citizenRepository.save(citizen);
 
     }
