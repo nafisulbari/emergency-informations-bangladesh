@@ -62,9 +62,6 @@ public class CitizenController {
             if (authUserEmail.equals(citizen.getEmail()) || authUserRole.equals("ADMIN")) {
                 model.addAttribute("medicalRecords", hospitalService.findMedicalRecordsByCitizenId(citizenId));
                 model.addAttribute("criminalRecords", policeStationService.findCriminalRecordsByCitizenId(citizenId));
-                if (authUserEmail.equals(citizen.getEmail())) {
-                    citizenService.generateQrCode(citizenId);
-                }
             }
 
             model.addAttribute("citizen", citizen);

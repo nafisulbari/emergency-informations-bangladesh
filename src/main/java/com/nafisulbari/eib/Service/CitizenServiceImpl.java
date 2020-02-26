@@ -106,6 +106,8 @@ public class CitizenServiceImpl implements CitizenService {
 
         fileService.uploadFile(image, fileName, citizen.getId());
 
+        generateQrCode(citizen.getId());
+
     }
 
 
@@ -128,6 +130,7 @@ public class CitizenServiceImpl implements CitizenService {
 
         citizenRepository.save(citizen);
 
+        generateQrCode(citizen.getId());
     }
 
     @Override
@@ -187,6 +190,8 @@ public class CitizenServiceImpl implements CitizenService {
         citizenRepository.save(citizen);
 
         citizenRequestRepository.delete(citizenRequest);
+
+        generateQrCode(citizen.getId());
 
     }
 
