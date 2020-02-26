@@ -21,6 +21,16 @@ import java.util.List;
 @Controller
 public class HospitalController {
 
+
+    @Autowired
+    HospitalService hospitalService;
+
+    @Autowired
+    CitizenService citizenService;
+
+    @Autowired
+    UserService userService;
+
     @InitBinder
     private void dateBinder(WebDataBinder binder) {
         //The date format to parse or output your dates
@@ -30,16 +40,6 @@ public class HospitalController {
         //Register it as custom editor for the Date type
         binder.registerCustomEditor(Date.class, editor);
     }
-
-
-    @Autowired
-    private HospitalService hospitalService;
-
-    @Autowired
-    private CitizenService citizenService;
-
-    @Autowired
-    private UserService userService;
 
 
     @GetMapping("/hospital/{citizenId}/add-medical-record")

@@ -25,29 +25,23 @@ public class CitizenController {
 
 
     @Autowired
-    private CitizenService citizenService;
+    CitizenService citizenService;
 
     @Autowired
-    private UserService userService;
+    UserService userService;
 
     @Autowired
-    private HospitalService hospitalService;
+    HospitalService hospitalService;
 
     @Autowired
-    private PoliceStationService policeStationService;
-
-
-
-
-
-
+    PoliceStationService policeStationService;
 
 
     @GetMapping("/{id}")
     public ModelAndView getCitizen(@PathVariable("id") String id,
                                    Model model) {
-        String authUserRole=userService.getAuthUserRole();
-        String authUserEmail =userService.getAuthUserEmail();
+        String authUserRole = userService.getAuthUserRole();
+        String authUserEmail = userService.getAuthUserEmail();
         Long citizenId;
         try {
             citizenId = Long.parseLong(id);
@@ -86,12 +80,9 @@ public class CitizenController {
     }
 
 
-
-
-
     @GetMapping("/citizen/criminal-record/{id}")
     public ModelAndView viewCriminalRecord(@PathVariable(name = "id") Long id,
-                                Model model) {
+                                           Model model) {
 
         String authUserEmail = userService.getAuthUserEmail();
         CriminalRecord criminalRecord = policeStationService.findCriminalRecordById(id);
@@ -113,7 +104,7 @@ public class CitizenController {
 
     @GetMapping("/citizen/medical-record/{id}")
     public ModelAndView viewMedicalRecord(@PathVariable(name = "id") Long id,
-                                Model model) {
+                                          Model model) {
 
         String authUserEmail = userService.getAuthUserEmail();
         MedicalRecord medicalRecord = hospitalService.findMedicalRecordById(id);
@@ -133,7 +124,6 @@ public class CitizenController {
     }
 
 
-
     @GetMapping("/citizen/request-update")
     public ModelAndView requestUpdatePage(Model model) {
 
@@ -144,7 +134,7 @@ public class CitizenController {
     @PostMapping("/citizen/request-update-action")
     public ModelAndView requestUpdateAction(@RequestParam("file") MultipartFile image, CitizenRequest citizenRequest, Model model, BindingResult result) {
 
-        Citizen citizen=citizenService.findCitizenByEmail(userService.getAuthUserEmail());
+        Citizen citizen = citizenService.findCitizenByEmail(userService.getAuthUserEmail());
         User tempUser = userService.findByEmail(citizenRequest.getEmail());
 
         if (tempUser != null && !tempUser.getEmail().equals(citizen.getEmail())) {
@@ -156,14 +146,13 @@ public class CitizenController {
 
         if (Objects.equals(image.getOriginalFilename(), "")) {
             citizenService.saveCitizenRequestOnly(citizenRequest, citizen);
-        }else {
-            citizenService.saveCitizenRequest(citizenRequest,image,citizen);
+        } else {
+            citizenService.saveCitizenRequest(citizenRequest, image, citizen);
         }
 
-        model.addAttribute("flag","Your update is requested");
+        model.addAttribute("flag", "Your update is requested");
         return new ModelAndView("citizen/request-update");
     }
-
 
 
 }

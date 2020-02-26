@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -27,18 +25,19 @@ public class AdminController {
 
 
     @Autowired
-    private UserService userService;
+    UserService userService;
 
     @Autowired
-    private CitizenService citizenService;
+    CitizenService citizenService;
 
     @Autowired
-    private HospitalService hospitalService;
+    HospitalService hospitalService;
 
     @Autowired
-    private PoliceStationService policeStationService;
+    PoliceStationService policeStationService;
 
 
+    //Binding date format as html and java date format doesnt match and gives exception
     @InitBinder
     private void dateBinder(WebDataBinder binder) {
         //The date format to parse or output your dates
@@ -63,7 +62,7 @@ public class AdminController {
 
 
     @PostMapping("/admin/add-citizen-action")
-    public ModelAndView addCitizenAction(@RequestParam("file") MultipartFile image, Citizen citizen, Model model, BindingResult result) {
+    public ModelAndView addCitizenAction(@RequestParam("file") MultipartFile image, Citizen citizen, Model model) {
 
         User tempUser = userService.findByEmail(citizen.getEmail());
         if (tempUser != null) {
@@ -97,7 +96,7 @@ public class AdminController {
     @PostMapping("/admin/edit-citizen-action/{id}")
     public ModelAndView editCitizenAction(@RequestParam("file") MultipartFile image,
                                           @PathVariable("id") Long id,
-                                          Citizen citizen, Model model, BindingResult result) {
+                                          Citizen citizen, Model model) {
 
         if (Objects.equals(image.getOriginalFilename(), "")) {
             citizenService.saveCitizenOnly(citizen);
@@ -149,7 +148,7 @@ public class AdminController {
 
     @PostMapping("/admin/edit-police-station-action/{id}")
     public ModelAndView editPoliceStationAction(@PathVariable("id") Long id,
-                                                PoliceStation policeStation, Model model, BindingResult result) {
+                                                PoliceStation policeStation, Model model) {
 
         policeStationService.savePoliceStation(policeStation);
 
@@ -197,7 +196,7 @@ public class AdminController {
 
     @PostMapping("/admin/edit-hospital-action/{id}")
     public ModelAndView editHospitalAction(@PathVariable("id") Long id,
-                                           Hospital hospital, Model model, BindingResult result) {
+                                           Hospital hospital, Model model) {
 
         hospitalService.saveHospital(hospital);
 

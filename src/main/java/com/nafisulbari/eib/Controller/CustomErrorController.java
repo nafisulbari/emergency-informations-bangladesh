@@ -17,7 +17,7 @@ public class CustomErrorController implements ErrorController {
 
 
     @Autowired
-    private UserService userService;
+    UserService userService;
 
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request, Model model) {
