@@ -22,10 +22,11 @@ public interface HospitalService {
 
     List<MedicalRecord> findMedicalRecordsByCitizenId(Long id);
 
+    List<MedicalRecord> findMedicalRecordsByCitizenIdOrderByIdASC(Long id);
+
     List<MedicalRecord> findAdmittedCitizensOfHospital();
 
     List<MedicalRecord> searchMedicalRecordsByCitizen(String key);
-
 
     List<Hospital> searchByHospitalName(String key);
 

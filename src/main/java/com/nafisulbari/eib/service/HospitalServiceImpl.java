@@ -81,6 +81,11 @@ public class HospitalServiceImpl implements HospitalService {
     }
 
     @Override
+    public List<MedicalRecord> findMedicalRecordsByCitizenIdOrderByIdASC(Long id) {
+        return medicalRecordRepository.findMedicalRecordsByCitizenIdOrderByIdAsc(id);
+    }
+
+    @Override
     public List<MedicalRecord> findAdmittedCitizensOfHospital() {
 
         Hospital hospital=hospitalRepository.findHospitalByEmail(userService.getAuthUserEmail());

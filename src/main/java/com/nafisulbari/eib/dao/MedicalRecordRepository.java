@@ -19,6 +19,8 @@ public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, Lo
 
     List<MedicalRecord> findMedicalRecordsByCitizenIdOrderByIdDesc(Long id);
 
+    List<MedicalRecord> findMedicalRecordsByCitizenIdOrderByIdAsc(Long id);
+
     List<MedicalRecord> findMedicalRecordsByHospitalOrderByDateDesc(Hospital hospital);
 
     @Query(value = "SELECT u FROM MedicalRecord u WHERE u.hospital IN :hospital and u.citizen.name like %:name%")

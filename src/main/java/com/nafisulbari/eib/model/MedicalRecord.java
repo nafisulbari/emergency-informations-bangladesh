@@ -26,6 +26,18 @@ public class MedicalRecord {
 
     private String title;
 
+    private String testCBC;
+
+    private String testBP;
+
+    private String testBS;
+
+    private String testECG;
+
+    private String testLP;
+
+    private String testURINE;
+
     @Lob
     private String description;
 
