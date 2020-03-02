@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -312,6 +313,20 @@ public class AdminController {
         }
         model.addAttribute("flag", "You are not authorized to view this record");
         return new ModelAndView("error");
+    }
+
+
+    @GetMapping("/admin/{citizenId}/view-graphs")
+    public ModelAndView viewMedicalGraphsPage(@PathVariable("citizenId") Long citizenId, Model model) {
+
+        List<MedicalRecord> medicalRecords =hospitalService.findMedicalRecordsByCitizenIdOrderByIdASC(citizenId);
+
+        String authUserEmail = userService.getAuthUserEmail();
+        model.addAttribute("authUserEmail", authUserEmail);
+        model.addAttribute("citizen", medicalRecords.get(0).getCitizen());
+        model.addAttribute("medicalRecords",medicalRecords);
+
+        return new ModelAndView("hospital/medical-test-graphs");
     }
 
 

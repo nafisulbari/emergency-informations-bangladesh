@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -149,6 +150,25 @@ public class CitizenController {
 
         model.addAttribute("flag", "Your update is requested");
         return new ModelAndView("citizen/request-update");
+    }
+
+
+
+    @GetMapping("/citizen/{citizenId}/view-graphs")
+    public ModelAndView viewMedicalGraphsPage(@PathVariable("citizenId") Long citizenId, Model model) {
+
+        List<MedicalRecord> medicalRecords =hospitalService.findMedicalRecordsByCitizenIdOrderByIdASC(citizenId);
+        String authUserEmail = userService.getAuthUserEmail();
+
+        if (medicalRecords.isEmpty() || !authUserEmail.equals(medicalRecords.get(0).getCitizen().getEmail())){
+            model.addAttribute("errorMessage","You are not authorized to view!\n This action is reported.");
+            return new ModelAndView("error");
+        }
+        model.addAttribute("authUserEmail", authUserEmail);
+        model.addAttribute("citizen", medicalRecords.get(0).getCitizen());
+        model.addAttribute("medicalRecords",medicalRecords);
+
+        return new ModelAndView("hospital/medical-test-graphs");
     }
 
 

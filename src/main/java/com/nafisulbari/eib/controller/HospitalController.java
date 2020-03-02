@@ -146,4 +146,18 @@ public class HospitalController {
         return new ModelAndView("/hospital/hospitals-records");
     }
 
+
+    @GetMapping("/hospital/{citizenId}/view-graphs")
+    public ModelAndView viewMedicalGraphsPage(@PathVariable("citizenId") Long citizenId, Model model) {
+
+        List<MedicalRecord> medicalRecords =hospitalService.findMedicalRecordsByCitizenIdOrderByIdASC(citizenId);
+
+        String authUserEmail = userService.getAuthUserEmail();
+        model.addAttribute("authUserEmail", authUserEmail);
+        model.addAttribute("citizen", medicalRecords.get(0).getCitizen());
+        model.addAttribute("medicalRecords",medicalRecords);
+
+        return new ModelAndView("hospital/medical-test-graphs");
+    }
+
 }
