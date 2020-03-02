@@ -1,9 +1,7 @@
-
 <#include "fragments/head-nav.ftl">
 
 
-
-<div id="table-block">
+<div id="block-info">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -18,15 +16,11 @@
                     <h3 style="color: red">${flag}</h3>
                 </#if>
 
-<div id="push"></div>
+                <div id="push"></div>
 
             </div>
         </div>
     </div>
 </div>
-
-
-
-
 
 <#include "fragments/footer.ftl">
