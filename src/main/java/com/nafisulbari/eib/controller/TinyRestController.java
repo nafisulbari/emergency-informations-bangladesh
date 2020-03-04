@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+//TinyRestController is responsible for TinyMCE image uploads
+
 @RestController
 public class TinyRestController {
 
