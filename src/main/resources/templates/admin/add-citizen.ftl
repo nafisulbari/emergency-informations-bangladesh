@@ -11,6 +11,7 @@
     <#if (citizen.id)??>
     <form action="/admin/edit-citizen-action/${citizen.id}" enctype="multipart/form-data" method="post">
         <h2 class="text-center">Update Information</h2>
+        <h5>Citizen ID: ${citizen.id}</h5>
         <#else>
         <form action="/admin/add-citizen-action" enctype="multipart/form-data" method="post">
             <h2 class="text-center">Citizen Registration</h2>
@@ -55,8 +56,17 @@
                                            required></div>
 
             <label>Blood Group</label><br>
-            <div class="form-group"><input class="form-control" type="text" name="bloodGroup"
-                                           value="<#if (citizen.bloodGroup)??>${citizen.bloodGroup}</#if>" required>
+            <div class="form-group">
+                <select class="form-control" name="bloodGroup" required>
+                    <option value="O+" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "O+")>selected</#if>>O+</option>
+                    <option value="O-" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "O-")>selected</#if>>O-</option>
+                    <option value="A+" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "A+")>selected</#if>>A+</option>
+                    <option value="A-" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "A-")>selected</#if>>A-</option>
+                    <option value="B+" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "B+")>selected</#if>>B+</option>
+                    <option value="B-" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "B-")>selected</#if>>B-</option>
+                    <option value="AB+" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "AB+")>selected</#if>>AB+</option>
+                    <option value="AB-" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "AB-")>selected</#if>>AB-</option>
+                </select>
             </div>
 
             <label>Emergency Contact Relation</label><br>
