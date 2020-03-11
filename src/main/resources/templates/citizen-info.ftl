@@ -106,7 +106,7 @@
                         <h4>Name: ${citizen.getName()}</h4>
                         <h4>Blood group: ${citizen.getBloodGroup()}</h4>
                         <h4>Emergency contact: ${citizen.getEmergencyRelation()}</h4>
-                        <h4>Emercency contact mobile: ${citizen.getEmergencyMobile()}</h4>
+                        <h4>Mobile: ${citizen.getEmergencyMobile()}</h4>
 
 
                     </div>
