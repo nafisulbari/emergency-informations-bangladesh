@@ -2,6 +2,7 @@ package com.nafisulbari.eib.service;
 
 import com.nafisulbari.eib.model.Citizen;
 import com.nafisulbari.eib.model.CitizenRequest;
+import com.nafisulbari.eib.model.Hospital;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -32,5 +33,7 @@ public interface CitizenService {
     void deleteCitizenRequestById(Long id);
 
     List<CitizenRequest> findAllCitizenRequest();
+
+    List<Citizen> searchCitizenByName(String key);
 
 }

@@ -158,6 +158,28 @@ public class AdminController {
         return new ModelAndView("admin/citizen-update-request");
     }
 
+
+
+    @GetMapping("/admin/search-citizen")
+    public ModelAndView searchCitizens(@RequestParam(name = "search", required = false) String key,
+                                             Model model) {
+        if (key != null && !key.equals("")) {
+
+            model.addAttribute("searchedCitizens", citizenService.searchCitizenByName(key));
+
+            return new ModelAndView("/admin/add-citizen");
+        }
+
+        return new ModelAndView("/admin/add-citizen");
+    }
+
+
+
+
+
+
+
+
     //--------------------------Police Station & Criminal Record controls-------------------------------------------
     //--------------------------------------------------------------------------------------------------------------
     @GetMapping("/admin/add-police-station")
@@ -297,6 +319,13 @@ public class AdminController {
     }
 
 
+
+
+
+
+
+
+    
     //-------------------------------Hospital & Medical Record controls---------------------------------------------
     //--------------------------------------------------------------------------------------------------------------
     @GetMapping("/admin/add-hospital")

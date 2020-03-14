@@ -210,6 +210,12 @@ public class CitizenServiceImpl implements CitizenService {
         return citizenRequestRepository.findAll();
     }
 
+    @Override
+    public List<Citizen> searchCitizenByName(String key) {
+
+        return citizenRepository.findByNameContaining(key);
+    }
+
 
     @Override
     public void generateQrCode(Long id) {
