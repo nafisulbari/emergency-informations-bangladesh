@@ -6,12 +6,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
+/**
+ * HomeController is responsible for "/home", "/login" and basic routes
+ *
+ * @author  Ahmed Nafisul Bari
+ */
+
 @Controller
 public class HomeController {
 
 
 
-
+    //--------------------Login Home & Basic Controls----------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------------------
     @GetMapping("favicon.ico")
     @ResponseBody
     void returnNoFavicon() {

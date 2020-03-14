@@ -12,6 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
+
+
+/**
+ * CustomErrorController is responsible for managing errors
+ *
+ * @author  Ahmed Nafisul Bari
+ */
+
 @Controller
 public class CustomErrorController implements ErrorController {
 
@@ -19,6 +27,9 @@ public class CustomErrorController implements ErrorController {
     @Autowired
     UserService userService;
 
+
+    //----------------------------Error Controls-------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request, Model model) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);

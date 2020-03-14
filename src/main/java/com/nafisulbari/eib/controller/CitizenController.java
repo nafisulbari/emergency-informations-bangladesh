@@ -20,6 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * CitizenController is responsible for handling route "/citizen" and its actions
+ *
+ * @author  Ahmed Nafisul Bari
+ */
 
 @Controller
 public class CitizenController {
@@ -38,6 +43,8 @@ public class CitizenController {
     PoliceStationService policeStationService;
 
 
+    //-------------------------Citizen Controls----------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------------------
     @GetMapping("/{id}")
     public ModelAndView getCitizen(@PathVariable("id") String id,
                                    Model model) {
@@ -153,20 +160,19 @@ public class CitizenController {
     }
 
 
-
     @GetMapping("/citizen/{citizenId}/view-graphs")
     public ModelAndView viewMedicalGraphsPage(@PathVariable("citizenId") Long citizenId, Model model) {
 
-        List<MedicalRecord> medicalRecords =hospitalService.findMedicalRecordsByCitizenIdOrderByIdASC(citizenId);
+        List<MedicalRecord> medicalRecords = hospitalService.findMedicalRecordsByCitizenIdOrderByIdASC(citizenId);
         String authUserEmail = userService.getAuthUserEmail();
 
-        if (medicalRecords.isEmpty() || !authUserEmail.equals(medicalRecords.get(0).getCitizen().getEmail())){
-            model.addAttribute("errorMessage","You are not authorized to view!\n This action is reported.");
+        if (medicalRecords.isEmpty() || !authUserEmail.equals(medicalRecords.get(0).getCitizen().getEmail())) {
+            model.addAttribute("errorMessage", "You are not authorized to view!\n This action is reported.");
             return new ModelAndView("error");
         }
         model.addAttribute("authUserEmail", authUserEmail);
         model.addAttribute("citizen", medicalRecords.get(0).getCitizen());
-        model.addAttribute("medicalRecords",medicalRecords);
+        model.addAttribute("medicalRecords", medicalRecords);
 
         return new ModelAndView("hospital/medical-test-graphs");
     }

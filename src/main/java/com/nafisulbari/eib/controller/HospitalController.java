@@ -18,6 +18,12 @@ import java.util.Date;
 import java.util.List;
 
 
+/**
+ * HospitalController is responsible for handling route "/hospital" and its actions
+ *
+ * @author  Ahmed Nafisul Bari
+ */
+
 @Controller
 public class HospitalController {
 
@@ -31,6 +37,7 @@ public class HospitalController {
     @Autowired
     UserService userService;
 
+    //Binding date format as html and java date format doesnt match and gives exception
     @InitBinder
     private void dateBinder(WebDataBinder binder) {
         //The date format to parse or output your dates
@@ -41,6 +48,10 @@ public class HospitalController {
         binder.registerCustomEditor(Date.class, editor);
     }
 
+
+
+    //----------------------------Hospital Controls----------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------
 
     @GetMapping("/hospital/{citizenId}/add-medical-record")
     public ModelAndView addMedicalRecordPage(@PathVariable("citizenId") Long citizenId, Model model) {

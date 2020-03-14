@@ -21,6 +21,12 @@ import java.util.List;
 import java.util.Objects;
 
 
+/**
+ * AdminController is responsible for handling route "/admin" and its actions
+ *
+ * @author  Ahmed Nafisul Bari
+ */
+
 @Controller
 public class AdminController {
 
@@ -49,14 +55,14 @@ public class AdminController {
         binder.registerCustomEditor(Date.class, editor);
     }
 
-    //Fetching admin dashboard--------------------------------------------------------------------------------------
+    //-------------------Fetching admin dashboard-------------------------------------------------------------------
     @GetMapping("/admin/dashboard")
     public ModelAndView dashboard() {
 
         return new ModelAndView("admin/dashboard");
     }
 
-    //Citizen controls----------------------------------------------------------------------------------------------
+    //--------------------Citizen controls--------------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------
     @GetMapping("/admin/add-citizen")
     public ModelAndView addCitizen() {
@@ -121,7 +127,6 @@ public class AdminController {
     }
 
 
-
     @GetMapping("/admin/citizen-update-request")
     public ModelAndView citizenUpdateRequestPage(Model model) {
 
@@ -152,7 +157,7 @@ public class AdminController {
         return new ModelAndView("admin/citizen-update-request");
     }
 
-    //Police Station & Criminal Record controls---------------------------------------------------------------------
+    //--------------------------Police Station & Criminal Record controls-------------------------------------------
     //--------------------------------------------------------------------------------------------------------------
     @GetMapping("/admin/add-police-station")
     public ModelAndView addPoliceStation() {
@@ -204,7 +209,6 @@ public class AdminController {
 
         return new ModelAndView("admin/add-police-station");
     }
-
 
 
     @GetMapping("/admin/criminal-record-review")
@@ -292,7 +296,7 @@ public class AdminController {
     }
 
 
-    //Hospital & Medical Record controls----------------------------------------------------------------------------
+    //-------------------------------Hospital & Medical Record controls---------------------------------------------
     //--------------------------------------------------------------------------------------------------------------
     @GetMapping("/admin/add-hospital")
     public ModelAndView addHospital() {
@@ -348,7 +352,6 @@ public class AdminController {
     }
 
 
-
     @GetMapping("/admin/view-medical-record/{id}")
     public ModelAndView viewMedicalRecord(@PathVariable(name = "id") Long id,
                                           Model model) {
@@ -396,8 +399,6 @@ public class AdminController {
 
         return new ModelAndView("/admin/add-hospital");
     }
-
-
 
 
 }
