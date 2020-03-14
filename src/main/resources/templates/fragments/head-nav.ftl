@@ -21,13 +21,9 @@
 </head>
 
 
-
-
-
 <body>
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"]/>
-
 
 <nav class="navbar navbar-light navbar-expand-md navigation-clean-search" id="nav-eib"
      style="background-color:#f4f5ec;">

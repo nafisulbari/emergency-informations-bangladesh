@@ -2,11 +2,9 @@
 
 <#setting date_format="yyyy-MM-dd">
 
-
-
 <#include "*/fragments/admin-dashboard-block.ftl">
 
-<div  class="contact-clean" style="background-color:rgb(255,255,255);">
+<div class="contact-clean" style="background-color:rgb(255,255,255);">
 
     <#if (citizen.id)??>
     <form action="/admin/edit-citizen-action/${citizen.id}" enctype="multipart/form-data" method="post">
@@ -58,14 +56,24 @@
             <label>Blood Group</label><br>
             <div class="form-group">
                 <select class="form-control" name="bloodGroup" required>
-                    <option value="O+" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "O+")>selected</#if>>O+</option>
-                    <option value="O-" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "O-")>selected</#if>>O-</option>
-                    <option value="A+" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "A+")>selected</#if>>A+</option>
-                    <option value="A-" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "A-")>selected</#if>>A-</option>
-                    <option value="B+" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "B+")>selected</#if>>B+</option>
-                    <option value="B-" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "B-")>selected</#if>>B-</option>
-                    <option value="AB+" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "AB+")>selected</#if>>AB+</option>
-                    <option value="AB-" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "AB-")>selected</#if>>AB-</option>
+                    <option value="O+" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "O+")>selected</#if>>O+
+                    </option>
+                    <option value="O-" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "O-")>selected</#if>>O-
+                    </option>
+                    <option value="A+" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "A+")>selected</#if>>A+
+                    </option>
+                    <option value="A-" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "A-")>selected</#if>>A-
+                    </option>
+                    <option value="B+" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "B+")>selected</#if>>B+
+                    </option>
+                    <option value="B-" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "B-")>selected</#if>>B-
+                    </option>
+                    <option value="AB+" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "AB+")>selected</#if>>
+                        AB+
+                    </option>
+                    <option value="AB-" <#if (citizen.bloodGroup)?? && (citizen.bloodGroup == "AB-")>selected</#if>>
+                        AB-
+                    </option>
                 </select>
             </div>
 
@@ -92,25 +100,24 @@
             <#if (citizen.id)??>
                 <br>
                 <input type="file" name="file"/><br/><br/>
-                <div class="form-group text-center"><button id="btn-war" class="btn btn-warning" role="button" type="submit">Update</button></div>
+                <div class="form-group text-center">
+                    <button id="btn-war" class="btn btn-warning" role="button" type="submit">Update</button>
+                </div>
             <#else>
                 <br>
                 <input type="file" name="file" required/><br/><br/>
-                <div class="form-group text-center"><button class="btn btn-primary" role="button" type="submit">Add Citizen</button></div>
+                <div class="form-group text-center">
+                    <button class="btn btn-primary" role="button" type="submit">Add Citizen</button>
+                </div>
             </#if>
 
         </form>
 
 
 </div>
-
-
 </div>
 </div>
 </div>
 </div>
-
-
-
 
 <#include "*/fragments/footer.ftl">

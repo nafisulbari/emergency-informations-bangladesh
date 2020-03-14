@@ -4,9 +4,7 @@
 
 <#include "*/fragments/admin-dashboard-block.ftl">
 
-
 <div class="contact-clean" style="background-color:rgb(255,255,255);">
-
 
     <#if (policeStation.id)??>
     <form action="/admin/edit-police-station-action/${policeStation.id}" enctype="multipart/form-data" method="post">
@@ -54,9 +52,6 @@
             </#if>
         </form>
 
-
-
-
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -96,13 +91,8 @@
             </#if>
         </div>
 
-
-
 </div>
-
-
 </div>
-
 </div>
 </div>
 </div>

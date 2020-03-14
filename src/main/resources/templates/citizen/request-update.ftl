@@ -2,7 +2,6 @@
 
 <#setting date_format="yyyy-MM-dd">
 
-
 <div class="contact-clean" style="background-color:rgb(255,255,255);">
     <form action="/citizen/request-update-action" enctype="multipart/form-data" method="post">
 
@@ -13,8 +12,6 @@
             <h2 class="text-center">Update Information</h2>
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-
 
             <label>Address</label><br>
             <div class="form-group"><input class="form-control" type="text" name="address"
@@ -40,12 +37,9 @@
             <div class="form-group"><input class="form-control" type="text" name="email"
                                            value="<#if (citizen.email)??>${citizen.email}</#if>"
                                            required></div>
-
             <#if flagUserExists??>
                 <h3 style="color: red">${flagUserExists}</h3>
             </#if>
-
-
 
             <label>Password</label><br>
             <div class="form-group"><input class="form-control" type="password" name="password" required></div>

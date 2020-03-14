@@ -1,12 +1,8 @@
 <#include "*/fragments/head-nav.ftl">
 
-
-
 <#include "*/fragments/admin-dashboard-block.ftl">
 
 <div id="table-block">
-
-
                 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                     <tr>
@@ -15,7 +11,6 @@
                         <th>NID</th>
                         <th>Accept</th>
                         <th>Decline</th>
-
                     </tr>
                     </thead>
                     <tbody>
@@ -45,18 +40,10 @@
                     </tbody>
                 </table>
 
-
-</div>
-
-
 </div>
 </div>
 </div>
 </div>
-
-
-
-
-
+</div>
 
 <#include "*/fragments/footer.ftl">

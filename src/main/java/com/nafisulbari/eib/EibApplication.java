@@ -7,9 +7,18 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import static java.util.Collections.singletonList;
 
 
+/**
+ * EibApplication runs the SpringBootApplication
+ *
+ *
+ * @author  Ahmed Nafisul Bari
+ */
+
+
 @SpringBootApplication
 public class EibApplication {
 
+    //Configuring Freemarker to use JspTagLibs
     public EibApplication(FreeMarkerConfigurer freeMarkerConfigurer) {
         freeMarkerConfigurer.getTaglibFactory().setClasspathTlds(singletonList("/META-INF/security.tld"));
     }

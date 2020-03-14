@@ -2,7 +2,6 @@
 
 <#setting date_format="yyyy-MM-dd">
 
-
 <div id="block-info">
     <div class="container">
         <div class="row">
@@ -40,13 +39,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
 
 
 <div id="form-div">
@@ -92,14 +84,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>

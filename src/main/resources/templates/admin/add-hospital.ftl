@@ -2,11 +2,7 @@
 
 <#setting date_format="yyyy-MM-dd">
 
-
 <#include "*/fragments/admin-dashboard-block.ftl">
-
-
-
 
 <div class="contact-clean" style="background-color:rgb(255,255,255);">
 
@@ -46,59 +42,56 @@
                 </div>
             <#else>
                 <div class="form-group text-center">
-                    <button class="btn btn-primary"role="button" type="submit">Add Hospital</button>
+                    <button class="btn btn-primary" role="button" type="submit">Add Hospital</button>
                 </div>
             </#if>
         </form>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
 
-                        <form class="search-form" target="_self" action="/admin/search-hospital" >
-                            <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search" style="color:rgb(23,162,185);font-size:18px;"></i></span></div><input id="ad-search-bar" class="form-control" type="text" name="search" placeholder="Search hospital  . . .">
-                                <div class="input-group-append"><button id="ad-search" class="btn btn-info btn-sm" type="submit">Search </button></div>
+                    <form class="search-form" target="_self" action="/admin/search-hospital">
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"
+                                                                                               style="color:rgb(23,162,185);font-size:18px;"></i></span>
                             </div>
-                        </form>
-                    </div>
+                            <input id="ad-search-bar" class="form-control" type="text" name="search"
+                                   placeholder="Search hospital  . . .">
+                            <div class="input-group-append">
+                                <button id="ad-search" class="btn btn-info btn-sm" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <#if searchedHospitals?? >
-                    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Email</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <#list searchedHospitals as hos>
-                            <tr>
-                                <td>${hos.getId()}</td>
-                                <td>
-                                    <a id="med-rec-link" href="/admin/edit-hospital/${hos.getId()}">${hos.getName()}</a>
-                                </td>
-                                <td>${hos.getAddress()}</td>
-                                <td>${hos.getEmail()}</td>
-                            </tr>
-                        </#list>
-                        </tbody>
-                    </table>
-
-                </#if>
             </div>
-
-
-
+            <#if searchedHospitals?? >
+                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#list searchedHospitals as hos>
+                        <tr>
+                            <td>${hos.getId()}</td>
+                            <td>
+                                <a id="med-rec-link" href="/admin/edit-hospital/${hos.getId()}">${hos.getName()}</a>
+                            </td>
+                            <td>${hos.getAddress()}</td>
+                            <td>${hos.getEmail()}</td>
+                        </tr>
+                    </#list>
+                    </tbody>
+                </table>
+            </#if>
         </div>
-
-
 </div>
-
-
-
+</div>
 </div>
 </div>
 </div>

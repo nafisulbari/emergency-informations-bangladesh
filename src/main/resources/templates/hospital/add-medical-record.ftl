@@ -77,8 +77,8 @@
                     <div class="form-group">
                         <label>Title</label>
                         <input class="form-control" type="text" name="title"
-                                                   value="<#if (medicalRecord.title)??>${medicalRecord.title}</#if>"
-                                                   required
+                               value="<#if (medicalRecord.title)??>${medicalRecord.title}</#if>"
+                               required
                                 <#if !medicalRecord?? || authUserEmail==medicalRecord.hospital.email>
 
                                 <#else>
@@ -90,8 +90,8 @@
                     <div class="form-group">
                         <label>Date</label>
                         <input class="form-control" type="date" name="date"
-                                                   value="<#if (medicalRecord.date)??>${medicalRecord.date?date}</#if>"
-                                                   required
+                               value="<#if (medicalRecord.date)??>${medicalRecord.date?date}</#if>"
+                               required
                                 <#if !medicalRecord?? || authUserEmail ==medicalRecord.hospital.email>
                                 <#else>
                                     disabled
@@ -102,8 +102,8 @@
                     <div class="form-group">
                         <label>Doctor's Name</label>
                         <input class="form-control" type="text" name="doctor"
-                                                   value="<#if (medicalRecord.doctor)??>${medicalRecord.doctor}</#if>"
-                                                   required
+                               value="<#if (medicalRecord.doctor)??>${medicalRecord.doctor}</#if>"
+                               required
                                 <#if !medicalRecord?? || authUserEmail==medicalRecord.hospital.email>
                                 <#else>
                                     disabled
@@ -111,11 +111,10 @@
                         ></div>
 
 
-
                     <div class="form-group">
                         <label>CBC test</label>
                         <input class="form-control" type="number" name="testCBC"
-                                                   value="<#if (medicalRecord.testCBC)??>${medicalRecord.testCBC}</#if>"
+                               value="<#if (medicalRecord.testCBC)??>${medicalRecord.testCBC}</#if>"
                                 <#if !medicalRecord?? || authUserEmail==medicalRecord.hospital.email>
                                 <#else>
                                     disabled
@@ -126,7 +125,7 @@
                     <div class="form-group">
                         <label>Blood Pressure test</label>
                         <input class="form-control" type="number" name="testBP"
-                                                   value="<#if (medicalRecord.testBP)??>${medicalRecord.testBP}</#if>"
+                               value="<#if (medicalRecord.testBP)??>${medicalRecord.testBP}</#if>"
                                 <#if !medicalRecord?? || authUserEmail==medicalRecord.hospital.email>
                                 <#else>
                                     disabled
@@ -136,7 +135,7 @@
                     <div class="form-group">
                         <label>Blood Suger test</label>
                         <input class="form-control" type="number" name="testBS"
-                                                   value="<#if (medicalRecord.testBS)??>${medicalRecord.testBS}</#if>"
+                               value="<#if (medicalRecord.testBS)??>${medicalRecord.testBS}</#if>"
                                 <#if !medicalRecord?? || authUserEmail==medicalRecord.hospital.email>
                                 <#else>
                                     disabled
@@ -146,7 +145,7 @@
                     <div class="form-group">
                         <label>ECG test</label>
                         <input class="form-control" type="number" name="testECG"
-                                                   value="<#if (medicalRecord.testECG)??>${medicalRecord.testECG}</#if>"
+                               value="<#if (medicalRecord.testECG)??>${medicalRecord.testECG}</#if>"
                                 <#if !medicalRecord?? || authUserEmail==medicalRecord.hospital.email>
                                 <#else>
                                     disabled
@@ -156,7 +155,7 @@
                     <div class="form-group">
                         <label>Lipid Profile test</label>
                         <input class="form-control" type="number" name="testLP"
-                                                   value="<#if (medicalRecord.testLP)??>${medicalRecord.testLP}</#if>"
+                               value="<#if (medicalRecord.testLP)??>${medicalRecord.testLP}</#if>"
                                 <#if !medicalRecord?? || authUserEmail==medicalRecord.hospital.email>
                                 <#else>
                                     disabled
@@ -165,7 +164,7 @@
                     <div class="form-group">
                         <label>Urine test</label>
                         <input class="form-control" type="number" name="testURINE"
-                                                   value="<#if (medicalRecord.testURINE)??>${medicalRecord.testURINE}</#if>"
+                               value="<#if (medicalRecord.testURINE)??>${medicalRecord.testURINE}</#if>"
                                 <#if !medicalRecord?? || authUserEmail==medicalRecord.hospital.email>
                                 <#else>
                                     disabled

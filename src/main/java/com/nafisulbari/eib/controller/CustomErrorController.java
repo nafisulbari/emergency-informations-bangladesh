@@ -13,12 +13,12 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 
-
 /**
  * CustomErrorController is responsible for managing errors
  *
  * @author  Ahmed Nafisul Bari
  */
+
 
 @Controller
 public class CustomErrorController implements ErrorController {

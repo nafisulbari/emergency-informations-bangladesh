@@ -2,7 +2,6 @@
 
 <#setting date_format="yyyy-MM-dd">
 
-
 <div id="block-info">
     <div class="container">
         <div class="row">
@@ -33,7 +32,6 @@
                     <p style="color:rgb(77,77,77);">Blood Group: ${citizen.getBloodGroup()}<br></p>
                     <p style="color:rgb(77,77,77);">Emergency Contact: ${citizen.getEmergencyRelation()}<br></p>
                     <p style="color:rgb(77,77,77);">Contact Mobile: ${citizen.getEmergencyMobile()}<br></p>
-
 
                 </div>
             </div>
@@ -139,8 +137,6 @@
                                  class="form-group form-control">${criminalRecord.description}</div>
                         </#if>
                     </form>
-
-
 
                 </#if>
             </div>

@@ -1,6 +1,5 @@
 <#include "fragments/head-nav.ftl">
 
-
 <div id="block-info">
     <div class="container">
         <div class="row">

@@ -41,33 +41,32 @@
 </nav>
 <div class="content-login">
 
-<div id="login-form-div" class="login-clean" style="background-color:rgb(255,255,255);">
+    <div id="login-form-div" class="login-clean" style="background-color:rgb(255,255,255);">
 
-    <form role="form" action="/login" method="post">
-        <h2 class="sr-only">Login Form</h2>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <form role="form" action="/login" method="post">
+            <h2 class="sr-only">Login Form</h2>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-        <div class="illustration"><i class="icon ion-ios-navigate"></i></div>
-        <div class="form-group">
-            <input class="form-control" type="email" name="email" id="email" placeholder="Email" required autofocus>
-        </div>
+            <div class="illustration"><i class="icon ion-ios-navigate"></i></div>
+            <div class="form-group">
+                <input class="form-control" type="email" name="email" id="email" placeholder="Email" required autofocus>
+            </div>
 
-        <div class="form-group">
-            <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
-        </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" id="password" placeholder="Password"
+                       required>
+            </div>
 
-        <#-- FIX THE TOMCAT ERROR    <div>-->
-        <#--        <label for="remember-me">Remember me</label>-->
-        <#--        <input type="checkbox" name="remember-me" id="remember-me">-->
-        <#--    </div>-->
+            <#-- FIX THE TOMCAT ERROR    <div>-->
+            <#--        <label for="remember-me">Remember me</label>-->
+            <#--        <input type="checkbox" name="remember-me" id="remember-me">-->
+            <#--    </div>-->
 
-
-
-        <div class="form-group">
-            <button class="btn btn-info btn-block" type="submit">Log In</button>
-        </div>
-    </form>
-</div>
+            <div class="form-group">
+                <button class="btn btn-info btn-block" type="submit">Log In</button>
+            </div>
+        </form>
+    </div>
 
 
 </div>

@@ -11,6 +11,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+
+/**
+ * SecurityConfiguration is responsible for configuring security,
+ * authentication and providing access to users in different urls
+ *
+ * @author  Ahmed Nafisul Bari
+ */
+
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {

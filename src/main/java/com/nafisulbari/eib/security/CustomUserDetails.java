@@ -9,6 +9,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+
+/**
+ * CustomUserDetails is responsible for Implementing UserDetails
+ * which is being used for managing login
+ *
+ * @author  Ahmed Nafisul Bari
+ */
+
+
 public class CustomUserDetails implements UserDetails {
 
     private User user;

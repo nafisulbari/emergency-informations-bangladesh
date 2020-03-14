@@ -24,6 +24,7 @@ import java.util.List;
  * @author  Ahmed Nafisul Bari
  */
 
+
 @Controller
 public class HospitalController {
 

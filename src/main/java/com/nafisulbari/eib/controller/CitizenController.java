@@ -20,11 +20,13 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import java.util.Objects;
 
+
 /**
  * CitizenController is responsible for handling route "/citizen" and its actions
  *
  * @author  Ahmed Nafisul Bari
  */
+
 
 @Controller
 public class CitizenController {
