@@ -11,13 +11,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan
 public class WebConfigurer implements WebMvcConfigurer {
 
+    //Setting citizen-records folder as a configuration----------------------------------------------------------------
+    public static final String recordsUploadDirectory = System.getProperty("user.dir") + "\\citizen-records";
 
-    public static String recordsUploadDirectory = System.getProperty("user.dir") + "\\citizen-records";
-    public static String staticDirectory = System.getProperty("user.dir") + "\\src\\main\\resources\\static";
-
+    //Manually adding resources path and its folders------------------------------------------------------------------
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/META-INF/resources/", "classpath:/resources/",
             "classpath:/static/", "classpath:/public/" };
+
+
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
