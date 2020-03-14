@@ -16,7 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
  * SecurityConfiguration is responsible for configuring security,
  * authentication and providing access to users in different urls
  *
- * @author  Ahmed Nafisul Bari
+ * @author Ahmed Nafisul Bari
  */
 
 

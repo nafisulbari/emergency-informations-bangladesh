@@ -14,7 +14,6 @@ import com.nafisulbari.eib.dao.MedicalRecordRepository;
 import com.nafisulbari.eib.model.Citizen;
 
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -55,28 +54,24 @@ public class CitizenServiceImpl implements CitizenService {
 
     @Override
     public Citizen findCitizenById(Long id) {
+
         return citizenRepository.findCitizenById(id);
     }
 
+
     @Override
     public Citizen findCitizenByEmail(String email) {
+
         return citizenRepository.findCitizenByEmail(email);
-    }
-
-
-    public String getStrDate() {
-        Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        String strDate = dateFormat.format(date);
-        strDate = strDate.replace(':', '-').replaceAll("\\s+", "_");
-        return strDate;
     }
 
 
     @Transactional
     @Override
     public void deleteCitizenById(Long id) {
+
         medicalRecordRepository.deleteByCitizen(citizenRepository.findCitizenById(id));
+
         citizenRepository.deleteCitizenById(id);
 
     }
@@ -85,8 +80,8 @@ public class CitizenServiceImpl implements CitizenService {
     @Override
     public void saveCitizen(Citizen citizen, MultipartFile image) {
 
-        Citizen tempCitizen =citizenRepository.findCitizenById(citizen.getId());
-        if (tempCitizen!=null){
+        Citizen tempCitizen = citizenRepository.findCitizenById(citizen.getId());
+        if (tempCitizen != null) {
             citizen.setCitizenPoint(tempCitizen.getCitizenPoint());
         }
 
@@ -127,7 +122,6 @@ public class CitizenServiceImpl implements CitizenService {
         citizen.setRole("CITIZEN");
         citizen.setPermissions("");
 
-
         citizenRepository.save(citizen);
 
         generateQrCode(citizen.getId());
@@ -138,10 +132,15 @@ public class CitizenServiceImpl implements CitizenService {
 
         if (id != null && Pattern.matches("(?<=\\s|^)\\d+(?=\\s|$)", id)) {
             try {
+
                 Citizen citizen = citizenRepository.findCitizenById(Long.parseLong(id));
+
                 citizen.setCitizenPoint(citizen.getCitizenPoint() + 1);
+
                 citizenRepository.save(citizen);
+
                 return "added";
+
             } catch (Exception e) {
                 System.err.println(e.getMessage());
                 return "noCitizenFound";
@@ -161,6 +160,7 @@ public class CitizenServiceImpl implements CitizenService {
         String fileName = "citizen" + getStrDate() + image.getOriginalFilename().replaceAll("\\s+", "");
         citizenRequest.setImageUrl(fileName);
         citizenRequest.setCitizen(citizen);
+
         citizenRequestRepository.save(citizenRequest);
 
         fileService.uploadFile(image, fileName, citizen.getId());
@@ -168,16 +168,19 @@ public class CitizenServiceImpl implements CitizenService {
 
     @Override
     public void saveCitizenRequestOnly(CitizenRequest citizenRequest, Citizen citizen) {
+
         citizenRequest.setImageUrl(citizen.getImageUrl());
         citizenRequest.setCitizen(citizen);
+
         citizenRequestRepository.save(citizenRequest);
     }
 
     @Override
     public void updateCitizenFromRequest(Long id) {
 
-        CitizenRequest citizenRequest=citizenRequestRepository.findCitizenRequestById(id);
-        Citizen citizen=citizenRepository.findCitizenById(citizenRequest.getCitizen().getId());
+        CitizenRequest citizenRequest = citizenRequestRepository.findCitizenRequestById(id);
+
+        Citizen citizen = citizenRepository.findCitizenById(citizenRequest.getCitizen().getId());
 
         citizen.setAddress(citizenRequest.getAddress());
         citizen.setMobile(citizenRequest.getMobile());
@@ -197,11 +200,13 @@ public class CitizenServiceImpl implements CitizenService {
 
     @Override
     public void deleteCitizenRequestById(Long id) {
+
         citizenRequestRepository.delete(citizenRequestRepository.findCitizenRequestById(id));
     }
 
     @Override
     public List<CitizenRequest> findAllCitizenRequest() {
+
         return citizenRequestRepository.findAll();
     }
 
@@ -212,20 +217,21 @@ public class CitizenServiceImpl implements CitizenService {
 
         Citizen citizen = citizenRepository.findCitizenById(id);
 
-        String myCodeText="BEGIN:VCARD\n" +
+        String myCodeText = "BEGIN:VCARD\n" +
                 "VERSION:3.0\n" +
-                "FN:"+citizen.getName()+"\n" +
-                "ADR;PREF:ID: ;;"+citizen.getId()+"\n"+
-                "ADR;PREF:Blood Group: ;;"+citizen.getBloodGroup()+"\n"+
-                "ADR;PREF:Emergency Contact: ;;"+citizen.getEmergencyRelation()+"\n"+
-                "TEL;TYPE=VOICE,pref:+88 "+citizen.getEmergencyMobile()+"\n" +
-                "URL:https://eib.nafisulbari.com/"+citizen.getId()+"\n"+
+                "FN:" + citizen.getName() + "\n" +
+                "ADR;PREF:ID: ;;" + citizen.getId() + "\n" +
+                "ADR;PREF:Blood Group: ;;" + citizen.getBloodGroup() + "\n" +
+                "ADR;PREF:Emergency Contact: ;;" + citizen.getEmergencyRelation() + "\n" +
+                "TEL;TYPE=VOICE,pref:+88 " + citizen.getEmergencyMobile() + "\n" +
+                "URL:https://eib.nafisulbari.com/" + citizen.getId() + "\n" +
                 "END:VCARD";
 
         String filePath = System.getProperty("user.dir") + "/citizen-records/" + citizen.getId() + "/" + citizen.getId() + ".png";
         int size = 300;
         String fileType = "png";
         File myFile = new File(filePath);
+
         try {
 
             Map<EncodeHintType, Object> hintMap = new EnumMap<EncodeHintType, Object>(EncodeHintType.class);
@@ -255,6 +261,7 @@ public class CitizenServiceImpl implements CitizenService {
                     }
                 }
             }
+
             String citizenId = "" + citizen.getId();
             graphics.drawString(citizenId, (310 / 2) - (citizenId.length() * 2), 310);
 
@@ -263,8 +270,19 @@ public class CitizenServiceImpl implements CitizenService {
         } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
+
         System.out.println("\n\nYou have successfully created QR Code.");
     }
 
 
+
+    public String getStrDate() {
+
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String strDate = dateFormat.format(date);
+        strDate = strDate.replace(':', '-').replaceAll("\\s+", "_");
+
+        return strDate;
+    }
 }
