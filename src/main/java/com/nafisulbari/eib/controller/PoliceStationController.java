@@ -56,6 +56,8 @@ public class PoliceStationController {
 
     //----------------------------Police Station Controls----------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------
+
+
     @GetMapping("/police/{citizenId}/add-criminal-record")
     public ModelAndView addCriminalRecordPage(@PathVariable("citizenId") Long citizenId, Model model) {
 
@@ -68,6 +70,7 @@ public class PoliceStationController {
         model.addAttribute("citizen", citizen);
         return new ModelAndView("police/add-criminal-record");
     }
+
 
 
     @PostMapping("/police/{citizenId}/add-criminal-record-action")

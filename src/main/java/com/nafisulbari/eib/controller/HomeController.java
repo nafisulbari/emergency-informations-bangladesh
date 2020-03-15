@@ -20,6 +20,8 @@ public class HomeController {
 
     //--------------------Login Home & Basic Controls----------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------------------
+
+
     @GetMapping("favicon.ico")
     @ResponseBody
     void returnNoFavicon() {
