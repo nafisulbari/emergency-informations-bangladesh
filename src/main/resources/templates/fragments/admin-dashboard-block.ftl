@@ -17,6 +17,13 @@
                     <div class="col"><a class="btn btn-secondary btn-block" role="button"
                                         href="/admin/add-police-station">Police Station</a></div>
                 </div>
+                <br>
+                <br>
+                <h4>Management</h4>
+                <div id="dashboard-button" class="row">
+                    <div class="col"><a class="btn btn-secondary btn-block" role="button"
+                                        href="/admin/search">Search</a></div>
+                </div>
 
                 <br>
                 <br>
