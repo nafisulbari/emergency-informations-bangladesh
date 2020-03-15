@@ -160,18 +160,7 @@ public class AdminController {
 
 
 
-    @GetMapping("/admin/search-citizen")
-    public ModelAndView searchCitizens(@RequestParam(name = "search", required = false) String key,
-                                             Model model) {
-        if (key != null && !key.equals("")) {
 
-            model.addAttribute("searchedCitizens", citizenService.searchCitizenByName(key));
-
-            return new ModelAndView("/admin/add-citizen");
-        }
-
-        return new ModelAndView("/admin/add-citizen");
-    }
 
 
 
@@ -306,17 +295,6 @@ public class AdminController {
     }
 
 
-    @GetMapping("/admin/search-police-station")
-    public ModelAndView searchPoliceStations(@RequestParam(name = "search", required = false) String key,
-                                             Model model) {
-        if (key != null && !key.equals("")) {
-
-            model.addAttribute("searchedPoliceStations", policeStationService.searchPoliceStationByName(key));
-            return new ModelAndView("/admin/add-police-station");
-        }
-
-        return new ModelAndView("/admin/add-police-station");
-    }
 
 
 
@@ -418,17 +396,50 @@ public class AdminController {
     }
 
 
-    @GetMapping("/admin/search-hospital")
-    public ModelAndView searchHospitals(@RequestParam(name = "search", required = false) String key,
-                                        Model model) {
-        if (key != null && !key.equals("")) {
 
-            model.addAttribute("searchedHospitals", hospitalService.searchByHospitalName(key));
-            return new ModelAndView("/admin/add-hospital");
-        }
 
-        return new ModelAndView("/admin/add-hospital");
+
+
+
+
+
+
+    //-------------------------------Dashboard > Search ------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
+
+
+    @GetMapping("/admin/search")
+    public ModelAndView search() {
+
+        return new ModelAndView("admin/search");
     }
 
+
+
+    @GetMapping("/admin/search-action")
+    public ModelAndView searchAction(@RequestParam(name = "search", required = false) String key, String type,
+                                        Model model) {
+
+        if (key != null && !key.equals("")) {
+          switch (type){
+              case "citizen":
+                  model.addAttribute("searchedList", citizenService.searchCitizenByName(key));
+                  break;
+
+              case "hospital":
+                  model.addAttribute("searchedList", hospitalService.searchByHospitalName(key));
+                  break;
+
+              case "police":
+                  model.addAttribute("searchedList", policeStationService.searchPoliceStationByName(key));
+                  break;
+
+          }
+
+            return new ModelAndView("/admin/search");
+        }
+
+        return new ModelAndView("/admin/search");
+    }
 
 }
