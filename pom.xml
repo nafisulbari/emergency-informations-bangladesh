@@ -8,11 +8,11 @@
         <version>2.2.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.nafisulbari</groupId>
+    <groupId>com.nafisulbari.eib</groupId>
     <artifactId>eib</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>eib</name>
-    <description>Demo project for Spring Boot</description>
+    <description>An open database of emergency information accessible by the people of Bangladesh</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -91,6 +91,8 @@
             </exclusions>
         </dependency>
     </dependencies>
+
+
 
     <build>
         <plugins>
