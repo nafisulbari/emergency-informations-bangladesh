@@ -45,6 +45,8 @@ public class CustomUserDetails implements UserDetails {
         return authorities;
     }
 
+
+
     //some user UserDetails methods are set from db, some are kept true to spring security to work
     @Override
     public String getPassword() {
@@ -57,6 +59,8 @@ public class CustomUserDetails implements UserDetails {
         return this.user.getPassword();
     }
 
+
+
     public Long getId() {
         return this.user.getId();
     }
@@ -64,6 +68,8 @@ public class CustomUserDetails implements UserDetails {
     public String getName() {
         return this.user.getName();
     }
+
+
 
     @Override
     public String getUsername() {
