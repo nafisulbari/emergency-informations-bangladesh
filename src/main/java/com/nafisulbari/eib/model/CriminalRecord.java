@@ -1,8 +1,7 @@
 package com.nafisulbari.eib.model;
 
 
-import lombok.Getter;
-import lombok.Setter;
+
 import lombok.ToString;
 
 
@@ -12,8 +11,6 @@ import java.util.Date;
 
 
 @Entity
-@Getter
-@Setter
 @ToString
 public class CriminalRecord {
 
@@ -43,5 +40,67 @@ public class CriminalRecord {
     private PoliceStation policeStation;
 
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Citizen getCitizen() {
+        return citizen;
+    }
+
+    public void setCitizen(Citizen citizen) {
+        this.citizen = citizen;
+    }
+
+    public PoliceStation getPoliceStation() {
+        return policeStation;
+    }
+
+    public void setPoliceStation(PoliceStation policeStation) {
+        this.policeStation = policeStation;
+    }
 }
