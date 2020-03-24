@@ -1,12 +1,12 @@
 # Emergency Informations Bangladesh
 
-This is an emergency information management system for my System Analysis and Design lab project.
+This is an information management system project for my System Analysis and Design lab.
 
 Here every citizen will have a unique id and QR code.
 
-With the id or QR, random citizens will be able to view emergency information(name, blood group, emergency contact) of a citizen. Also, hospitals and police stations will be able to create, read and edit medical records and criminal records of every citizen.
+With the id or QR, citizens will be able to view emergency information(name, blood group, emergency contact) of another citizen. Also, hospitals and police stations will be able to store medical records and criminal records efficiently.
 
-Multi-user access, image uploads, text formatting, viewing data in graphs, QR code generations and many other features are implemented in this project.
+Multi-user authentication, image uploads, text formatting, viewing data in graphs, QR code generations and many other features are implemented in this project.
 
 ## Build and Run
 
@@ -61,4 +61,4 @@ _a@a.c_
 
  _a_
 
- 
+
