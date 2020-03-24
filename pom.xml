@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.nafisulbari.eib</groupId>
     <artifactId>eib</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1-SNAPSHOT</version>
     <name>eib</name>
     <description>An open database of emergency information accessible by the people of Bangladesh</description>
 
