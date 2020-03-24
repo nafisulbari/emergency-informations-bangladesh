@@ -17,7 +17,7 @@
             </div>
             <div class="col-md-4">
                 <div>
-                    <h2 id="name">${citizen.getName()}</h2>
+                    <a href="/${citizen.getId()}"><h2 id="name">${citizen.getName()}</h2></a>
                     <p style="color:rgb(77,77,77);">Sex: ${citizen.getSex()}</p>
                     <p style="color:rgb(77,77,77);">DOB:&nbsp;${citizen.getBirthDate()}<br></p>
                     <p style="color:rgb(77,77,77);">Mobile: ${citizen.getMobile()}</p>
