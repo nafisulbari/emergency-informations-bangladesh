@@ -1,6 +1,6 @@
 # Emergency Informations Bangladesh
 
-This is a citizen management system for my System Analysis and Design lab project.
+This is an emergency information management system for my System Analysis and Design lab project.
 
 Here every citizen will have a unique id and QR code.
 
@@ -23,16 +23,16 @@ Multi-user access, image uploads, text formatting, viewing data in graphs, QR co
 6. Run the app and goto [http://localhost](http://localhost/)
 
 ### Demo Email and Passwords
- **Admin** <br/>
-_ad@a.c_<br/>
-_a_<br/>
-**Hospital**<br/>
-_h@a.c_<br/>
- _a_<br/>
-**Police**<br/>
- _p@a.c_<br/>
- _a_<br/>
-**Citizen**<br/>
-ID: 2<br/>
-_a@a.c_<br/>
- _a_<br/>
+ **Admin**
+_ad@a.c_
+_a_
+**Hospital**
+_h@a.c_
+ _a_
+**Police**
+ _p@a.c_
+ _a_
+**Citizen**
+Use citizen ID: 2 for search
+_a@a.c_
+ _a_
