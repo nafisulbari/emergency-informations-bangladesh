@@ -4,7 +4,7 @@ This is an information management system project for my System Analysis and Desi
 
 Here every citizen will have a unique id and QR code.
 
-With the id or QR, citizens will be able to view emergency information(name, blood group, emergency contact) of another citizen. Also, hospitals and police stations will be able to store medical records and criminal records efficiently.
+With the id or QR, citizens will be able to view emergency information(name, blood group, emergency contact) of another citizen. Also, hospitals and police stations will be able to manage medical records and criminal records efficiently.
 
 Multi-user authentication, image uploads, text formatting, viewing data in graphs, QR code generations and many other features are implemented in this project.
 
