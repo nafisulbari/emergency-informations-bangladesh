@@ -23,16 +23,16 @@ Multi-user access, image uploads, text formatting, viewing data in graphs, QR co
 6. Run the app and goto [http://localhost](http://localhost/)
 
 ### Demo Email and Passwords
- **Admin**
-_ad@a.c_
-_a_
-**Hospital**
-_h@a.c_
- _a_
-**Police**
- _p@a.c_
- _a_
-**Citizen**
-ID: 2
-_a@a.c_
- _a_
+ **Admin** <br/>
+_ad@a.c_<br/>
+_a_<br/>
+**Hospital**<br/>
+_h@a.c_<br/>
+ _a_<br/>
+**Police**<br/>
+ _p@a.c_<br/>
+ _a_<br/>
+**Citizen**<br/>
+ID: 2<br/>
+_a@a.c_<br/>
+ _a_<br/>
