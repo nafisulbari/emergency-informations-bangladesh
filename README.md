@@ -24,15 +24,15 @@ Multi-user access, image uploads, text formatting, viewing data in graphs, QR co
 
 ### Demo Email and Passwords
  **Admin** <br/>
-_ad@a.c_ &nbps; &nbps; &nbps; &nbps; &nbps;
-_a_
+_ad@a.c_ <br/>
+_a_<br/>
 **Hospital**<br/>
-_h@a.c_ &nbps; &nbps; &nbps; &nbps; &nbps;
- _a_
+_h@a.c_ <br/>
+ _a_<br/>
 **Police**<br/>
- _p@a.c_ &nbps; &nbps; &nbps; &nbps; &nbps;
- _a_
+ _p@a.c_ <br/>
+ _a_<br/>
 **Citizen**<br/>
-Use citizen ID: 2 for search
-_a@a.c_ &nbps; &nbps; &nbps; &nbps; &nbps;
- _a_
+Use citizen ID: 2 for search<br/>
+_a@a.c_ <br/>
+ _a_<br/>
