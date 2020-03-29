@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emergency Informations Bangladesh</title>
+    <#--    logo credit @Tahsin Amin-->
+    <link rel="icon" href="/static/assets/img/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/assets/css/Data-Table.css">
@@ -26,8 +28,8 @@
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"]/>
 
 <nav class="navbar navbar-light navbar-expand-md navigation-clean-search" id="nav-eib"
-     style="background-color:#f4f5ec;">
-    <div class="container" id="navbar-hov"><a class="navbar-brand" href="/"><img src="/static/assets/img/bd-govt-logo copy.png"
+     style="background-color:#f4f5ec;"><#--    logo credit @Tahsin Amin-->
+    <div class="container" id="navbar-hov"><a class="navbar-brand" href="/"><img src="/static/assets/img/logo.png"
                                                                  id="logo"></a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
                     class="navbar-toggler-icon"></span></button>
