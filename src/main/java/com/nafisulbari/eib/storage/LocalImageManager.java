@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.EnumMap;
 import java.util.Map;
 
-@Component
+
 public class LocalImageManager implements ImageManagerService{
 
     @Override
