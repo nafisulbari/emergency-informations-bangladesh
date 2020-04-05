@@ -72,21 +72,20 @@ public class CitizenServiceImpl implements CitizenService {
         }
 
 
-
-
         Calendar c = Calendar.getInstance();
         c.setTime(citizen.getBirthDate());
         c.add(Calendar.DATE, 1);
         citizen.setBirthDate(c.getTime());
 
-        citizen.setImageUrl(localImageManager.uploadProfilePicture(image, citizen.getId()));
+        citizen.setImageUrl("");
 
         citizen.setPassword(passwordEncoder.encode(citizen.getPassword()));
         citizen.setRole("CITIZEN");
         citizen.setPermissions("");
 
+        citizenRepository.save(citizen);
 
-
+        citizen.setImageUrl(localImageManager.uploadProfilePicture(image, citizen.getId()));
         citizenRepository.save(citizen);
 
         generateQrCode(citizen.getId());

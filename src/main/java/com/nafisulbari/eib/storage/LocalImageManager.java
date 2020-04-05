@@ -34,18 +34,11 @@ import java.util.Map;
 public class LocalImageManager {
 
 
+    public String uploadProfilePicture(MultipartFile file, Long id) {
 
+        String uploadDir = System.getProperty("user.dir") + "\\citizen-records\\" + id;
 
-
-
-
-
-
-    public String uploadProfilePicture(MultipartFile file ,Long id) {
-
-        String uploadDir = System.getProperty("user.dir") + "\\citizen-records\\"+id;
-
-        String fileName="citizen" + getStrDate() + file.getOriginalFilename().replaceAll("\\s+", "");
+        String fileName = "citizen" + getStrDate() + file.getOriginalFilename().replaceAll("\\s+", "");
 
         File theDir = new File(uploadDir);
         theDir.mkdir();
@@ -60,11 +53,9 @@ public class LocalImageManager {
             throw new FileStorageException("Could not store file " + file.getOriginalFilename()
                     + ". Please try again!");
         }
-        System.out.println("/citizen-records/"+id+"/"+fileName);
-        return "/citizen-records/"+id+"/"+fileName;
+        System.out.println("/citizen-records/" + id + "/" + fileName);
+        return "/citizen-records/" + id + "/" + fileName;
     }
-
-
 
 
     public String generateQrCode(Citizen citizen) {
@@ -81,10 +72,12 @@ public class LocalImageManager {
                 "URL:https://eib.nafisulbari.com/" + citizen.getId() + "\n" +
                 "END:VCARD";
 
+
         String filePath = System.getProperty("user.dir") + "/citizen-records/" + citizen.getId() + "/" + citizen.getId() + ".png";
         int size = 300;
         String fileType = "png";
-        File myFile=new File(filePath);
+        File myFile = new File(filePath);
+        myFile.mkdir();
 
         try {
 
@@ -120,9 +113,7 @@ public class LocalImageManager {
             graphics.drawString(citizenId, (310 / 2) - (citizenId.length() * 2), 310);
 
 
-
             ImageIO.write(image, fileType, myFile);
-
 
 
         } catch (WriterException | IOException e) {
@@ -131,14 +122,11 @@ public class LocalImageManager {
 
         System.out.println("\n\nYou have successfully created QR Code.");
         //file path according to web
-        return "/citizen-records/" + citizen.getId() + "/" + citizen.getId() +".png";
+        return "/citizen-records/" + citizen.getId() + "/" + citizen.getId() + ".png";
     }
 
 
-
-
     public String uploadFilesFromTinyMCE(MultipartFile files, String recordType, String strDate, int citizen_id) {
-
 
 
         try {
@@ -182,7 +170,7 @@ public class LocalImageManager {
                 result.append(files.getOriginalFilename() + " Failed. ");
 
 
-            String filePath = "\\citizen-records\\" + citizen_id + "\\"+recordType+"\\" + strDate + "\\" + files.getOriginalFilename();
+            String filePath = "\\citizen-records\\" + citizen_id + "\\" + recordType + "\\" + strDate + "\\" + files.getOriginalFilename();
             String location = "{\"location\":\"" + filePath + "\"}";
             location = location.replace('\\', '/');
             return location;
