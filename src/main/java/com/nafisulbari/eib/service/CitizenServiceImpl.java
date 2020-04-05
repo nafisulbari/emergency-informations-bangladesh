@@ -1,14 +1,8 @@
 package com.nafisulbari.eib.service;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.nafisulbari.eib.dao.CitizenRequestRepository;
 import com.nafisulbari.eib.model.CitizenRequest;
-import com.nafisulbari.eib.storage.FileService;
+import com.nafisulbari.eib.storage.LocalImageManager;
 import com.nafisulbari.eib.dao.CitizenRepository;
 import com.nafisulbari.eib.dao.MedicalRecordRepository;
 import com.nafisulbari.eib.model.Citizen;
@@ -20,14 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -37,7 +23,7 @@ import java.util.regex.Pattern;
 public class CitizenServiceImpl implements CitizenService {
 
     @Autowired
-    FileService fileService;
+    LocalImageManager localImageManager;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -85,21 +71,23 @@ public class CitizenServiceImpl implements CitizenService {
             citizen.setCitizenPoint(tempCitizen.getCitizenPoint());
         }
 
-        String fileName = "citizen" + getStrDate() + image.getOriginalFilename().replaceAll("\\s+", "");
-        citizen.setImageUrl(fileName);
+
+
 
         Calendar c = Calendar.getInstance();
         c.setTime(citizen.getBirthDate());
         c.add(Calendar.DATE, 1);
         citizen.setBirthDate(c.getTime());
 
+        citizen.setImageUrl(localImageManager.uploadProfilePicture(image, citizen.getId()));
+
         citizen.setPassword(passwordEncoder.encode(citizen.getPassword()));
         citizen.setRole("CITIZEN");
         citizen.setPermissions("");
 
-        citizenRepository.save(citizen);
 
-        fileService.uploadProfilePicture(image, fileName, citizen.getId());
+
+        citizenRepository.save(citizen);
 
         generateQrCode(citizen.getId());
 
@@ -157,13 +145,13 @@ public class CitizenServiceImpl implements CitizenService {
     @Override
     public void saveCitizenRequest(CitizenRequest citizenRequest, MultipartFile image, Citizen citizen) {
 
-        String fileName = "citizen" + getStrDate() + image.getOriginalFilename().replaceAll("\\s+", "");
-        citizenRequest.setImageUrl(fileName);
+
+        citizenRequest.setImageUrl(localImageManager.uploadProfilePicture(image, citizen.getId()));
         citizenRequest.setCitizen(citizen);
 
         citizenRequestRepository.save(citizenRequest);
 
-        fileService.uploadProfilePicture(image, fileName, citizen.getId());
+
     }
 
     @Override
@@ -219,17 +207,12 @@ public class CitizenServiceImpl implements CitizenService {
 
     @Override
     public void generateQrCode(Long id) {
-        fileService.generateQrCode(id);
+
+        Citizen citizen = citizenRepository.findCitizenById(id);
+        citizen.setQrUrl(localImageManager.generateQrCode(citizen));
+        citizenRepository.save(citizen);
     }
 
 
-    public String getStrDate() {
 
-        Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        String strDate = dateFormat.format(date);
-        strDate = strDate.replace(':', '-').replaceAll("\\s+", "_");
-
-        return strDate;
-    }
 }

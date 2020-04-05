@@ -30,7 +30,7 @@
                 </div>
                 <div class="row" id="info-block">
                     <div class="col-md-4">
-                        <div><img src="/citizen-records/${citizen.getId()}/${citizen.getImageUrl()}"
+                        <div><img src="${citizen.getImageUrl()}"
                                   id="profile-img"
                                   alt="${citizen.getName()}"></div>
                     </div>
@@ -60,7 +60,7 @@
                             <p style="color:rgb(77,77,77);">Contact Mobile: ${citizen.getEmergencyMobile()}<br></p>
                             <#if authUserEmail == citizen.getEmail()>
                                 <a class="btn btn-info" role="button"
-                                   href="/citizen-records/${citizen.getId()}/${citizen.getId()}.png" download>Download
+                                   href="${citizen.getQrUrl()}" download>Download
                                     QR Code</a>
                             </#if>
                         </div>

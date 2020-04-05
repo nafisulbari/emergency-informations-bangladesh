@@ -1,12 +1,11 @@
 package com.nafisulbari.eib.controller;
 
 
-import com.nafisulbari.eib.storage.FileService;
+import com.nafisulbari.eib.storage.LocalImageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,7 +26,7 @@ public class TinyRestController {
 
 
     @Autowired
-    private FileService fileService;
+    private LocalImageManager localImageManager;
 
 
 
@@ -40,7 +39,7 @@ public class TinyRestController {
         String strDate = getStrDate();
 
         //returning the location/file path
-        return fileService.uploadFilesFromTinyMCE(files,"criminal",strDate,citizenId);
+        return localImageManager.uploadFilesFromTinyMCE(files,"criminal",strDate,citizenId);
 
     }
 
@@ -54,7 +53,7 @@ public class TinyRestController {
         String strDate = getStrDate();
 
         //returning the location/file path
-        return fileService.uploadFilesFromTinyMCE(files,"medical",strDate,citizenId);
+        return localImageManager.uploadFilesFromTinyMCE(files,"medical",strDate,citizenId);
 
     }
 

@@ -34,5 +34,7 @@ public class Citizen extends User {
 
     private String imageUrl;
 
+    private String qrUrl;
+
 
 }

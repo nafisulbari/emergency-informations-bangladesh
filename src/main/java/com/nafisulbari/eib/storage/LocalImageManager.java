@@ -31,20 +31,21 @@ import java.util.EnumMap;
 import java.util.Map;
 
 @Service
-public class FileService {
-
-
-
-    @Autowired
-    private CitizenService citizenService;
+public class LocalImageManager {
 
 
 
 
 
-    public void uploadProfilePicture(MultipartFile file, String fileName,Long id) {
+
+
+
+
+    public String uploadProfilePicture(MultipartFile file ,Long id) {
 
         String uploadDir = System.getProperty("user.dir") + "\\citizen-records\\"+id;
+
+        String fileName="citizen" + getStrDate() + file.getOriginalFilename().replaceAll("\\s+", "");
 
         File theDir = new File(uploadDir);
         theDir.mkdir();
@@ -59,13 +60,16 @@ public class FileService {
             throw new FileStorageException("Could not store file " + file.getOriginalFilename()
                     + ". Please try again!");
         }
+        System.out.println("/citizen-records/"+id+"/"+fileName);
+        return "/citizen-records/"+id+"/"+fileName;
     }
 
 
-    public void generateQrCode(Long id) {
+
+
+    public String generateQrCode(Citizen citizen) {
         //Source: http://zxing.github.io/zxing/apidocs/index.html
 
-        Citizen citizen = citizenService.findCitizenById(id);
 
         String myCodeText = "BEGIN:VCARD\n" +
                 "VERSION:3.0\n" +
@@ -80,7 +84,7 @@ public class FileService {
         String filePath = System.getProperty("user.dir") + "/citizen-records/" + citizen.getId() + "/" + citizen.getId() + ".png";
         int size = 300;
         String fileType = "png";
-        File myFile = new File(filePath);
+        File myFile=new File(filePath);
 
         try {
 
@@ -115,13 +119,19 @@ public class FileService {
             String citizenId = "" + citizen.getId();
             graphics.drawString(citizenId, (310 / 2) - (citizenId.length() * 2), 310);
 
+
+
             ImageIO.write(image, fileType, myFile);
+
+
 
         } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
 
         System.out.println("\n\nYou have successfully created QR Code.");
+        //file path according to web
+        return "/citizen-records/" + citizen.getId() + "/" + citizen.getId() +".png";
     }
 
 
@@ -183,5 +193,13 @@ public class FileService {
     }
 
 
+    public String getStrDate() {
 
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String strDate = dateFormat.format(date);
+        strDate = strDate.replace(':', '-').replaceAll("\\s+", "_");
+
+        return strDate;
+    }
 }
