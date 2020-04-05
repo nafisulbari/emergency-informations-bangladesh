@@ -9,6 +9,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.nafisulbari.eib.model.Citizen;
 import com.nafisulbari.eib.service.CitizenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -30,10 +31,10 @@ import java.util.Date;
 import java.util.EnumMap;
 import java.util.Map;
 
-@Service
-public class LocalImageManager {
+@Component
+public class LocalImageManager implements ImageManagerService{
 
-
+    @Override
     public String uploadProfilePicture(MultipartFile file, Long id) {
 
         String uploadDir = System.getProperty("user.dir") + "\\citizen-records\\" + id;
@@ -57,7 +58,7 @@ public class LocalImageManager {
         return "/citizen-records/" + id + "/" + fileName;
     }
 
-
+    @Override
     public String generateQrCode(Citizen citizen) {
         //Source: http://zxing.github.io/zxing/apidocs/index.html
 
@@ -125,7 +126,7 @@ public class LocalImageManager {
         return "/citizen-records/" + citizen.getId() + "/" + citizen.getId() + ".png";
     }
 
-
+    @Override
     public String uploadFilesFromTinyMCE(MultipartFile files, String recordType, String strDate, int citizen_id) {
 
 

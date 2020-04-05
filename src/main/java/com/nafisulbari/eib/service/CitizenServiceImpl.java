@@ -2,7 +2,7 @@ package com.nafisulbari.eib.service;
 
 import com.nafisulbari.eib.dao.CitizenRequestRepository;
 import com.nafisulbari.eib.model.CitizenRequest;
-import com.nafisulbari.eib.storage.LocalImageManager;
+import com.nafisulbari.eib.storage.ImageManagerService;
 import com.nafisulbari.eib.dao.CitizenRepository;
 import com.nafisulbari.eib.dao.MedicalRecordRepository;
 import com.nafisulbari.eib.model.Citizen;
@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 public class CitizenServiceImpl implements CitizenService {
 
     @Autowired
-    LocalImageManager localImageManager;
+    ImageManagerService imageManagerService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -85,7 +85,7 @@ public class CitizenServiceImpl implements CitizenService {
 
         citizenRepository.save(citizen);
 
-        citizen.setImageUrl(localImageManager.uploadProfilePicture(image, citizen.getId()));
+        citizen.setImageUrl(imageManagerService.uploadProfilePicture(image, citizen.getId()));
         citizenRepository.save(citizen);
 
         generateQrCode(citizen.getId());
@@ -145,7 +145,7 @@ public class CitizenServiceImpl implements CitizenService {
     public void saveCitizenRequest(CitizenRequest citizenRequest, MultipartFile image, Citizen citizen) {
 
 
-        citizenRequest.setImageUrl(localImageManager.uploadProfilePicture(image, citizen.getId()));
+        citizenRequest.setImageUrl(imageManagerService.uploadProfilePicture(image, citizen.getId()));
         citizenRequest.setCitizen(citizen);
 
         citizenRequestRepository.save(citizenRequest);
@@ -208,7 +208,7 @@ public class CitizenServiceImpl implements CitizenService {
     public void generateQrCode(Long id) {
 
         Citizen citizen = citizenRepository.findCitizenById(id);
-        citizen.setQrUrl(localImageManager.generateQrCode(citizen));
+        citizen.setQrUrl(imageManagerService.generateQrCode(citizen));
         citizenRepository.save(citizen);
     }
 

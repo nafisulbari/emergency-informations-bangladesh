@@ -1,6 +1,7 @@
 package com.nafisulbari.eib.controller;
 
 
+import com.nafisulbari.eib.storage.ImageManagerService;
 import com.nafisulbari.eib.storage.LocalImageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class TinyRestController {
 
 
     @Autowired
-    private LocalImageManager localImageManager;
+    private ImageManagerService imageManagerService;
 
 
 
@@ -39,7 +40,7 @@ public class TinyRestController {
         String strDate = getStrDate();
 
         //returning the location/file path
-        return localImageManager.uploadFilesFromTinyMCE(files,"criminal",strDate,citizenId);
+        return imageManagerService.uploadFilesFromTinyMCE(files,"criminal",strDate,citizenId);
 
     }
 
@@ -53,7 +54,7 @@ public class TinyRestController {
         String strDate = getStrDate();
 
         //returning the location/file path
-        return localImageManager.uploadFilesFromTinyMCE(files,"medical",strDate,citizenId);
+        return imageManagerService.uploadFilesFromTinyMCE(files,"medical",strDate,citizenId);
 
     }
 
