@@ -27,17 +27,18 @@ CREATE TABLE IF NOT EXISTS `citizen` (
   `image_url` varchar(255) DEFAULT NULL,
   `mobile` varchar(255) DEFAULT NULL,
   `nid` bigint(20) DEFAULT NULL,
+  `qr_url` varchar(255) DEFAULT NULL,
   `sex` varchar(255) DEFAULT NULL,
   `id` bigint(32) NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FKfjkt9xbjvf26s6t19sa0l5cb4` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table eib.citizen: ~0 rows (approximately)
+-- Dumping data for table eib.citizen: ~2 rows (approximately)
 /*!40000 ALTER TABLE `citizen` DISABLE KEYS */;
-INSERT IGNORE INTO `citizen` (`address`, `birth_date`, `blood_group`, `citizen_point`, `emergency_mobile`, `emergency_relation`, `image_url`, `mobile`, `nid`, `sex`, `id`) VALUES
-	('BRAC University, Mohakhali', '2020-03-11', 'O+', 1, '546516456465', 'Brother', 'citizen2020-36-24_11-36-12putIn.png', '01843771138', 564654654, 'Male', 2),
-	('Heaven', '2020-03-17', 'O-', 1, '54654564564654', 'Fellow', 'citizen2020-44-24_11-44-12093b6b02-5389-4b7f-804b-d1f87eda9f2d.sized-1000x1000.jpg', '65654654', 5454546546546546546, 'Other', 5);
+INSERT IGNORE INTO `citizen` (`address`, `birth_date`, `blood_group`, `citizen_point`, `emergency_mobile`, `emergency_relation`, `image_url`, `mobile`, `nid`, `qr_url`, `sex`, `id`) VALUES
+	('Frankia', '2020-04-15', 'O+', 0, '123456789123', 'Wife', '/citizen-records/2/citizen2020-38-06_06-38-17john-smith-9486928-1-402.jpg', '123456789123', 6546546546546546546, '/citizen-records/2/2.png', 'Male', 2),
+	('Heavan, Oh Heavaaan', '2020-04-07', 'O-', 3, '111111111111', 'Follower', '/citizen-records/3/citizen2020-40-06_06-40-21093b6b02-5389-4b7f-804b-d1f87eda9f2d.sized-1000x1000.jpg', '000000000000', 54654654654, '/citizen-records/3/3.png', 'Male', 3);
 /*!40000 ALTER TABLE `citizen` ENABLE KEYS */;
 
 -- Dumping structure for table eib.citizen_request
@@ -75,13 +76,15 @@ CREATE TABLE IF NOT EXISTS `criminal_record` (
   KEY `FK2qm7fy6x8xw0vq57baht1ur4w` (`police_station_id`),
   CONSTRAINT `FK2qm7fy6x8xw0vq57baht1ur4w` FOREIGN KEY (`police_station_id`) REFERENCES `police_station` (`id`),
   CONSTRAINT `FKdys5t870iojrv0ke91gg61dip` FOREIGN KEY (`citizen_id`) REFERENCES `citizen` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table eib.criminal_record: ~0 rows (approximately)
+-- Dumping data for table eib.criminal_record: ~2 rows (approximately)
 /*!40000 ALTER TABLE `criminal_record` DISABLE KEYS */;
 INSERT IGNORE INTO `criminal_record` (`id`, `active`, `date`, `description`, `location`, `title`, `citizen_id`, `police_station_id`) VALUES
-	(1, b'1', '2020-03-09', '<p>Criminal data, images and stuff&nbsp;</p>', 'Mohakhali', 'Theft at Jacky\'s House', 2, 4),
-	(2, b'1', '2020-03-19', '<p>bla bla bla</p>', 'Heaven', 'Got no chill', 5, 4);
+	(1, b'1', '2020-04-03', '<p>Bad man&nbsp;&nbsp;</p>\r\n<p>and some details and docs</p>\r\n<p><img src="/citizen-records/2/criminal/2020-51-06_06-51-42/max-pooling.png" alt="" width="401" height="161" /></p>', 'India', 'Broke into india', 2, 5),
+	(3, b'1', '2020-04-24', '<p>Stole macy\'s apple&nbsp;</p>\r\n<p>apple\'s image attached</p>\r\n<p><img src="/citizen-records/3/criminal/2020-53-06_06-53-38/6000200094514.jpg" alt="" width="460" height="460" /></p>', 'Heaven', 'Stole an apple', 3, 5),
+	(4, b'1', '2020-04-14', '<p>supplied illegal drugs to queen</p>', 'England', 'Drug dealing ', 2, 7),
+	(5, b'1', '2020-04-07', '<p>Stole a chair in paris</p>', 'Hell', 'Stole a chair', 3, 7);
 /*!40000 ALTER TABLE `criminal_record` ENABLE KEYS */;
 
 -- Dumping structure for table eib.hospital
@@ -92,10 +95,11 @@ CREATE TABLE IF NOT EXISTS `hospital` (
   CONSTRAINT `FKburp17s1diyv4sjsgs4yggq4l` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table eib.hospital: ~0 rows (approximately)
+-- Dumping data for table eib.hospital: ~1 rows (approximately)
 /*!40000 ALTER TABLE `hospital` DISABLE KEYS */;
 INSERT IGNORE INTO `hospital` (`address`, `id`) VALUES
-	('Mohakhali', 3);
+	('Mohakhali', 4),
+	('Ctg', 6);
 /*!40000 ALTER TABLE `hospital` ENABLE KEYS */;
 
 -- Dumping structure for table eib.medical_record
@@ -120,14 +124,14 @@ CREATE TABLE IF NOT EXISTS `medical_record` (
   CONSTRAINT `FKjj3tdte1bvcjpobed7bvgncny` FOREIGN KEY (`citizen_id`) REFERENCES `citizen` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table eib.medical_record: ~0 rows (approximately)
+-- Dumping data for table eib.medical_record: ~5 rows (approximately)
 /*!40000 ALTER TABLE `medical_record` DISABLE KEYS */;
 INSERT IGNORE INTO `medical_record` (`id`, `date`, `description`, `doctor`, `testbp`, `testbs`, `testcbc`, `testecg`, `testlp`, `testurine`, `title`, `citizen_id`, `hospital_id`) VALUES
-	(1, '2020-03-18', '<p><strong>This Person is sick</strong></p>\r\n<p><em>Takecare</em></p>\r\n<p><em><img src="/citizen-records/2/medical/2020-39-24_11-39-58/d1992971e172a5471d6e0e1de843d747.jpg" alt="" width="440" height="622" /></em></p>', 'Dr Strange', '80', '50', '1600', '', '', '', 'roger bus magni illum.', 2, 3),
-	(2, '2020-03-12', '<p>Left tooth brokern</p>\r\n<p><img src="/citizen-records/2/medical/2020-41-24_11-41-43/d1992971e172a5471d6e0e1de843d747.jpg" alt="" width="440" height="622" /></p>', 'Dr George', '70', '', '1200', '', '', '', 'Toothache', 2, 3),
-	(3, '2020-03-26', '<p>bla bla bla</p>', 'Dr Strange', '90', '', '1200', '', '', '', 'Sick of staying home', 2, 3),
-	(4, '2020-03-10', '<p><img src="/citizen-records/5/medical/2020-50-24_11-50-29/d1992971e172a5471d6e0e1de843d747.jpg" alt="" width="440" height="622" /></p>\r\n<p>lord oh lord</p>', 'Dr Strange', '80', '55', '1200', '', '', '', 'Broke left arm', 5, 3),
-	(5, '2020-03-30', '<p><img src="/citizen-records/5/medical/2020-51-24_11-51-08/d1992971e172a5471d6e0e1de843d747.jpg" alt="" width="440" height="622" /></p>\r\n<p>sad jesus</p>', 'Dr Strange', '80', '50', '1200', '', '', '', 'Broke right arm', 5, 3);
+	(1, '2020-04-20', '<p>John broke his left arm&nbsp;</p>\r\n<p>Check prescription below</p>\r\n<p><img src="/citizen-records/2/medical/2020-44-06_06-44-41/drbeen-sample-prescription.jpg" alt="" width="604" height="782" /></p>', 'Dr Strange', '80', '55', '1600', '', '', '', 'Broke left arm', 2, 6),
+	(2, '2020-04-29', '<p>Broke right arm&nbsp;</p>\r\n<p>3 broken bones</p>\r\n<p><img src="/citizen-records/2/medical/2020-46-06_06-46-07/drbeen-sample-prescription.jpg" alt="" width="711" height="920" /></p>', 'Dr George', '70', '56', '1200', '', '', '', 'Broke right arm', 2, 6),
+	(3, '2020-04-14', '<p>Sad Jesus</p>\r\n<p><img src="/citizen-records/3/medical/2020-47-06_06-47-25/drbeen-sample-prescription.jpg" alt="" width="646" height="836" /></p>', 'Dr Strange', '90', '', '1600', '', '', '', 'Broke tooth', 3, 6),
+	(4, '2020-04-07', '<p>dummy txt</p>\r\n<p><img src="/citizen-records/2/medical/2020-49-06_06-49-18/drbeen-sample-prescription.jpg" alt="" width="584" height="756" /></p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>', 'Dr Strange', '70', '80', '1100', '', '', '', 'Got polio', 2, 6),
+	(5, '2020-04-16', '<p>Prescribed 5 chills</p>', 'Dr George', '80', '50', '1200', '', '', '', 'Got no chill', 3, 6);
 /*!40000 ALTER TABLE `medical_record` ENABLE KEYS */;
 
 -- Dumping structure for table eib.police_station
@@ -138,10 +142,11 @@ CREATE TABLE IF NOT EXISTS `police_station` (
   CONSTRAINT `FKgyhsl82f40pmqd96wdittydui` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table eib.police_station: ~0 rows (approximately)
+-- Dumping data for table eib.police_station: ~1 rows (approximately)
 /*!40000 ALTER TABLE `police_station` DISABLE KEYS */;
 INSERT IGNORE INTO `police_station` (`address`, `id`) VALUES
-	('Banani', 4);
+	('Mohakhali', 5),
+	('Dublin', 7);
 /*!40000 ALTER TABLE `police_station` ENABLE KEYS */;
 
 -- Dumping structure for table eib.user
@@ -153,16 +158,18 @@ CREATE TABLE IF NOT EXISTS `user` (
   `permissions` varchar(255) DEFAULT NULL,
   `role` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table eib.user: ~0 rows (approximately)
+-- Dumping data for table eib.user: ~5 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT IGNORE INTO `user` (`id`, `email`, `name`, `password`, `permissions`, `role`) VALUES
 	(1, 'ad@a.c', 'Admin', '$2y$12$hOE2pbMYFI89vwMFjbmo9.92sXzjff7Prkq5VFLSxOVpyKE/0IDHS', '', 'ADMIN'),
-	(2, 'a@a.c', 'Ahmed Nafisul Bari', '$2a$10$Y5CrNFm/1TaYmUPOyHKmjudgwv8I3WGWRJ0tA8afWsgryHgGNwPXO', '', 'CITIZEN'),
-	(3, 'h@a.c', 'Mohakhali HOS', '$2a$10$5bSebZpznd4PkhQnu6kXQOb7NRADnWtJ2q9taSX2sWtwjH1s8NRuy', '', 'HOSPITAL'),
-	(4, 'p@a.c', 'Banani Thanna', '$2a$10$z.e8kBMwkFRR8lpZZek3J.UwMLxIQbeLke.YU9uICrNq.K2V5KC7O', '', 'POLICE'),
-	(5, 'j@a.c', 'Jesus', '$2a$10$HO5TaVfcDHLFIND1O.a0AuAJcyP4iZpvHcDmsUQNRZ3e9Vuvc9xny', '', 'CITIZEN');
+	(2, 'a@a.c', 'John Smith', '$2a$10$iQk8qPlGWczFKyM/H.vcs.C6BG9ICAg0W9EZxb84QlTyU1RhPtsPa', '', 'CITIZEN'),
+	(3, 'j@a.c', 'Jesus Christ', '$2a$10$8Dco9lhH.eUfp4VLS/iJTu/jnHuOYu31.yARHCWobK4ciuOZxc6yu', '', 'CITIZEN'),
+	(4, 'h@a.c', 'Mohakhali HOS', '$2a$10$g1MataR6de5vvVcfNeHuUOi9RTXPGZy1PveF8Tp9FMkZ/9KyXPSXW', '', 'HOSPITAL'),
+	(5, 'p@a.c', 'Mohalakhali Police Station', '$2a$10$J2k7Dd3VVvQZbe6OFRspruN9Qyv77WCxMbkxBQM/.GZMKhN1cuGiK', '', 'POLICE'),
+	(6, 'hh@a.c', 'Ctg Hospital', '$2a$10$n5TpI4LJmT9t/fY03SOGbepyUi7UO/fjJsc3HpGfw6ZeQGAvOgPUK', '', 'HOSPITAL'),
+	(7, 'pp@a.c', 'Dublin POL', '$2a$10$YOFS0myrY.T.e.8gSrxreOdSqaUTPkkK.hkTmsUOHlld.coPq1UhK', '', 'POLICE');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
