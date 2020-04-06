@@ -7,12 +7,8 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.nafisulbari.eib.model.Citizen;
-import com.nafisulbari.eib.service.CitizenService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -31,7 +27,15 @@ import java.util.Date;
 import java.util.EnumMap;
 import java.util.Map;
 
+/**
+ * Use @Component over this class to enable image uploads in local storage
+ * citizen-record folder is used in current settings
+ * do not forger to remove @Component over CloudinaryImageManager class
+ *
+ * @author  Ahmed Nafisul Bari
+ */
 
+@Component
 public class LocalImageManager implements ImageManagerService{
 
     @Override

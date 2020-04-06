@@ -10,18 +10,13 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.nafisulbari.eib.model.Citizen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,7 +24,13 @@ import java.util.Date;
 import java.util.EnumMap;
 import java.util.Map;
 
-@Component
+/**
+ * Use @Component over this class to enable image uploads in cloud
+ * do not forger to remove @Component over LocalImageManager class
+ *
+ * @author  Ahmed Nafisul Bari
+ */
+
 public class CloudinaryImageManager implements ImageManagerService {
 
 
@@ -55,7 +56,6 @@ public class CloudinaryImageManager implements ImageManagerService {
         System.out.println("Unable to upload");
         return null;
 
-
     }
 
     @Override
@@ -74,11 +74,8 @@ public class CloudinaryImageManager implements ImageManagerService {
                 "END:VCARD";
 
 
-        String filePath = System.getProperty("user.dir") + "/citizen-records/" + citizen.getId() + "/" + citizen.getId() + ".png";
         int size = 300;
-        String fileType = "png";
-        File myFile = new File(filePath);
-        myFile.mkdir();
+
 
         try {
 
@@ -114,71 +111,56 @@ public class CloudinaryImageManager implements ImageManagerService {
             graphics.drawString(citizenId, (310 / 2) - (citizenId.length() * 2), 310);
 
 
-            ImageIO.write(image, fileType, myFile);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            ImageIO.write(image, "png", byteArrayOutputStream);
+
+            String uploadDir_filename = "citizen-records/" + citizen.getId() + "/" + citizen.getId();
+            Map params = ObjectUtils.asMap("public_id", uploadDir_filename, "use_filename", true, "unique_filename", false);
+
+            try {
+
+                Map uploadResult = cloudinaryService.upload(byteArrayOutputStream.toByteArray(), params);
+                return uploadResult.get("url").toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
 
         } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println("\n\nYou have successfully created QR Code.");
-        //file path according to web
-        return "/citizen-records/" + citizen.getId() + "/" + citizen.getId() + ".png";
+
+        System.out.println("Unable to upload");
+        return null;
     }
 
     @Override
     public String uploadFilesFromTinyMCE(MultipartFile files, String recordType, String strDate, int citizen_id) {
 
 
+        String uploadDir = "citizen-records/" + citizen_id + "/" + recordType + "/" + strDate + "/";
+
+        String fileName = "record_" + strDate + files.getOriginalFilename().replaceAll("\\s+", "");
+
+        Map params = ObjectUtils.asMap("public_id", uploadDir + fileName, "use_filename", true, "unique_filename", false);
+
         try {
-            String folder = System.getProperty("user.dir") + "\\citizen-records\\" + citizen_id + "\\" + recordType + "\\" + strDate + "\\";
-            String folderPre = System.getProperty("user.dir") + "\\citizen-records\\" + citizen_id + "\\" + recordType + "\\";
 
-            StringBuffer result = new StringBuffer();
+            Map uploadResult = cloudinaryService.upload(files.getBytes(), params);
 
-            result.append("Uploading of File(s) ");
-
-            if (!files.isEmpty()) {
-
-                try {
-                    boolean created = false;
-
-                    try {
-                        File theDirPre = new File(folderPre);
-                        theDirPre.mkdir();
-                        File theDir = new File(folder);
-                        created = theDir.mkdir();
-
-                    } catch (SecurityException se) {
-                        se.printStackTrace();
-                    }
-                    if (created) {
-                        System.out.println("DIR created");
-                    }
-                    String path = "";
-                    path = folder + files.getOriginalFilename();
-                    File destination = new File(path);
-
-                    System.out.println("--> " + destination);
-
-                    files.transferTo(destination);
-                    result.append(files.getOriginalFilename() + " Succsess. ");
-                } catch (Exception e) {
-                    throw new RuntimeException("Image saving failed", e);
-                }
-
-            } else
-                result.append(files.getOriginalFilename() + " Failed. ");
-
-
-            String filePath = "\\citizen-records\\" + citizen_id + "\\" + recordType + "\\" + strDate + "\\" + files.getOriginalFilename();
-            String location = "{\"location\":\"" + filePath + "\"}";
+            String location = "{\"location\":\"" + uploadResult.get("url").toString() + "\"}";
             location = location.replace('\\', '/');
+
             return location;
 
         } catch (Exception e) {
-            return "Error Occured while uploading files." + " => " + e.getMessage();
+            e.printStackTrace();
         }
+        System.out.println("Unable to upload from tinyMCE");
+        return null;
+
+
     }
 
 

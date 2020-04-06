@@ -12,7 +12,7 @@
         </div>
         <div class="row" id="info-block">
             <div class="col-md-4">
-                <div><img src="/citizen-records/${citizen.getId()}/${citizen.getImageUrl()}" id="profile-img"
+                <div><img src="${citizen.getImageUrl()}" id="profile-img"
                           alt="${citizen.getName()}"></div>
             </div>
             <div class="col-md-4">
