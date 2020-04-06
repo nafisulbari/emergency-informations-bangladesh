@@ -7,7 +7,6 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.nafisulbari.eib.model.Citizen;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,7 +34,7 @@ import java.util.Map;
  * @author  Ahmed Nafisul Bari
  */
 
-@Component
+
 public class LocalImageManager implements ImageManagerService{
 
     @Override

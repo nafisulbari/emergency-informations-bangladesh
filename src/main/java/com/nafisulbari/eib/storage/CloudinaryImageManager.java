@@ -31,6 +31,7 @@ import java.util.Map;
  * @author  Ahmed Nafisul Bari
  */
 
+@Component
 public class CloudinaryImageManager implements ImageManagerService {
 
 
